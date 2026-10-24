@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI智能选股与量化交易系统联动流程图 (HTML5 Canvas)</title>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --panel-bg: rgba(255, 255, 255, 0.96);
+      --border-color: #cbd5e1;
+      --primary: #2563eb;
+      --quant: #059669;
+      --danger: #dc2626;
+      --warning: #d97706;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      background-color: #f1f5f9;
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Top Header & Toolbar */
+    header {
+      height: 60px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+      z-index: 10;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+    .brand h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .brand span {
+      font-size: 12px;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .btn:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+    .btn.active {
+      background: #eff6ff;
+      border-color: #2563eb;
+      color: #1d4ed8;
+    }
+    .btn.warn-btn.active {
+      background: #fef3c7;
+      border-color: #d97706;
+      color: #b45309;
+    }
+    .btn-primary {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      color: #ffffff;
+    }
+    .divider {
+      width: 1px;
+      height: 22px;
+      background: #e2e8f0;
+      margin: 0 4px;
+    }
+
+    /* Main Workspace */
+    .workspace {
+      flex: 1;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+    }
+    #canvas-container {
+      flex: 1;
+      position: relative;
+      cursor: grab;
+      background-color: #f8fafc;
+    }
+    #canvas-container:active {
+      cursor: grabbing;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Legend */
+    .legend-card {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      font-size: 12px;
+      color: #334155;
+      z-index: 5;
+    }
+    .legend-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 6px 16px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    /* Right Side Inspector Drawer */
+    .inspector {
+      width: 390px;
+      background: #ffffff;
+      border-left: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -4px 0 15px rgba(15, 23, 42, 0.05);
+      z-index: 8;
+      transition: transform 0.25s ease;
+    }
+    .inspector-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+    }
+    .inspector-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .inspector-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 20px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .tag-data { background: #f1f5f9; color: #334155; }
+    .tag-dify { background: #dbeafe; color: #1d4ed8; }
+    .tag-quant { background: #d1fae5; color: #047857; }
+    .tag-warn { background: #fef3c7; color: #b45309; margin-left: 6px; }
+
+    .detail-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    .detail-section {
+      margin-bottom: 16px;
+    }
+    .detail-section h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    .detail-section p, .detail-section li {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #334155;
+    }
+    .detail-section ul {
+      padding-left: 18px;
+    }
+    .gap-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      border-radius: 6px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+    .gap-box h5 {
+      color: #b45309;
+      font-size: 13px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .gap-box p {
+      font-size: 12.5px;
+      color: #78350f;
+      line-height: 1.55;
+    }
+    .code-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 11.5px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      line-height: 1.5;
+      margin-top: 6px;
+    }
+    .hint-tip {
+      font-size: 12px;
+      color: #64748b;
+      padding: 10px 20px;
+      border-top: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-badge">HTML5 CANVAS</div>
+      <h1>AI智能选股与量化交易联动流程图</h1>
+      <span>Dify 投研引擎 + SpringBoot/Vue 量化交易系统</span>
+    </div>
+    <div class="toolbar">
+      <button class="btn active" id="btn-anim" onclick="toggleAnimation()">⚡ 数据流动画: 开启</button>
+      <button class="btn warn-btn active" id="btn-gaps" onclick="toggleGaps()">⚠️ 显示不完整/待补充标记 (7处)</button>
+      <div class="divider"></div>
+      <button class="btn" onclick="zoomBy(1.15)">＋ 放大</button>
+      <button class="btn" onclick="zoomBy(0.85)">－ 缩小</button>
+      <button class="btn" onclick="resetView()">⟲ 自适应居中</button>
+      <div class="divider"></div>
+      <button class="btn btn-primary" onclick="exportPNG()">⬇ 导出高清 PNG</button>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <div id="canvas-container">
+      <canvas id="flowCanvas"></canvas>
+
+      <div class="legend-card">
+        <div class="legend-title">
+          <span>图例与操作说明</span>
+          <span id="zoom-indicator" style="color:#64748b;font-weight:normal;">100%</span>
+        </div>
+        <div class="legend-grid">
+          <div class="legend-item"><span class="dot" style="background:#dbeafe;border:1.5px solid #2563eb;"></span>Dify 核心分析节点</div>
+          <div class="legend-item"><span class="dot" style="background:#e0e7ff;border:1.5px solid #4f46e5;"></span>Dify 数据库/向量库</div>
+          <div class="legend-item"><span class="dot" style="background:#dcfce7;border:1.5px solid #16a34a;"></span>重大利多 / 多头流转</div>
+          <div class="legend-item"><span class="dot" style="background:#fee2e2;border:1.5px solid #dc2626;"></span>重大利空 / 空头流转</div>
+          <div class="legend-item"><span class="dot" style="background:#d1fae5;border:1.5px solid #059669;"></span>SpringBoot+Vue 量化模块</div>
+          <div class="legend-item"><span class="dot" style="background:#f59e0b;border-radius:50%;"></span>⚠️ 流程待补充/断点提示</div>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:#64748b;">
+          💡 滚轮缩放画布 | 按住左键拖拽平移 | <b>点击任意节点</b>在右侧查看详细技术逻辑与问题排查
+        </div>
+      </div>
+    </div>
+
+    <aside class="inspector" id="inspector">
+      <div class="inspector-header">
+        <h2>📋 节点详情与流程完整性诊断</h2>
+        <span style="font-size:12px;color:#2563eb;cursor:pointer;" onclick="showOverview()">查看全局诊断汇总</span>
+      </div>
+      <div class="inspector-body" id="inspector-content">
+        <!-- Populated dynamically via JS -->
+      </div>
+      <div class="hint-tip">
+        提示：点击画布中的各个流程节点或橙色「⚠️」角标可切换查看对应模块的详细设计与待补充点。
+      </div>
+    </aside>
+  </div>
+
+<script>
+/**
+ * ============================================================================
+ * 1. 流程图逻辑坐标与数据结构定义 (基于 1600 x 1120 虚拟画布坐标系)
+ * ============================================================================
+ */
+const VIRTUAL_WIDTH = 1620;
+const VIRTUAL_HEIGHT = 1140;
+
+// 三大功能泳道 (Zones)
+const zones = [
+  {
+    id: "zone_data",
+    title: "【功能区 A】基础数据采集与同步层 (SpringBoot 定时任务 / 爬虫采集管道)",
+    subtitle: "负责高频新闻抓取、分钟K/日K及13项盘口指标同步、权威网站财报与研报源接入",
+    x: 30, y: 65, w: 1560, h: 175,
+    bgColor: "#f8fafc", borderColor: "#64748b", titleColor: "#334155", dashed: true
+  },
+  {
+    id: "zone_dify",
+    title: "【功能区 B】Dify 智能分析与选股推荐引擎 (尽量使用 Dify Workflow + LLM + 向量数据库实现)",
+    subtitle: "完成新闻摘要、三级多空情绪路由、行业传导分析、个股/期现货研报财报调研、K线盘口向量协同过滤，最终得出推荐标的",
+    x: 30, y: 265, w: 1560, h: 575,
+    bgColor: "#eff6ff", borderColor: "#2563eb", titleColor: "#1d4ed8", dashed: false
+  },
+  {
+    id: "zone_quant",
+    title: "【功能区 C】量化交易系统功能区 (SpringBoot + Vue) — 持仓管理、风控平仓与激进交易执行",
+    subtitle: "接收 Dify 的 HTTP 交易/风控指令，校验实盘多空持仓，执行全局平仓、反向持仓平仓及【激进交易法】自动下单",
+    x: 30, y: 865, w: 1560, h: 245,
+    bgColor: "#ecfdf5", borderColor: "#059669", titleColor: "#047857", dashed: false
+  }
+];
+
+// 节点定义 (Nodes)
+const nodes = [
+  // --- Zone A: 基础数据层 ---
+  {
+    id: "D1",
+    zone: "基础数据层",
+    title: "1. 监控/收集权威新闻",
+    lines: [
+      "• 数据源：1~2个权威财经网站",
+      "• 频率：每 3 分钟抓取一次",
+      "• 动作：立即触发 Dify 分析工作流"
+    ],
+    x: 80, y: 115, w: 380, h: 105,
+    bg: "#ffffff", border: "#64748b", headerBg: "#475569",
+    badge: "⚠️ 缺去重机制",
+    details: {
+      role: "高频新闻源监控与推送",
+      inputs: "权威财经网站实时快讯、公告、宏观新闻",
+      outputs: "原始新闻标题、正文、发布时间戳、来源URL -> 推送至 Dify API",
+      gap: "【不完整点 #1：高频抓取去重缺失】每3分钟抓取一次，同一重大事件会被多家媒体反复报道或重复抓取。若无去重机制，会重复触发下游 HTTP 平仓与激进交易下单。建议在进入分析前增加 URL/标题 Hash 去重 + Dify 向量库近24小时新闻摘要余弦相似度去重（阈值 > 0.85 跳过）。"
+    }
+  },
+  {
+    id: "D2",
+    zone: "基础数据层",
+    title: "2. 定时同步 K线 与 盘口数据",
+    lines: [
+      "• 频率：每 25 分钟同步分钟K / 16:30 同步日K",
+      "• 盘口指标：总股本/流通股/流通值/成交额/成交量/",
+      "  量比/换手率/市盈/总额/总值/内盘/外盘/委比等"
+    ],
+    x: 560, y: 115, w: 480, h: 105,
+    bg: "#ffffff", border: "#64748b", headerBg: "#475569",
+    badge: "⚠️ 向量化方式待明确",
+    details: {
+      role: "全市场/核心池行情与盘口快照同步",
+      inputs: "行情源分钟K、日K及13项盘口实时指标",
+      outputs: "结构化行情表 + 转化为自然语言特征描述写入 Dify 向量数据库",
+      gap: "【不完整点 #2：纯数值K线存入向量库的检索局限】向量数据库擅长语义检索，对纯浮点数K线序列检索效果差。建议在同步时将K线与盘口转化为「语义特征卡片」（如：『2026-10-13 放量突破20日均线，量比2.4，换手率8.5%，外盘显著大于内盘，委比+35%』）再向量化入库，或提供精确 SQL 查询 Tool 供 Dify 调用。"
+    }
+  },
+  {
+    id: "D3",
+    zone: "基础数据层",
+    title: "3. 提供个股/行业研报与财报数据",
+    lines: [
+      "• 数据源：1~2个权威研报/财报网站",
+      "• 触发：根据新闻利多/利空分析结果按需调取",
+      "• 覆盖：个股财报研报 + 期货/现货对应行业研报"
+    ],
+    x: 1140, y: 115, w: 400, h: 105,
+    bg: "#ffffff", border: "#64748b", headerBg: "#475569",
+    badge: null,
+    details: {
+      role: "基本面与机构研报数据源",
+      inputs: "Dify 传入的候选股票代码或行业/期货品种名称",
+      outputs: "最新季度财报核心指标（营收/净利增速/ROE/现金流）及机构最新评级研报摘要",
+      gap: "建议提前将核心标的近3期财报与行业深度研报定时预同步至 Dify 知识库，避免盘中实时爬取权威网站遭遇反爬限流导致交易延迟。"
+    }
+  },
+
+  // --- Zone B: Dify 智能分析与选股引擎 ---
+  {
+    id: "N1",
+    zone: "Dify 功能区",
+    title: "① Dify 新闻实时分析节点 (LLM)",
+    lines: [
+      "• 立即提炼新闻核心摘要与关键实体",
+      "• 判定影响维度（整体行情 / 行业 / 公司）",
+      "• 判定多空级别（重大利多 / 一般 / 重大利空）"
+    ],
+    x: 80, y: 330, w: 380, h: 110,
+    bg: "#dbeafe", border: "#2563eb", headerBg: "#1d4ed8",
+    badge: null,
+    details: {
+      role: "Dify Workflow 入口：新闻结构化提取与情绪分级",
+      inputs: "每3分钟抓取的新闻正文与元数据",
+      outputs: "JSON: { summary, scope: 'MARKET'|'INDUSTRY'|'COMPANY', level: 'MAJOR_BULL'|'NORMAL'|'MAJOR_BEAR', entities: [] }",
+      gap: "需在 Prompt 中严格约束「重大利多/重大利空」的量化判定标准，防止普通行业动态被误判为「重大」从而频繁触发激进交易。"
+    }
+  },
+  {
+    id: "DB1",
+    zone: "Dify 功能区",
+    title: "② Dify 数据库 & 向量数据库 (Dataset)",
+    lines: [
+      "• Dify 数据库：保存新闻摘要、多空分析结果、",
+      "  以及推荐个股/期现货的财报研报分析结论",
+      "• 向量数据库：存储日K/25分钟K线及13项盘口特征"
+    ],
+    x: 560, y: 330, w: 480, h: 110,
+    bg: "#e0e7ff", border: "#4f46e5", headerBg: "#4338ca",
+    badge: "⚠️ 缺行业->个股映射表",
+    details: {
+      role: "Dify 持久化存储与 RAG 向量检索引擎",
+      inputs: "新闻分析结果、K线盘口同步数据、财报研报分析结论",
+      outputs: "向深度调研节点提供 K线/盘口技术面上下文与历史分析记忆",
+      gap: "【不完整点 #3：缺少『行业 -> 个股/期货/现货』标准映射字典】当新闻仅提及某行业重大利好（未点名具体公司）时，大模型凭记忆容易产生股票代码幻觉。必须在 Dify 知识库中内置《申万行业-概念龙头股-期货主力合约映射表》供检索匹配。"
+    }
+  },
+  {
+    id: "R1",
+    zone: "Dify 功能区",
+    title: "③ 新闻影响层级与情绪路由 (条件分支)",
+    lines: [
+      "• 1. 整体行情：一般 / 重大利空 (如战争等重大事故)",
+      "• 2. 行业层面：重大利多 / 一般 / 重大利空",
+      "• 3. 公司层面：重大利多 / 一般 / 重大利空"
+    ],
+    x: 80, y: 495, w: 380, h: 105,
+    bg: "#fef3c7", border: "#d97706", headerBg: "#b45309",
+    badge: "⚠️ 缺「整体重大利多」",
+    details: {
+      role: "Dify IF/ELSE 多路条件路由节点",
+      inputs: "节点 ① 输出的 scope 与 level 字段",
+      outputs: "路由分发至 ④-A / ④-B / ④-C / ④-D 四条处理链路",
+      gap: "【不完整点 #4：缺少『整体行情：重大利多』分支】原表仅定义了整体行情的「一般、重大利空」，遗漏了如超预期降准降息、国家级救市政策等「整体重大利多」场景（应触发空头全部平仓 + 筛选指数期指/券商龙头做多）。"
+    }
+  },
+  {
+    id: "B1",
+    zone: "Dify 功能区",
+    title: "④-A 整体行情：重大利空 (战争等)",
+    lines: [
+      "• 多头处置：立马通过 HTTP 通知全部平仓",
+      "• 衍生分析：同步分析相关利多信息(如黄金/军工)",
+      "  与相关利空信息(如航空/可选消费)，传导至行业分支"
+    ],
+    x: 55, y: 665, w: 265, h: 135,
+    bg: "#fee2e2", border: "#dc2626", headerBg: "#b91c1c",
+    badge: "⚠️ 衍生流转需闭环",
+    details: {
+      role: "黑天鹅/系统性风险应急响应与衍生机会挖掘",
+      inputs: "整体行情 = 重大利空（战争、地缘冲突、系统性金融风险）",
+      outputs: "1. HTTP 全局多头平仓指令；2. 衍生受益/受损行业清单 -> 汇入 ④-C / ④-D",
+      gap: "【不完整点 #5：衍生利多/利空分析后续动作未闭环】原表写明『并分析相关利多信息和利空信息』，但未说明分析后的去向。应在图中闭环连接至 ④-C（做多避险板块/军工/原油期货）与 ④-D（做空受损行业）。"
+    }
+  },
+  {
+    id: "B2",
+    zone: "Dify 功能区",
+    title: "④-B 一般行情 (无重大影响)",
+    lines: [
+      "• 整体 / 行业 / 公司 = 一般",
+      "• 仅将摘要与分析结果归档入库",
+      "• 不触发 HTTP 平仓或激进交易"
+    ],
+    x: 340, y: 665, w: 195, h: 135,
+    bg: "#f1f5f9", border: "#64748b", headerBg: "#475569",
+    badge: null,
+    details: {
+      role: "常规资讯归档过滤",
+      inputs: "影响级别判定为「一般」的新闻",
+      outputs: "保存至 Dify 数据库留存备查，流程结束",
+      gap: "无断点，起到过滤噪音、防止过度交易的作用。"
+    }
+  },
+  {
+    id: "B3",
+    zone: "Dify 功能区",
+    title: "④-C 行业/公司：重大利多",
+    lines: [
+      "• 分析对应行业传导影响",
+      "• 若利空现有【空头持仓】-> HTTP通知平仓空头",
+      "• 定位对应【多头】候选个股 / 期货 / 现货"
+    ],
+    x: 575, y: 505, w: 450, h: 125,
+    bg: "#dcfce7", border: "#16a34a", headerBg: "#15803d",
+    badge: "⚠️ 持仓状态感知问题",
+    details: {
+      role: "重大利多事件处理：反向空头平仓 + 多头标的初筛",
+      inputs: "行业/公司 = 重大利多（或整体黑天鹅衍生的避险利多行业）",
+      outputs: "1. HTTP 通知平仓对应空头持仓；2. 候选多头个股/期货/现货列表 -> 送入节点 ⑤",
+      gap: "【不完整点 #6：Dify 如何获知当前是否有空头持仓？】持仓数据在 SpringBoot 量化系统中。建议由 Dify 先通过 HTTP Tool 查询 SpringBoot 持仓接口，或者 Dify 直接发送「行业重大利多信号」由 SpringBoot 本地判断若持有空头则自动平仓。"
+    }
+  },
+  {
+    id: "B4",
+    zone: "Dify 功能区",
+    title: "④-D 行业/公司：重大利空",
+    lines: [
+      "• 分析对应行业传导影响",
+      "• 若利空现有【多头持仓】-> HTTP通知平仓多头",
+      "• 定位对应【空头】候选个股 / 期货 / 现货"
+    ],
+    x: 575, y: 675, w: 450, h: 125,
+    bg: "#ffe4e6", border: "#e11d48", headerBg: "#be123c",
+    badge: "⚠️ A股做空机制限制",
+    details: {
+      role: "重大利空事件处理：反向多头平仓 + 空头标的初筛",
+      inputs: "行业/公司 = 重大利空",
+      outputs: "1. HTTP 通知平仓对应多头持仓；2. 候选空头个股/期货/现货列表 -> 送入节点 ⑤",
+      gap: "【不完整点 #7：A股个股无法直接裸做空】国内A股大部分个股无融券券源，无法像期货一样直接开空仓。建议在 Dify 筛选空头标的时：若为A股利空，优先映射至对应商品期货/股指期货做空，或校验是否为可融券标的。"
+    }
+  },
+  {
+    id: "RES",
+    zone: "Dify 功能区",
+    title: "⑤ Dify 标的深度调研与最终推荐生成",
+    lines: [
+      "1. 基本面深度调研 (调用权威数据源 3)：",
+      "   • 个股：分析最新财报与机构研报",
+      "   • 期货/现货：分析对应行业研报与财报",
+      "2. 技术面与盘口验证 (检索向量库 ②)：",
+      "   • 结合日K/25分钟K形态与13项盘口指标过滤",
+      "3. 持久化与输出：",
+      "   • 财报研报分析结果保存入 Dify 数据库",
+      "   • 得出最终推荐【多头/空头】个股或期现货"
+    ],
+    x: 1120, y: 495, w: 430, h: 305,
+    bg: "#dbeafe", border: "#1d4ed8", headerBg: "#1e40af",
+    badge: "⚠️ 补充K线盘口过滤准则",
+    details: {
+      role: "核心投研闭环：基本面(财报/研报) + 技术面(K线/盘口) 双重验证得出推荐标的",
+      inputs: "候选多头/空头标的 + 权威财报研报 + 向量库K线与盘口指标",
+      outputs: "1. 财报研报分析报告写入 Dify 数据库；2. 最终推荐标的清单(含代码、方向、置信度)通过 HTTP 发送至量化交易系统",
+      gap: "【关键衔接补充】原表基础数据2定义了K线和13项盘口指标存入向量库，但流程描述中只写了『分析研报和财报』。此处已将「向量库K线与盘口协同过滤」补齐并入调研节点，实现基本面+盘口量价共振选股。"
+    }
+  },
+
+  // --- Zone C: 量化交易系统 (SpringBoot + Vue) ---
+  {
+    id: "Q1",
+    zone: "量化交易系统",
+    title: "⑥-A 全局紧急风控平仓模块",
+    lines: [
+      "• 接收 Dify HTTP 整体重大利空指令",
+      "• 实盘【多头持仓】立马全部市价/最优价平仓",
+      "• Vue 监控台实时弹窗报警与风控日志记录"
+    ],
+    x: 55, y: 925, w: 360, h: 145,
+    bg: "#fecaca", border: "#dc2626", headerBg: "#b91c1c",
+    badge: null,
+    details: {
+      role: "SpringBoot 全局一键清仓风控接口 (POST /api/v1/risk/close-all-long)",
+      inputs: "Dify HTTP 告警请求：{ eventId, reason, timestamp, signature }",
+      outputs: "撤除所有未成交多头挂单 + 市价全平多头持仓 + 推送 WebSocket 告警至 Vue 前端",
+      gap: "建议在 Vue 端配置「自动全平 / 人工5秒确认熔断」开关，避免极端假新闻导致误清仓。"
+    }
+  },
+  {
+    id: "Q2",
+    zone: "量化交易系统",
+    title: "⑥-B 反向持仓检查与平仓模块",
+    lines: [
+      "• 接收 HTTP 行业/公司重大利多 -> 检查并平仓对应空头",
+      "• 接收 HTTP 行业/公司重大利空 -> 检查并平仓对应多头",
+      "• 实时更新账户持仓表与可用保证金/资金"
+    ],
+    x: 525, y: 925, w: 490, h: 145,
+    bg: "#d1fae5", border: "#059669", headerBg: "#047857",
+    badge: null,
+    details: {
+      role: "SpringBoot 持仓冲突平仓服务 (POST /api/v1/position/close-reverse)",
+      inputs: "Dify HTTP 信号：{ industry, symbols, signalType: 'MAJOR_BULL'|'MAJOR_BEAR' }",
+      outputs: "平掉与最新基本面方向相反的存量持仓，释放资金供后续激进交易使用",
+      gap: "需确保「先平反向仓、释放资金成功」与「后开新仓」之间的事务顺序，避免资金不足拒单。"
+    }
+  },
+  {
+    id: "Q3",
+    zone: "量化交易系统",
+    title: "⑥-C 激进交易法自动执行模块",
+    lines: [
+      "• 接收 Dify HTTP 最终推荐的个股 / 期货 / 现货",
+      "• 根据【多头买入 / 空头卖出】方向调用激进交易法",
+      "• 校验交易时段、涨跌停盘口与仓位上限后极速下单"
+    ],
+    x: 1120, y: 925, w: 430, h: 145,
+    bg: "#a7f3d0", border: "#047857", headerBg: "#065f46",
+    badge: "⚠️ 缺非交易时段队列",
+    details: {
+      role: "SpringBoot 激进交易执行引擎 (POST /api/v1/trade/aggressive-execute)",
+      inputs: "Dify HTTP 推荐结果：{ targets: [{ code, market, direction: 'LONG'|'SHORT', score, reportId }] }",
+      outputs: "调用券商/期货柜台接口（对手价/超价/市价）快速建仓，并在 Vue 前端展示持仓与盈亏跟踪",
+      gap: "【不完整点 #8：非交易时段指令排队与风控参数】新闻是 7×24 小时抓取的，若在盘后/周末收到推荐，直接下单会失败。需在 SpringBoot 增加「非交易时段预埋单队列」，并在开盘集合竞价结合最新盘口（如是否一字涨跌停）执行。"
+    }
+  }
+];
+
+// 连线定义 (Edges)
+const edges = [
+  // 数据层 -> Dify
+  { from: "D1", to: "N1", label: "每3分钟抓取推送", color: "#2563eb", points: [[270, 220], [270, 330]] },
+  { from: "D2", to: "DB1", label: "每25分钟/16:30向量化入库", color: "#4f46e5", points: [[800, 220], [800, 330]] },
+  { from: "D3", to: "RES", label: "按需提供个股/行业研报财报", color: "#0284c7", points: [[1340, 220], [1340, 495]] },
+
+  // Dify 内部流转
+  { from: "N1", to: "DB1", label: "保存摘要与分析结果", color: "#2563eb", points: [[460, 385], [560, 385]] },
+  { from: "N1", to: "R1", label: "传入分级结果", color: "#d97706", points: [[270, 440], [270, 495]] },
+
+  // 路由分支
+  { from: "R1", to: "B1", label: "整体: 重大利空", color: "#dc2626", points: [[185, 600], [185, 665]] },
+  { from: "R1", to: "B2", label: "一般行情", color: "#64748b", points: [[380, 600], [435, 665]] },
+  { from: "R1", to: "B3", label: "行业/公司: 重大利多", color: "#16a34a", points: [[460, 535], [575, 535]] },
+  { from: "R1", to: "B4", label: "行业/公司: 重大利空", color: "#e11d48", points: [[460, 575], [520, 575], [520, 720], [575, 720]] },
+
+  // 整体重大利空的衍生行业分析传导
+  { from: "B1", to: "B4", label: "分析衍生利多/利空行业", color: "#dc2626", dashed: true, points: [[185, 800], [185, 825], [800, 825], [800, 800]] },
+
+  // 初筛标的 -> 深度调研
+  { from: "B3", to: "RES", label: "初筛【多头】个股/期现货", color: "#16a34a", points: [[1025, 565], [1120, 565]] },
+  { from: "B4", to: "RES", label: "初筛【空头】个股/期现货", color: "#e11d48", points: [[1025, 735], [1120, 735]] },
+
+  // 向量库 <-> 深度调研
+  { from: "DB1", to: "RES", label: "检索K线盘口向量 & 保存研报结论", color: "#4f46e5", points: [[950, 440], [950, 470], [1220, 470], [1220, 495]] },
+
+  // 跨系统 HTTP 调用 (Dify -> SpringBoot+Vue)
+  { from: "B1", to: "Q1", label: "HTTP: 多头立马全部平仓", color: "#dc2626", thick: true, points: [[140, 800], [140, 925]] },
+  { from: "B3", to: "Q2", label: "HTTP: 平仓空头持仓", color: "#16a34a", thick: true, points: [[650, 630], [555, 630], [555, 925]] },
+  { from: "B4", to: "Q2", label: "HTTP: 平仓多头持仓", color: "#e11d48", thick: true, points: [[760, 800], [760, 925]] },
+  { from: "RES", to: "Q3", label: "HTTP: 推荐标的 + 激进交易法", color: "#047857", thick: true, points: [[1335, 800], [1335, 925]] }
+];
+
+/**
+ * ============================================================================
+ * 2. Canvas 渲染与交互状态管理
+ * ============================================================================
+ */
+const canvas = document.getElementById("flowCanvas");
+const ctx = canvas.getContext("2d");
+const container = document.getElementById("canvas-container");
+
+let scale = 1;
+let offsetX = 0;
+let offsetY = 0;
+let isDragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+
+let hoveredNode = null;
+let selectedNode = null;
+let showAnimation = true;
+let showGapBadges = true;
+let animOffset = 0;
+
+function resizeCanvas() {
+  const rect = container.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  resetView();
+}
+
+function resetView() {
+  const rect = container.getBoundingClientRect();
+  const scaleX = (rect.width - 40) / VIRTUAL_WIDTH;
+  const scaleY = (rect.height - 40) / VIRTUAL_HEIGHT;
+  scale = Math.min(scaleX, scaleY, 1.1);
+  offsetX = (rect.width - VIRTUAL_WIDTH * scale) / 2;
+  offsetY = (rect.height - VIRTUAL_HEIGHT * scale) / 2;
+  updateZoomIndicator();
+}
+
+function zoomBy(factor) {
+  const rect = container.getBoundingClientRect();
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
+  const newScale = Math.min(Math.max(scale * factor, 0.35), 2.5);
+  offsetX = cx - (cx - offsetX) * (newScale / scale);
+  offsetY = cy - (cy - offsetY) * (newScale / scale);
+  scale = newScale;
+  updateZoomIndicator();
+}
+
+function updateZoomIndicator() {
+  document.getElementById("zoom-indicator").textContent = Math.round(scale * 100) + "%";
+}
+
+// 辅助绘制圆角矩形
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// 绘制网格背景
+function drawGrid(ctx, width, height) {
+  ctx.save();
+  ctx.strokeStyle = "#e2e8f0";
+  ctx.lineWidth = 1;
+  const step = 30 * scale;
+  const startX = offsetX % step;
+  const startY = offsetY % step;
+  ctx.beginPath();
+  for (let x = startX; x < width; x += step) {
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+  }
+  for (let y = startY; y < height; y += step) {
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+// 主渲染循环
+function render() {
+  const dpr = window.devicePixelRatio || 1;
+  const width = canvas.width / dpr;
+  const height = canvas.height / dpr;
+
+  ctx.save();
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, width, height);
+
+  drawGrid(ctx, width, height);
+
+  ctx.translate(offsetX, offsetY);
+  ctx.scale(scale, scale);
+
+  // 1. 绘制顶部大标题
+  ctx.fillStyle = "#0f172a";
+  ctx.font = "bold 22px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("AI 智能选股与量化交易系统全链路操作流程图 (Dify + SpringBoot/Vue)", VIRTUAL_WIDTH / 2, 38);
+
+  // 2. 绘制三大功能区泳道 (Zones)
+  zones.forEach(z => {
+    ctx.save();
+    roundRect(ctx, z.x, z.y, z.w, z.h, 12);
+    ctx.fillStyle = z.bgColor;
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = z.borderColor;
+    if (z.dashed) ctx.setLineDash([8, 6]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 泳道标题栏
+    ctx.fillStyle = z.titleColor;
+    ctx.font = "bold 15px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText(z.title, z.x + 18, z.y + 26);
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "12.5px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+    ctx.fillText(z.subtitle, z.x + 18, z.y + 46);
+    ctx.restore();
+  });
+
+  // 3. 绘制连线与动态粒子 (Edges)
+  edges.forEach(edge => {
+    const pts = edge.points;
+    const isHighlighted =
+      (hoveredNode && (hoveredNode.id === edge.from || hoveredNode.id === edge.to)) ||
+      (selectedNode && (selectedNode.id === edge.from || selectedNode.id === edge.to));
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) {
+      ctx.lineTo(pts[i][0], pts[i][1]);
+    }
+    ctx.strokeStyle = edge.color;
+    ctx.lineWidth = isHighlighted ? 3.5 : (edge.thick ? 2.6 : 2);
+    if (edge.dashed) ctx.setLineDash([6, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 绘制箭头 (在最后一段末端)
+    const last = pts[pts.length - 1];
+    const prev = pts[pts.length - 2];
+    const angle = Math.atan2(last[1] - prev[1], last[0] - prev[0]);
+    const headLen = 10;
+    ctx.beginPath();
+    ctx.moveTo(last[0], last[1]);
+    ctx.lineTo(last[0] - headLen * Math.cos(angle - Math.PI / 6), last[1] - headLen * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(last[0] - headLen * Math.cos(angle + Math.PI / 6), last[1] - headLen * Math.sin(angle + Math.PI / 6));
+    ctx.closePath();
+    ctx.fillStyle = edge.color;
+    ctx.fill();
+
+    // 绘制动态数据流光点
+    if (showAnimation) {
+      drawFlowParticles(ctx, pts, edge.color);
+    }
+
+    // 绘制连线标签胶囊
+    if (edge.label) {
+      let midX, midY;
+      if (pts.length === 2) {
+        midX = (pts[0][0] + pts[1][0]) / 2;
+        midY = (pts[0][1] + pts[1][1]) / 2;
+      } else {
+        // 取最长线段的中点
+        let maxLen = 0, bestIdx = 0;
+        for (let i = 0; i < pts.length - 1; i++) {
+          const d = Math.hypot(pts[i+1][0] - pts[i][0], pts[i+1][1] - pts[i][1]);
+          if (d > maxLen) { maxLen = d; bestIdx = i; }
+        }
+        midX = (pts[bestIdx][0] + pts[bestIdx+1][0]) / 2;
+        midY = (pts[bestIdx][1] + pts[bestIdx+1][1]) / 2;
+      }
+
+      ctx.font = "bold 11.5px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+      const textWidth = ctx.measureText(edge.label).width;
+      const padX = 8, padY = 4;
+      roundRect(ctx, midX - textWidth / 2 - padX, midY - 10, textWidth + padX * 2, 20, 10);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = edge.color;
+      ctx.stroke();
+
+      ctx.fillStyle = edge.color;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(edge.label, midX, midY);
+    }
+    ctx.restore();
+  });
+
+  // 4. 绘制节点 (Nodes)
+  nodes.forEach(node => {
+    const isHovered = hoveredNode && hoveredNode.id === node.id;
+    const isSelected = selectedNode && selectedNode.id === node.id;
+
+    ctx.save();
+    // 阴影效果
+    ctx.shadowColor = isSelected ? "rgba(37, 99, 235, 0.35)" : (isHovered ? "rgba(15, 23, 42, 0.18)" : "rgba(15, 23, 42, 0.07)");
+    ctx.shadowBlur = isSelected || isHovered ? 16 : 8;
+    ctx.shadowOffsetY = 3;
+
+    // 节点主体背景
+    roundRect(ctx, node.x, node.y, node.w, node.h, 10);
+    ctx.fillStyle = node.bg;
+    ctx.fill();
+
+    // 节点边框
+    ctx.lineWidth = isSelected ? 3 : (isHovered ? 2.5 : 1.8);
+    ctx.strokeStyle = isSelected ? "#1d4ed8" : node.border;
+    ctx.stroke();
+
+    ctx.shadowColor = "transparent";
+
+    // 节点顶部 Header 条
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(node.x + 10, node.y);
+    ctx.lineTo(node.x + node.w - 10, node.y);
+    ctx.quadraticCurveTo(node.x + node.w, node.y, node.x + node.w, node.y + 10);
+    ctx.lineTo(node.x + node.w, node.y + 32);
+    ctx.lineTo(node.x, node.y + 32);
+    ctx.lineTo(node.x, node.y + 10);
+    ctx.quadraticCurveTo(node.x, node.y, node.x + 10, node.y);
+    ctx.closePath();
+    ctx.fillStyle = node.headerBg;
+    ctx.fill();
+
+    // 节点标题文字
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 13.5px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText(node.title, node.x + 12, node.y + 16);
+    ctx.restore();
+
+    // 节点正文多行列表
+    ctx.fillStyle = "#1e293b";
+    ctx.font = "12.5px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    let startY = node.y + 42;
+    const lineHeight = 21;
+    node.lines.forEach((line, idx) => {
+      const isSubHeader = line.startsWith("1.") || line.startsWith("2.") || line.startsWith("3.");
+      ctx.font = isSubHeader
+        ? "bold 12.5px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif"
+        : "12.5px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+      ctx.fillText(line, node.x + 14, startY + idx * lineHeight);
+    });
+
+    // 绘制右上角「待补充/不完整」提示角标
+    if (showGapBadges && node.badge) {
+      ctx.save();
+      ctx.font = "bold 11px -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif";
+      const bw = ctx.measureText(node.badge).width + 14;
+      const bx = node.x + node.w - bw - 6;
+      const by = node.y - 11;
+      roundRect(ctx, bx, by, bw, 22, 11);
+      ctx.fillStyle = "#fef3c7";
+      ctx.fill();
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = "#d97706";
+      ctx.stroke();
+
+      ctx.fillStyle = "#b45309";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(node.badge, bx + bw / 2, by + 11);
+      ctx.restore();
+    }
+
+    ctx.restore();
+  });
+
+  ctx.restore();
+
+  if (showAnimation) {
+    animOffset = (animOffset + 0.006) % 1;
+  }
+  requestAnimationFrame(render);
+}
+
+// 沿折线绘制流动的粒子
+function drawFlowParticles(ctx, pts, color) {
+  let totalLen = 0;
+  const segLens = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const l = Math.hypot(pts[i+1][0] - pts[i][0], pts[i+1][1] - pts[i][1]);
+    segLens.push(l);
+    totalLen += l;
+  }
+  const numParticles = Math.max(1, Math.floor(totalLen / 140));
+  for (let p = 0; p < numParticles; p++) {
+    const t = (animOffset + p / numParticles) % 1;
+    let targetDist = t * totalLen;
+    for (let i = 0; i < segLens.length; i++) {
+      if (targetDist <= segLens[i]) {
+        const ratio = targetDist / segLens[i];
+        const px = pts[i][0] + (pts[i+1][0] - pts[i][0]) * ratio;
+        const py = pts[i][1] + (pts[i+1][1] - pts[i][1]) * ratio;
+        ctx.beginPath();
+        ctx.arc(px, py, 4, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+        break;
+      }
+      targetDist -= segLens[i];
+    }
+  }
+}
+
+/**
+ * ============================================================================
+ * 3. 鼠标交互：拖拽平移、滚轮缩放、点击/悬停检测
+ * ============================================================================
+ */
+function screenToVirtual(sx, sy) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (sx - rect.left - offsetX) / scale,
+    y: (sy - rect.top - offsetY) / scale
+  };
+}
+
+function getNodeAt(vx, vy) {
+  for (let i = nodes.length - 1; i >= 0; i--) {
+    const n = nodes[i];
+    if (vx >= n.x && vx <= n.x + n.w && vy >= n.y - 12 && vy <= n.y + n.h) {
+      return n;
+    }
+  }
+  return null;
+}
+
+container.addEventListener("mousedown", e => {
+  const v = screenToVirtual(e.clientX, e.clientY);
+  const clicked = getNodeAt(v.x, v.y);
+  if (clicked) {
+    selectedNode = clicked;
+    renderNodeInspector(clicked);
+  }
+  isDragging = true;
+  dragStartX = e.clientX - offsetX;
+  dragStartY = e.clientY - offsetY;
+});
+
+window.addEventListener("mousemove", e => {
+  if (isDragging) {
+    offsetX = e.clientX - dragStartX;
+    offsetY = e.clientY - dragStartY;
+    return;
+  }
+  const v = screenToVirtual(e.clientX, e.clientY);
+  const hit = getNodeAt(v.x, v.y);
+  hoveredNode = hit;
+  container.style.cursor = hit ? "pointer" : "grab";
+});
+
+window.addEventListener("mouseup", () => {
+  isDragging = false;
+});
+
+container.addEventListener("wheel", e => {
+  e.preventDefault();
+  const rect = container.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const factor = e.deltaY < 0 ? 1.1 : 0.9;
+  const newScale = Math.min(Math.max(scale * factor, 0.35), 2.5);
+  offsetX = mx - (mx - offsetX) * (newScale / scale);
+  offsetY = my - (my - offsetY) * (newScale / scale);
+  scale = newScale;
+  updateZoomIndicator();
+}, { passive: false });
+
+/**
+ * ============================================================================
+ * 4. 右侧详情面板与工具栏动作
+ * ============================================================================
+ */
+function renderNodeInspector(node) {
+  const el = document.getElementById("inspector-content");
+  let tagClass = "tag-data";
+  if (node.zone.includes("Dify")) tagClass = "tag-dify";
+  if (node.zone.includes("量化")) tagClass = "tag-quant";
+
+  const gapHtml = node.details.gap
+    ? `<div class="gap-box">
+         <h5>⚠️ 流程完整性诊断与补充建议</h5>
+         <p>${node.details.gap}</p>
+       </div>`
+    : "";
+
+  el.innerHTML = `
+    <div>
+      <span class="tag ${tagClass}">${node.zone}</span>
+      ${node.badge ? `<span class="tag tag-warn">${node.badge}</span>` : ""}
+    </div>
+    <div class="detail-title">${node.title}</div>
+    <div class="detail-section">
+      <h4>模块核心职责</h4>
+      <p>${node.details.role}</p>
+    </div>
+    <div class="detail-section">
+      <h4>执行步骤明细</h4>
+      <ul>
+        ${node.lines.map(l => `<li>${l.replace(/^[•\s]+/, "")}</li>`).join("")}
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>输入数据 (Inputs)</h4>
+      <p>${node.details.inputs}</p>
+    </div>
+    <div class="detail-section">
+      <h4>输出与下游动作 (Outputs)</h4>
+      <p>${node.details.outputs}</p>
+    </div>
+    ${gapHtml}
+  `;
+}
+
+function showOverview() {
+  selectedNode = null;
+  const el = document.getElementById("inspector-content");
+  el.innerHTML = `
+    <span class="tag tag-dify">全局架构与问题排查</span>
+    <div class="detail-title">选股流程结构完整性诊断汇总 (7处待补充)</div>
+    <div class="detail-section">
+      <h4>功能区职责划分</h4>
+      <ul>
+        <li><b>Dify 智能分析功能区</b>：承担从新闻抓取入库、多空分级、行业传导、财报研报分析、K线盘口向量检索到最终得出推荐个股/期现货的全部逻辑。</li>
+        <li><b>量化交易系统 (SpringBoot+Vue)</b>：提供 HTTP 接口接收 Dify 的平仓与推荐指令，负责实盘持仓核对、紧急全平、反向平仓及「激进交易法」下单。</li>
+      </ul>
+    </div>
+    <div class="gap-box">
+      <h5>1. 整体行情缺少「重大利多」分支 & 衍生分析未闭环</h5>
+      <p>原表仅定义了整体行情的「一般、重大利空」，建议补充「整体重大利多」；同时将整体重大利空分析出的「相关利多/利空行业」闭环接入行业选股分支。</p>
+    </div>
+    <div class="gap-box">
+      <h5>2. Dify 无法直接感知 SpringBoot 中的实时持仓</h5>
+      <p>执行「若利空空头/多头持仓则通知平仓」前，建议 Dify 直接推送标准化多空事件，由 SpringBoot 本地校验持仓表自动平掉反向仓位。</p>
+    </div>
+    <div class="gap-box">
+      <h5>3. K线与盘口向量数据的具体使用节点未写明</h5>
+      <p>已在图中节点 ⑤ 补齐：在分析财报研报的同时检索向量库中的 K线与13项盘口指标，完成「基本面 + 量价盘口」双重过滤。</p>
+    </div>
+    <div class="gap-box">
+      <h5>4. 每3分钟抓取新闻的幂等去重机制缺失</h5>
+      <p>需增加新闻摘要向量相似度去重，避免同一重大事件被多家媒体报道时重复触发 HTTP 激进交易。</p>
+    </div>
+    <div class="gap-box">
+      <h5>5. 行业 -> 具体个股/期货主力合约映射库缺失</h5>
+      <p>需在 Dify 知识库维护《行业-龙头股-对应期货品种映射表》，防止大模型凭记忆输出错误代码。</p>
+    </div>
+    <div class="gap-box">
+      <h5>6. A股个股做空限制 & 7. 非交易时段指令排队</h5>
+      <p>A股利空应优先映射至商品/股指期货或融券标的；盘后/周末触发的 HTTP 交易信号需进入 SpringBoot 预埋单队列。</p>
+    </div>
+  `;
+}
+
+function toggleAnimation() {
+  showAnimation = !showAnimation;
+  const btn = document.getElementById("btn-anim");
+  btn.textContent = showAnimation ? "⚡ 数据流动画: 开启" : "⚡ 数据流动画: 暂停";
+  btn.classList.toggle("active", showAnimation);
+}
+
+function toggleGaps() {
+  showGapBadges = !showGapBadges;
+  const btn = document.getElementById("btn-gaps");
+  btn.classList.toggle("active", showGapBadges);
+}
+
+function exportPNG() {
+  // 创建离屏高清 Canvas 完整导出整张流程图
+  const exportCanvas = document.createElement("canvas");
+  const exportScale = 2;
+  exportCanvas.width = VIRTUAL_WIDTH * exportScale;
+  exportCanvas.height = VIRTUAL_HEIGHT * exportScale;
+  const ectx = exportCanvas.getContext("2d");
+
+  const prevScale = scale, prevX = offsetX, prevY = offsetY;
+  // 临时在离屏 Canvas 上绘制
+  ectx.fillStyle = "#f8fafc";
+  ectx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+  // Swap context logic by rendering directly onto exportCanvas via current canvas snapshot or re-centering
+  resetView();
+  setTimeout(() => {
+    const link = document.createElement("a");
+    link.download = "AI智能选股与量化交易流程图_Canvas.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  }, 60);
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+showOverview();
+requestAnimationFrame(render);
+</script>
+</body>
+</html>
