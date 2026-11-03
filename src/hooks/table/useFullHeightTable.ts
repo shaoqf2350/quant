@@ -37,6 +37,13 @@ const getOuterHeight = (element: HTMLElement) => {
   return element.getBoundingClientRect().height + marginTop + marginBottom;
 };
 
+// 全局界面缩放（html { zoom }）下，getBoundingClientRect / window.innerHeight 是缩放后的视觉像素，
+// 而 offsetTop / getComputedStyle 仍是布局像素，两者相差 --app-scale 倍，需要统一到布局像素再计算。
+const getAppScale = () => {
+  const scale = Number.parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--app-scale'));
+  return Number.isFinite(scale) && scale > 0 ? scale : 1;
+};
+
 const isVisible = (element: HTMLElement) => {
   const rect = element.getBoundingClientRect();
   return rect.width > 0 && rect.height > 0;
@@ -115,10 +122,10 @@ const calculateTableHeight = (table: HTMLElement) => {
     node = node.offsetParent as HTMLElement | null;
   }
 
-  // Keep the calculation tied to the page layout. Using the current scroll
-  // position here would make scrolling change the table height again.
-  const viewportBottom = window.innerHeight;
-  const followingHeight = getFollowingHeight(table);
+  // 统一换算到布局像素：innerHeight 与 getBoundingClientRect 是视觉像素，需除以缩放比。
+  const scale = getAppScale();
+  const viewportBottom = window.innerHeight / scale;
+  const followingHeight = getFollowingHeight(table) / scale;
   const bottomPadding = getBottomPadding(table);
   const bottomOffset = window.innerWidth < 768 ? 28 : 32;
   const minHeight = window.innerWidth < 768 ? 220 : 260;

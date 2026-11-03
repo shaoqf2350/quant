@@ -1,0 +1,33 @@
+/* 全局界面缩放：把整个应用按 --app-scale 等比缩放（字号、图标、间距、布局一起缩放）。
+   实现要点：
+   1. zoom 作用于 html，连 teleport 到 body 的弹窗/下拉/消息也会一起缩放；
+   2. zoom 下 html 自身仍以 100% 铺满视口，无需补宽高（实测 1578x802 视口下 html 视觉尺寸即为 1578x802）；
+   3. zoom 会同时缩放 vh/vw，100vh 实际只有视口的 0.75 倍，因此视口单位统一走 --app-vh / --app-vw 换算。 */
+
+:root {
+  --app-scale: 0.75;
+  // 等价于「整个视口宽度 / 高度」的长度，用于替代 100vw / 100vh
+  --app-vw: calc(100vw / var(--app-scale));
+  --app-vh: calc(100vh / var(--app-scale));
+}
+
+html {
+  zoom: var(--app-scale);
+}
+
+/* 弹层定位修正（Element Plus / popperjs）。
+   popperjs 用 getBoundingClientRect 算出「视觉像素」坐标，却把坐标写成弹层的 left/top 或
+   transform: translate()，这些 px 落在 zoom 子树里按布局像素渲染，等于又乘了一次 --app-scale，
+   于是弹层整体往左上偏移（头像下拉、顶部 tooltip、日期面板都能看到）。
+   做法：把弹层容器反向缩放回 1:1 的视觉坐标空间，弹层自身的坐标就正确了；
+   弹层自身不缩放（否则 popperjs 量到的大小变了会误判翻转），只缩放弹层内部内容，
+   使视觉大小仍与整体界面的 75% 一致。 */
+div[id^='el-popper-container-'] {
+  width: 1px;
+  height: 1px;
+  zoom: calc(1 / var(--app-scale));
+
+  > .el-popper > *:not(.el-popper__arrow) {
+    zoom: var(--app-scale);
+  }
+}

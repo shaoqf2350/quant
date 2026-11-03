@@ -5,7 +5,7 @@
 }
 
 .el-message-box {
-  width: min(440px, calc(100vw - 32px));
+  width: min(440px, calc(var(--app-vw) - 32px));
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--app-surface-border);

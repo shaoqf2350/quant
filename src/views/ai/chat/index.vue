@@ -53,7 +53,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .ai-chat-page {
-  height: calc(100vh - 123px);
+  height: calc(var(--app-vh) - 123px);
   min-height: 0;
   background: var(--el-bg-color-page);
   border-radius: var(--app-radius-base);
@@ -75,7 +75,7 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .ai-chat-page {
-    height: calc(100vh - 88px);
+    height: calc(var(--app-vh) - 88px);
   }
 }
 </style>

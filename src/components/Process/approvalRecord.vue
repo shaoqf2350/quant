@@ -157,8 +157,8 @@ defineExpose({
 <style lang="scss" scoped>
 .container {
   :deep(.el-dialog .el-dialog__body) {
-    max-height: calc(100vh - 170px) !important;
-    min-height: calc(100vh - 170px) !important;
+    max-height: calc(var(--app-vh) - 170px) !important;
+    min-height: calc(var(--app-vh) - 170px) !important;
   }
 }
 </style>

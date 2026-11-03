@@ -53,7 +53,7 @@ defineExpose({
 <style lang="scss" scoped>
 .warm-flow-designer-page {
   width: 100%;
-  height: calc(100vh - 123px);
+  height: calc(var(--app-vh) - 123px);
   overflow: hidden;
 }
 

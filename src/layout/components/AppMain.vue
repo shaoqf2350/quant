@@ -49,7 +49,8 @@ function addIframe() {
 
 <style lang="scss" scoped>
 .app-main {
-  min-height: 100vh;
+  // zoom 缩放下 100vh 只有视口的 --app-scale 倍，统一用 --app-vh 换算
+  min-height: var(--app-vh);
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -65,20 +66,20 @@ function addIframe() {
 }
 
 .app-main:not(.with-fixed-header) {
-  min-height: calc(100vh - 64px);
+  min-height: calc(var(--app-vh) - 64px);
 }
 
 .app-main.with-tags-view:not(.with-fixed-header) {
-  min-height: calc(100vh - 105px);
+  min-height: calc(var(--app-vh) - 105px);
 }
 
 .app-main.with-fixed-header {
   padding-top: 76px;
-  min-height: calc(100vh - 76px);
+  min-height: calc(var(--app-vh) - 76px);
 }
 
 .app-main.with-fixed-header.with-tags-view {
-  min-height: calc(100vh - 111px);
+  min-height: calc(var(--app-vh) - 111px);
   padding-top: 111px;
 }
 </style>

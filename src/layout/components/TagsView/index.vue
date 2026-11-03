@@ -709,8 +709,8 @@ body.tags-fullscreen-mode .navbar {
 .main-container.tags-fullscreen-mode {
   position: fixed !important;
   inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
+  width: var(--app-vw) !important;
+  height: var(--app-vh) !important;
   margin-left: 0 !important;
   z-index: 2000;
   overflow: hidden;
@@ -732,8 +732,8 @@ body.tags-fullscreen-mode .navbar {
 .main-container.tags-fullscreen-mode .app-main,
 .main-container.tags-fullscreen-mode .app-main.with-fixed-header,
 .main-container.tags-fullscreen-mode .app-main.with-fixed-header.with-tags-view {
-  height: calc(100vh - var(--tags-fullscreen-header-height, 50px));
-  min-height: calc(100vh - var(--tags-fullscreen-header-height, 50px)) !important;
+  height: calc(var(--app-vh) - var(--tags-fullscreen-header-height, 50px));
+  min-height: calc(var(--app-vh) - var(--tags-fullscreen-header-height, 50px)) !important;
   padding-top: 12px !important;
   overflow: auto;
 }

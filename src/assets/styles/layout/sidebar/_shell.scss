@@ -22,7 +22,7 @@
     transition: width 0.28s;
     width: $base-sidebar-width !important;
     background: transparent;
-    height: calc(100vh - 24px);
+    height: calc(var(--app-vh) - 24px);
     position: fixed;
     font-size: 0;
     top: 12px;

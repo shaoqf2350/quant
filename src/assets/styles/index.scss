@@ -4,6 +4,7 @@
 @use './tokens/sass-vars' as *;
 @use './tokens/theme';
 @use './tokens/theme-dark';
+@use './tokens/scale';
 @use './mixin.scss';
 @use './transition.scss';
 @use './base/document';
