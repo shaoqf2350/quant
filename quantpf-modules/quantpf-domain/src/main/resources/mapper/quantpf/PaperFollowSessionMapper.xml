@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quantpf.domain.persistence.mapper.PaperFollowSessionMapper">
+    <resultMap id="PaperFollowSessionRowMap" type="com.quantpf.domain.persistence.record.PaperFollowSessionRow">
+        <id property="id" column="id" />
+        <result property="sessionId" column="session_id" />
+        <result property="accountId" column="account_id" />
+        <result property="strategyId" column="strategy_id" />
+        <result property="mode" column="mode" />
+        <result property="status" column="status" />
+        <result property="startRequestId" column="start_request_id" />
+        <result property="stopRequestId" column="stop_request_id" />
+        <result property="startedBy" column="started_by" />
+        <result property="stoppedBy" column="stopped_by" />
+        <result property="startedAt" column="started_at" />
+        <result property="stoppedAt" column="stopped_at" />
+        <result property="stopReason" column="stop_reason" />
+        <result property="revision" column="revision" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+        <result property="activeSlot" column="active_slot" />
+    </resultMap>
+    <sql id="columns">id, session_id, account_id, strategy_id, mode, status, start_request_id, stop_request_id, started_by, stopped_by, started_at, stopped_at, stop_reason, revision, created_at, updated_at, active_slot</sql>
+    <select id="selectByStartRequestId" resultMap="PaperFollowSessionRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_follow_session WHERE start_request_id=#{startRequestId}</select>
+    <select id="selectByStopRequestId" resultMap="PaperFollowSessionRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_follow_session WHERE stop_request_id=#{stopRequestId}</select>
+    <select id="selectRunning" resultMap="PaperFollowSessionRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_follow_session WHERE account_id=#{accountId} AND strategy_id=#{strategyId} AND mode=#{mode} AND status='RUNNING' LIMIT 1</select>
+    <select id="selectBySessionIdForUpdate" resultMap="PaperFollowSessionRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_follow_session WHERE session_id=#{sessionId} FOR UPDATE</select>
+    <select id="selectRunningForUpdateNowait" resultMap="PaperFollowSessionRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_follow_session WHERE account_id=#{accountId} AND strategy_id=#{strategyId} AND mode=#{mode} AND status='RUNNING' LIMIT 1 FOR UPDATE NOWAIT</select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quantpf_paper_follow_session (session_id, account_id, strategy_id, mode, status, start_request_id, started_by, started_at, revision)
+        VALUES (#{sessionId}, #{accountId}, #{strategyId}, #{mode}, #{status}, #{startRequestId}, #{startedBy}, #{startedAt}, #{revision})
+    </insert>
+    <update id="stop">
+        UPDATE quantpf_paper_follow_session
+        SET status='STOPPED', stop_request_id=#{stopRequestId}, stopped_by=#{stoppedBy}, stopped_at=#{stoppedAt}, stop_reason=#{stopReason}, revision=revision+1
+        WHERE session_id=#{sessionId} AND status='RUNNING'
+    </update>
+    <select id="selectAccountType" resultType="string">SELECT account_type FROM quantpf_trading_account WHERE id=#{accountId}</select>
+    <select id="selectAccountStatus" resultType="string">SELECT status FROM quantpf_trading_account WHERE id=#{accountId}</select>
+    <select id="selectStrategyStatus" resultType="string">SELECT status FROM quantpf_strategy WHERE id=#{strategyId}</select>
+</mapper>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.quantpf</groupId>
+        <artifactId>quantpf-modules</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>quantpf-backtest</artifactId>
+    <packaging>jar</packaging>
+    <description>QuantPF Phase 0C foundation skeleton: quantpf-backtest</description>
+
+    <dependencies>        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-strategy</artifactId>
+            <version>${revision}</version>
+        </dependency>        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-risk</artifactId>
+            <version>${revision}</version>
+        </dependency>        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-domain</artifactId>
+            <version>${revision}</version>
+        </dependency>        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+</project>

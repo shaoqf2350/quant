@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quantpf.domain.persistence.mapper.TradingHaltMapper">
+    <resultMap id="TradingHaltRowMap" type="com.quantpf.domain.persistence.record.TradingHaltRow">
+        <id property="id" column="id" />
+        <result property="scope" column="scope" />
+        <result property="targetId" column="target_id" />
+        <result property="reason" column="reason" />
+        <result property="haltedBy" column="halted_by" />
+        <result property="active" column="active" />
+        <result property="haltedAt" column="halted_at" />
+        <result property="resumedAt" column="resumed_at" />
+        <result property="resumeReason" column="resume_reason" />
+    </resultMap>
+    <select id="countActive" resultType="int">
+        SELECT COUNT(*) FROM quantpf_trading_halt
+        WHERE active=1 AND scope=#{scope}
+          AND (target_id=#{targetId} OR (target_id IS NULL AND #{targetId} IS NULL))
+    </select>
+    <select id="selectActive" resultMap="TradingHaltRowMap">
+        SELECT id, scope, target_id, reason, halted_by, active, halted_at, resumed_at, resume_reason
+        FROM quantpf_trading_halt
+        WHERE active=1 AND scope=#{scope}
+          AND (target_id=#{targetId} OR (target_id IS NULL AND #{targetId} IS NULL))
+        ORDER BY id DESC LIMIT 1
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quantpf_trading_halt (scope, target_id, reason, halted_by, active, halted_at)
+        VALUES (#{scope}, #{targetId}, #{reason}, #{haltedBy}, 1, #{haltedAt})
+    </insert>
+    <update id="resume">
+        UPDATE quantpf_trading_halt
+        SET active=0, resumed_at=#{resumedAt}, resume_reason=#{resumeReason}
+        WHERE id=#{id} AND active=1
+    </update>
+</mapper>

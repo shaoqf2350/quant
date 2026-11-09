@@ -480,6 +480,8 @@
         <module>ruoyi-modules</module>
         <!-- api模块 -->
         <module>ruoyi-api</module>
+        <!-- QuantPF Phase 0C foundation skeleton -->
+        <module>quantpf-modules</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -613,3 +615,5 @@
     </pluginRepositories>
 
 </project>
+
+

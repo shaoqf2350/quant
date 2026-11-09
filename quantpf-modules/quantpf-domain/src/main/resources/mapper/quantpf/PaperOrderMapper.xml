@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quantpf.domain.persistence.mapper.PaperOrderMapper">
+    <resultMap id="PaperOrderRowMap" type="com.quantpf.domain.persistence.record.PaperOrderRow">
+        <id property="id" column="id" />
+        <result property="accountId" column="account_id" />
+        <result property="instrumentId" column="instrument_id" />
+        <result property="clientOrderId" column="client_order_id" />
+        <result property="requestId" column="request_id" />
+        <result property="idempotencyKey" column="idempotency_key" />
+        <result property="side" column="side" />
+        <result property="orderType" column="order_type" />
+        <result property="quantity" column="quantity" />
+        <result property="limitPrice" column="limit_price" />
+        <result property="status" column="status" />
+        <result property="rejectReason" column="reject_reason" />
+        <result property="frozenCash" column="frozen_cash" />
+        <result property="frozenQuantity" column="frozen_quantity" />
+        <result property="createdAt" column="created_at" />
+    </resultMap>
+    <sql id="columns">id, account_id, instrument_id, client_order_id, request_id, idempotency_key, side, order_type, quantity, limit_price, status, reject_reason, frozen_cash, frozen_quantity, created_at</sql>
+    <select id="selectById" resultMap="PaperOrderRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_order WHERE id=#{id}</select>
+    <select id="selectPage" resultMap="PaperOrderRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_order ORDER BY id DESC LIMIT #{offset}, #{limit}</select>
+    <select id="selectByIdForUpdate" resultMap="PaperOrderRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_order WHERE id=#{id} FOR UPDATE</select>
+    <select id="selectByIdempotencyKey" resultMap="PaperOrderRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_order WHERE idempotency_key=#{idempotencyKey}</select>
+    <select id="selectByClientOrderId" resultMap="PaperOrderRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_order WHERE account_id=#{accountId} AND client_order_id=#{clientOrderId}</select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quantpf_paper_order (account_id, instrument_id, client_order_id, request_id, idempotency_key, side, order_type, quantity, limit_price, status, reject_reason, frozen_cash, frozen_quantity)
+        VALUES (#{accountId}, #{instrumentId}, #{clientOrderId}, #{requestId}, #{idempotencyKey}, #{side}, #{orderType}, #{quantity}, #{limitPrice}, #{status}, #{rejectReason}, #{frozenCash}, #{frozenQuantity})
+    </insert>
+    <update id="updateStatus">UPDATE quantpf_paper_order SET status=#{status}, reject_reason=#{rejectReason} WHERE id=#{id}</update>
+    <update id="updateFrozenAmounts">UPDATE quantpf_paper_order SET frozen_cash=#{frozenCash}, frozen_quantity=#{frozenQuantity} WHERE id=#{id}</update>
+    <select id="countByIdempotencyKey" resultType="int">SELECT COUNT(*) FROM quantpf_paper_order WHERE idempotency_key=#{idempotencyKey}</select>
+</mapper>
+

@@ -1,0 +1,71 @@
+package com.quantpf.domain.vo;
+
+import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+/**
+ * 原始数据快照视图对象（§7）。
+ */
+@Data
+public class DataRawSnapshotVo implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    /** 主键（雪花ID） */
+    private Long pkId;
+
+    /** 快照业务ID */
+    private String snapshotId;
+
+    /** 数据源ID */
+    private Long sourceId;
+
+    /** 来源组ID */
+    private Long sourceGroupId;
+
+    /** 外部ID */
+    private String externalId;
+
+    /** 请求时间 */
+    private LocalDateTime requestTime;
+
+    /** 系统观察时间 */
+    private LocalDateTime observedAt;
+
+    /** 来源发布时间 */
+    private LocalDateTime publishedAt;
+
+    /** 系统可获得时间 */
+    private LocalDateTime availableAt;
+
+    /** 内容哈希 */
+    private String contentHash;
+
+    /** 标准化标题哈希 */
+    private String normalizedTitleHash;
+
+    /** 原始内容引用路径 */
+    private String rawContentReference;
+
+    /** 响应状态 */
+    private String responseStatus;
+
+    /** 解析器版本 */
+    private String parserVersion;
+
+    /** 来源响应 Schema 版本 */
+    private String responseSchemaVersion;
+
+    /** 授权状态 */
+    private String authorizationStatus;
+
+    /** 幂等键 */
+    private String idempotencyKey;
+
+    /** 创建时间 */
+    private LocalDateTime createTime;
+}

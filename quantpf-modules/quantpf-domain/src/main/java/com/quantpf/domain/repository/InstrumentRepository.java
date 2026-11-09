@@ -1,0 +1,1 @@
+package com.quantpf.domain.repository; import com.quantpf.domain.entity.Instrument; import java.util.Optional; public interface InstrumentRepository { Optional<Instrument> findById(Long id); }

@@ -1,0 +1,1 @@
+package com.quantpf.domain.repository; import com.quantpf.domain.entity.Position; import java.util.Optional; public interface PositionRepository { Optional<Position> findByAccountAndInstrument(Long accountId,Long instrumentId); Position save(Position position); }

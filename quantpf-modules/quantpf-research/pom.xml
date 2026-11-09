@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.quantpf</groupId>
+        <artifactId>quantpf-modules</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>quantpf-research</artifactId>
+    <packaging>jar</packaging>
+    <description>QuantPF Phase 0C foundation skeleton: quantpf-research</description>
+
+    <!-- 解耦原则：research 只依赖 domain/common（研究链不依赖市场数据实现，防止业务污染） -->
+    <dependencies>
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-domain</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+</project>

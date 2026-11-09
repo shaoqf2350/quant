@@ -1,0 +1,248 @@
+version: 1
+namespace: quantpf
+transport: BODY_CODE_OVER_HTTP_200
+codes:
+  - code: QPF-REQ-001
+    category: REQUEST
+    message: Invalid request
+    retryable: false
+    httpStatus: 400
+    owner: platform
+    deprecated: false
+  - code: QPF-IDEMP-001
+    category: IDEMPOTENCY
+    message: Idempotency key conflict
+    retryable: false
+    httpStatus: 409
+    owner: execution
+    deprecated: false
+  - code: QPF-ORDER-001
+    category: ORDER
+    message: Invalid order state transition
+    retryable: false
+    httpStatus: 409
+    owner: execution
+    deprecated: false
+  - code: QPF-ACCOUNT-001
+    category: ACCOUNT
+    message: Account not found
+    retryable: false
+    httpStatus: 404
+    owner: finance
+    deprecated: false
+  - code: QPF-CASH-001
+    category: ACCOUNT
+    message: Insufficient cash
+    retryable: false
+    httpStatus: 409
+    owner: finance
+    deprecated: false
+  - code: QPF-POSITION-001
+    category: ACCOUNT
+    message: Insufficient position
+    retryable: false
+    httpStatus: 409
+    owner: finance
+    deprecated: false
+  - code: QPF-RISK-001
+    category: RISK
+    message: Risk gate rejected the request
+    retryable: false
+    httpStatus: 409
+    owner: risk
+    deprecated: false
+  - code: QPF-RISK-002
+    category: RISK
+    message: Paper trading is halted
+    retryable: false
+    httpStatus: 409
+    owner: risk
+    deprecated: false
+  - code: QPF-MARKET-001
+    category: MARKET
+    message: Market data is stale
+    retryable: true
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-INSTRUMENT-001
+    category: INSTRUMENT
+    message: Instrument not found
+    retryable: false
+    httpStatus: 404
+    owner: marketdata
+    deprecated: false
+  - code: QPF-AUDIT-001
+    category: AUDIT
+    message: Audit record could not be written
+    retryable: true
+    httpStatus: 500
+    owner: platform
+    deprecated: false
+  - code: QPF-INTERNAL-001
+    category: INTERNAL
+    message: Internal error
+    retryable: false
+    httpStatus: 500
+    owner: platform
+    deprecated: false
+  - code: QPF-FOLLOW-001
+    category: FOLLOW
+    message: Paper Follow active session conflict
+    retryable: false
+    httpStatus: 409
+    owner: execution
+    deprecated: false
+  - code: QPF-FOLLOW-002
+    category: FOLLOW
+    message: Paper Follow session not found
+    retryable: false
+    httpStatus: 404
+    owner: execution
+    deprecated: false
+  - code: QPF-FOLLOW-003
+    category: FOLLOW
+    message: Invalid Paper Follow state or admission
+    retryable: false
+    httpStatus: 409
+    owner: execution
+    deprecated: false
+  - code: QPF-FOLLOW-004
+    category: FOLLOW
+    message: Paper Follow requires Idempotency-Key
+    retryable: false
+    httpStatus: 400
+    owner: execution
+    deprecated: false
+
+  - code: QPF-ORDER-002
+    category: ORDER
+    message: Execution exceeds remaining quantity
+    retryable: false
+    httpStatus: 409
+    owner: execution
+    deprecated: false
+  - code: QPF-ORDER-003
+    category: ORDER
+    message: Terminal order cannot be canceled
+    retryable: false
+    httpStatus: 409
+    owner: execution
+    deprecated: false
+  - code: QPF-RISK-003
+    category: RISK
+    message: Market is closed
+    retryable: false
+    httpStatus: 409
+    owner: risk
+    deprecated: false
+
+
+
+
+  # ============ 模块一：数据与标的基础（《详设_1》指导文档 §10.3） ============
+  - code: QPF-DATA-001
+    category: DATA_SOURCE
+    message: Data source or subject not found
+    retryable: false
+    httpStatus: 404
+    owner: marketdata
+    deprecated: false
+  - code: QPF-DATA-002
+    category: DATA_SOURCE
+    message: Data source unauthorized, expired or illegal state transition
+    retryable: false
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-COLLECT-001
+    category: COLLECTION
+    message: Data collection failed
+    retryable: true
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-COLLECT-002
+    category: COLLECTION
+    message: Partial collection success
+    retryable: false
+    httpStatus: 206
+    owner: marketdata
+    deprecated: false
+  - code: QPF-SNAPSHOT-001
+    category: SNAPSHOT
+    message: Duplicate snapshot (idempotent hit)
+    retryable: false
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-QUALITY-001
+    category: QUALITY
+    message: Data quality check failed or issue state illegal
+    retryable: false
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-TIME-001
+    category: TIME_VISIBILITY
+    message: Time visibility invalid
+    retryable: false
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-INSTRUMENT-002
+    category: INSTRUMENT
+    message: Instrument version conflict
+    retryable: false
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-CALENDAR-001
+    category: CALENDAR
+    message: Calendar conflict requires manual override
+    retryable: false
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-CALENDAR-002
+    category: CALENDAR
+    message: Calendar date or timezone invalid
+    retryable: false
+    httpStatus: 409
+    owner: marketdata
+    deprecated: false
+  - code: QPF-RESEARCH-TASK-001
+    category: RESEARCH
+    message: Research task not found
+    retryable: false
+    httpStatus: 404
+    owner: research
+    deprecated: false
+  - code: QPF-AI-001
+    category: RESEARCH
+    message: AI adapter timeout or unavailable
+    retryable: true
+    httpStatus: 504
+    owner: research
+    deprecated: false
+  - code: QPF-AI-002
+    category: RESEARCH
+    message: AI output invalid (JSON/Schema)
+    retryable: false
+    httpStatus: 422
+    owner: research
+    deprecated: false
+  - code: QPF-AI-003
+    category: RESEARCH
+    message: AI claim unverified (CLAIM_UNVERIFIED)
+    retryable: false
+    httpStatus: 409
+    owner: research
+    deprecated: false
+  - code: QPF-RESEARCH-EVENT-001
+    category: RESEARCH
+    message: Research event conflict or idempotency conflict
+    retryable: false
+    httpStatus: 409
+    owner: research
+    deprecated: false

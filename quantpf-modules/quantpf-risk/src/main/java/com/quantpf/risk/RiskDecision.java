@@ -1,0 +1,2 @@
+package com.quantpf.risk;
+public record RiskDecision(boolean accepted,String code,String reason){public static RiskDecision accept(){return new RiskDecision(true,null,null);}public static RiskDecision reject(String code,String reason){return new RiskDecision(false,code,reason);}}

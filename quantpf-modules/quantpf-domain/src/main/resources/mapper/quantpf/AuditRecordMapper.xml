@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quantpf.domain.persistence.mapper.AuditRecordMapper">
+    <resultMap id="AuditRecordRowMap" type="com.quantpf.domain.persistence.record.AuditRecordRow">
+        <id property="id" column="id" />
+        <result property="requestId" column="request_id" />
+        <result property="actorId" column="actor_id" />
+        <result property="action" column="action" />
+        <result property="aggregateType" column="aggregate_type" />
+        <result property="aggregateId" column="aggregate_id" />
+        <result property="result" column="result" />
+        <result property="detail" column="detail" />
+        <result property="occurredAt" column="occurred_at" />
+    </resultMap>
+    <sql id="columns">id, request_id, actor_id, action, aggregate_type, aggregate_id, result, detail, occurred_at</sql>
+    <select id="selectPage" resultMap="AuditRecordRowMap">
+        SELECT <include refid="columns"/>
+        FROM quantpf_audit_record
+        <where>
+            <if test="requestId != null and requestId != ''">AND request_id = #{requestId}</if>
+            <if test="aggregateType != null and aggregateType != ''">AND aggregate_type = #{aggregateType}</if>
+            <if test="aggregateId != null and aggregateId != ''">AND aggregate_id = #{aggregateId}</if>
+        </where>
+        ORDER BY occurred_at DESC, id DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quantpf_audit_record (request_id, actor_id, action, aggregate_type, aggregate_id, result, detail, occurred_at)
+        VALUES (#{requestId}, #{actorId}, #{action}, #{aggregateType}, #{aggregateId}, #{result}, #{detail}, COALESCE(#{occurredAt}, CURRENT_TIMESTAMP(6)))
+    </insert>
+</mapper>

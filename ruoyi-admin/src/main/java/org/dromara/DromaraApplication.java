@@ -10,7 +10,7 @@ import org.springframework.boot.context.metrics.buffering.BufferingApplicationSt
  * @author Lion Li
  */
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"org.dromara", "com.quantpf"})
 public class DromaraApplication {
 
     /**
@@ -26,3 +26,4 @@ public class DromaraApplication {
     }
 
 }
+

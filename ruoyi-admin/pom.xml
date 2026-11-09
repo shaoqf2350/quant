@@ -121,7 +121,38 @@
 <!--            <artifactId>apm-toolkit-trace</artifactId>-->
 <!--            <version>${与你的agent探针版本保持一致}</version>-->
 <!--        </dependency>-->
-
+
+        <!-- QuantPF Phase 0C foundation modules -->
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-job</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-execution</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-backtest</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-research</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-finance</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.quantpf</groupId>
+            <artifactId>quantpf-marketdata</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
 
@@ -176,3 +207,4 @@
     </build>
 
 </project>
+

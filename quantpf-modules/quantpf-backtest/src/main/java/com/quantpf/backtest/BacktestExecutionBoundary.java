@@ -1,0 +1,2 @@
+package com.quantpf.backtest;
+import java.time.LocalDate;public interface BacktestExecutionBoundary { BacktestRequest validate(BacktestRequest request); record BacktestRequest(Long strategyId,LocalDate startDate,LocalDate endDate){} }

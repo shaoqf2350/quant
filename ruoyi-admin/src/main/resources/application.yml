@@ -129,6 +129,56 @@ mybatis-plus:
       # 如需改为自增 需要将数据库表全部设置为自增
       idType: ASSIGN_ID
 
+# QuantPF 雪花主键生成器配置（业务表主键 pk_id 统一使用 Hutool Snowflake）
+quantpf:
+  snowflake:
+    # 机器标识（0~31），多实例部署时每个实例唯一，可用环境变量覆盖
+    worker-id: ${QUANTPF_SNOWFLAKE_WORKER_ID:1}
+    # 数据中心标识（0~31）
+    datacenter-id: ${QUANTPF_SNOWFLAKE_DATACENTER_ID:1}
+  # Dify 应用调用客户端配置（公共模块 quantpf-common，仅供 Service 层调用）
+  dify:
+    # 是否启用 Dify 客户端（默认启用；未配置 apiKey 时调用会快速失败并给出明确错误）
+    enabled: true
+    # Dify Service API 根地址（含 /v1）
+    base-url: ${DIFY_BASE_URL:http://localhost:3000/v1}
+    # 建立连接超时
+    connect-timeout: 10s
+    # 同步调用读超时（流式调用不受此值限制）
+    read-timeout: 300s
+    # /v1/info 应用信息缓存时长（避免每次调用都请求 info，瓶颈优化）
+    info-cache-ttl: 300s
+    # WebClient 连接池最大连接数
+    max-connections: 200
+    # WebClient 编解码单块内存上限
+    max-in-memory-size: 10MB
+    # 各业务意图（DifyAppType.code）对应的 Dify 应用，apiKey 与 /v1/info 校验到的应用一一对应
+    apps:
+      chat:
+        api-key: ${DIFY_CHAT_API_KEY:}
+      agent:
+        api-key: ${DIFY_AGENT_API_KEY:app-dgqpip6O77BlkGGhGoDKL3Q8}
+      chatflow:
+        api-key: ${DIFY_CHATFLOW_API_KEY:}
+      workflow:
+        api-key: ${DIFY_WORKFLOW_API_KEY:}
+      text-generation:
+        api-key: ${DIFY_TEXT_GENERATION_API_KEY:}
+
+# XXL-JOB 执行器配置（ADR-10：SnailJob 全量下线 → XXL-JOB；默认关闭，部署 xxl-job-admin 后开启）
+xxl:
+  job:
+    # 是否启用 XXL-JOB 执行器（默认 false，本地无调度中心时不影响应用启动）
+    enabled: ${XXL_JOB_ENABLED:false}
+    accessToken: ${XXL_JOB_ACCESS_TOKEN:default_token}
+    admin:
+      addresses: ${XXL_JOB_ADMIN_ADDRESSES:http://localhost:8080/xxl-job-admin}
+    executor:
+      appname: ${XXL_JOB_EXECUTOR_APPNAME:quant-executor}
+      port: ${XXL_JOB_EXECUTOR_PORT:9999}
+      logpath: ${XXL_JOB_EXECUTOR_LOGPATH:./logs/xxl-job}
+      logretentiondays: 30
+
 # 数据加密
 mybatis-encryptor:
   # 是否开启加密

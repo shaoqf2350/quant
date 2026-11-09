@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quantpf.domain.persistence.mapper.PaperExecutionMapper">
+    <resultMap id="PaperExecutionRowMap" type="com.quantpf.domain.persistence.record.PaperExecutionRow">
+        <id property="id" column="id" />
+        <result property="orderId" column="order_id" />
+        <result property="executionId" column="execution_id" />
+        <result property="executedQuantity" column="executed_quantity" />
+        <result property="executedPrice" column="executed_price" />
+        <result property="fee" column="fee" />
+        <result property="executedAt" column="executed_at" />
+        <result property="idempotencyKey" column="idempotency_key" />
+    </resultMap>
+    <sql id="columns">id, order_id, execution_id, executed_quantity, executed_price, fee, executed_at, idempotency_key</sql>
+    <select id="selectByExecutionId" resultMap="PaperExecutionRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_execution WHERE execution_id=#{executionId}</select>
+    <select id="selectByIdempotencyKey" resultMap="PaperExecutionRowMap">SELECT <include refid="columns"/> FROM quantpf_paper_execution WHERE idempotency_key=#{idempotencyKey}</select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quantpf_paper_execution (order_id, execution_id, executed_quantity, executed_price, fee, executed_at, idempotency_key)
+        VALUES (#{orderId}, #{executionId}, #{executedQuantity}, #{executedPrice}, #{fee}, #{executedAt}, #{idempotencyKey})
+    </insert>
+    <select id="countByOrderId" resultType="int">SELECT COUNT(*) FROM quantpf_paper_execution WHERE order_id=#{orderId}</select>
+    <select id="sumExecutedQuantity" resultType="java.math.BigDecimal">SELECT COALESCE(SUM(executed_quantity), 0) FROM quantpf_paper_execution WHERE order_id=#{orderId}</select>
+</mapper>
+

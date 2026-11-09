@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quantpf.domain.persistence.mapper.PositionMapper">
+    <resultMap id="PositionRowMap" type="com.quantpf.domain.persistence.record.PositionRow">
+        <id property="id" column="id" />
+        <result property="accountId" column="account_id" />
+        <result property="instrumentId" column="instrument_id" />
+        <result property="quantity" column="quantity" />
+        <result property="availableQuantity" column="available_quantity" />
+        <result property="frozenQuantity" column="frozen_quantity" />
+        <result property="averageCost" column="average_cost" />
+        <result property="realizedPnl" column="realized_pnl" />
+    </resultMap>
+    <select id="selectByAccountAndInstrument" resultMap="PositionRowMap">SELECT id, account_id, instrument_id, quantity, available_quantity, frozen_quantity, average_cost, realized_pnl FROM quantpf_position WHERE account_id=#{accountId} AND instrument_id=#{instrumentId}</select>
+    <select id="selectByAccountAndInstrumentForUpdate" resultMap="PositionRowMap">SELECT id, account_id, instrument_id, quantity, available_quantity, frozen_quantity, average_cost, realized_pnl FROM quantpf_position WHERE account_id=#{accountId} AND instrument_id=#{instrumentId} FOR UPDATE</select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quantpf_position (account_id, instrument_id, quantity, available_quantity, frozen_quantity, average_cost, realized_pnl)
+        VALUES (#{accountId}, #{instrumentId}, #{quantity}, #{availableQuantity}, #{frozenQuantity}, #{averageCost}, #{realizedPnl})
+    </insert>
+    <update id="updateState">
+        UPDATE quantpf_position SET quantity=#{quantity}, available_quantity=#{availableQuantity}, frozen_quantity=#{frozenQuantity}, average_cost=#{averageCost}, realized_pnl=#{realizedPnl} WHERE id=#{id}
+    </update>
+</mapper>

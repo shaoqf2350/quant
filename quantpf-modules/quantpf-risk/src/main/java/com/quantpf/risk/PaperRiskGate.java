@@ -1,0 +1,8 @@
+package com.quantpf.risk;
+import java.time.Duration;import java.time.Instant;import java.util.Set;import java.util.concurrent.ConcurrentHashMap;
+public class PaperRiskGate implements RiskGate{
+ private volatile boolean globalHalted; private final Set<Long> haltedAccounts=ConcurrentHashMap.newKeySet(); private final Duration staleAfter;
+ public PaperRiskGate(Duration staleAfter){this.staleAfter=staleAfter;}
+ public RiskDecision evaluate(RiskContext c){if(globalHalted)return RiskDecision.reject("QPF-RISK-002","Paper trading is halted");if(haltedAccounts.contains(c.accountId()))return RiskDecision.reject("QPF-RISK-002","Account is halted");if(!c.marketOpen())return RiskDecision.reject("QPF-RISK-003","Market is closed");if(c.marketDataAt()==null||Duration.between(c.marketDataAt(),Instant.now()).compareTo(staleAfter)>0)return RiskDecision.reject("QPF-MARKET-001","Market data is stale");if(c.quantity()==null||!c.quantity().isPositive())return RiskDecision.reject("QPF-REQ-001","Quantity must be positive");if(c.estimatedNotional()==null||!c.estimatedNotional().isPositive())return RiskDecision.reject("QPF-REQ-001","Estimated notional must be positive");return RiskDecision.accept();}
+ public void haltGlobal(String reason){globalHalted=true;}public void resumeGlobal(){globalHalted=false;}public void haltAccount(Long id){haltedAccounts.add(id);}public void resumeAccount(Long id){haltedAccounts.remove(id);}
+}

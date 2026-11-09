@@ -1,0 +1,6 @@
+package com.quantpf.execution;
+import com.quantpf.domain.entity.PaperOrder;import com.quantpf.domain.enums.OrderStatus;import com.quantpf.domain.exception.QuantPfDomainException;import java.util.EnumSet;import java.util.Map;import java.util.Set;
+public class OrderStateMachine{
+ private static final Map<OrderStatus,Set<OrderStatus>> ALLOWED=Map.of(OrderStatus.NEW,EnumSet.of(OrderStatus.ACCEPTED,OrderStatus.REJECTED),OrderStatus.ACCEPTED,EnumSet.of(OrderStatus.PARTIALLY_FILLED,OrderStatus.FILLED,OrderStatus.CANCEL_REQUESTED,OrderStatus.REJECTED),OrderStatus.PARTIALLY_FILLED,EnumSet.of(OrderStatus.FILLED,OrderStatus.CANCEL_REQUESTED),OrderStatus.CANCEL_REQUESTED,EnumSet.of(OrderStatus.CANCELED));
+ public void transition(PaperOrder order,OrderStatus target){if(order.getStatus()==target)return;if(!ALLOWED.getOrDefault(order.getStatus(),Set.of()).contains(target))throw new QuantPfDomainException("QPF-ORDER-001","Invalid order state transition: "+order.getStatus()+" -> "+target);order.setStatus(target);}
+}

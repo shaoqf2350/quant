@@ -1,0 +1,1 @@
+package com.quantpf.domain.repository; import com.quantpf.domain.entity.TradingAccount; import java.util.Optional; public interface TradingAccountRepository { Optional<TradingAccount> findById(Long id); TradingAccount save(TradingAccount account); }

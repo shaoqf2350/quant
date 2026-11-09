@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quantpf.domain.persistence.mapper.RiskSnapshotMapper">
+    <resultMap id="RiskSnapshotRowMap" type="com.quantpf.domain.persistence.record.RiskSnapshotRow">
+        <id property="id" column="id" />
+        <result property="accountId" column="account_id" />
+        <result property="riskStatus" column="risk_status" />
+        <result property="riskScore" column="risk_score" />
+        <result property="reason" column="reason" />
+        <result property="snapshotAt" column="snapshot_at" />
+        <result property="data" column="data" />
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quantpf_risk_snapshot (account_id, risk_status, risk_score, reason, snapshot_at, data)
+        VALUES (#{accountId}, #{riskStatus}, #{riskScore}, #{reason}, #{snapshotAt}, #{data})
+    </insert>
+    <select id="selectLatestByAccountId" resultMap="RiskSnapshotRowMap">
+        SELECT id, account_id, risk_status, risk_score, reason, snapshot_at, data
+        FROM quantpf_risk_snapshot WHERE account_id=#{accountId} ORDER BY snapshot_at DESC, id DESC LIMIT 1
+    </select>
+</mapper>
