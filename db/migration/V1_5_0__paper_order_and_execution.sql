@@ -1,0 +1,43 @@
+CREATE TABLE quantpf_paper_order (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    account_id BIGINT UNSIGNED NOT NULL,
+    instrument_id BIGINT UNSIGNED NOT NULL,
+    client_order_id VARCHAR(128) NOT NULL,
+    request_id VARCHAR(128) NOT NULL,
+    idempotency_key VARCHAR(128) NOT NULL,
+    side VARCHAR(8) NOT NULL,
+    order_type VARCHAR(16) NOT NULL,
+    quantity DECIMAL(24,8) NOT NULL,
+    limit_price DECIMAL(24,8) NULL,
+    status VARCHAR(24) NOT NULL DEFAULT 'NEW',
+    reject_reason VARCHAR(512) NULL,
+    frozen_cash DECIMAL(24,8) NOT NULL DEFAULT 0,
+    frozen_quantity DECIMAL(24,8) NOT NULL DEFAULT 0,
+    created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_quantpf_order_client (account_id, client_order_id),
+    UNIQUE KEY uk_quantpf_order_idempotency (idempotency_key),
+    KEY idx_quantpf_order_account_status (account_id, status),
+    CONSTRAINT fk_quantpf_order_account FOREIGN KEY (account_id) REFERENCES quantpf_trading_account (id),
+    CONSTRAINT fk_quantpf_order_instrument FOREIGN KEY (instrument_id) REFERENCES quantpf_instrument (id),
+    CONSTRAINT ck_quantpf_order_side CHECK (side IN ('BUY','SELL')),
+    CONSTRAINT ck_quantpf_order_type CHECK (order_type IN ('MARKET','LIMIT')),
+    CONSTRAINT ck_quantpf_order_status CHECK (status IN ('NEW','ACCEPTED','PARTIALLY_FILLED','FILLED','CANCEL_REQUESTED','CANCELED','REJECTED'))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE quantpf_paper_execution (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    order_id BIGINT UNSIGNED NOT NULL,
+    execution_id VARCHAR(128) NOT NULL,
+    executed_quantity DECIMAL(24,8) NOT NULL,
+    executed_price DECIMAL(24,8) NOT NULL,
+    fee DECIMAL(24,8) NOT NULL DEFAULT 0,
+    executed_at DATETIME(6) NOT NULL,
+    idempotency_key VARCHAR(128) NOT NULL,
+    created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_quantpf_execution_id (execution_id),
+    UNIQUE KEY uk_quantpf_execution_idempotency (idempotency_key),
+    CONSTRAINT fk_quantpf_execution_order FOREIGN KEY (order_id) REFERENCES quantpf_paper_order (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

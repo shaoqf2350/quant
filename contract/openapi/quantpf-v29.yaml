@@ -1,0 +1,1881 @@
+openapi: 3.0.3
+info:
+  title: QuantPF API
+  version: 29.0.0
+  description: |
+    QuantPF V29 formal API contract. Stage 1 permits Paper execution only.
+    QMT, CTP, LIVE submit/cancel operations are intentionally absent.
+servers:
+  - url: /
+tags:
+  - name: health
+  - name: dashboard
+  - name: instrument
+  - name: market
+  - name: research
+  - name: strategy
+  - name: backtest
+  - name: paper-account
+  - name: paper-order
+  - name: risk
+  - name: audit
+  - name: data-source
+  - name: data-governance
+  - name: calendar
+  - name: event
+  - name: market-analysis
+  - name: capacity
+  - name: feature
+  - name: dict
+paths:
+  /api/quant/health:
+    get:
+      tags: [health]
+      operationId: getQuantPfHealth
+      summary: Phase 0C static health
+      responses:
+        '200':
+          description: Static health response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /api/quant/dashboard/summary:
+    x-quantpf-implementation-status: DEFERRED
+    get:
+      tags: [dashboard]
+      operationId: getDashboardSummary
+      summary: Dashboard summary
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/instrument/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [instrument]
+      operationId: pageInstruments
+      summary: Page instruments
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: keyword
+          schema: { type: string }
+        - in: query
+          name: productType
+          schema: { type: string, enum: [STOCK, FUTURE] }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  # ============ 模块一：数据与标的基础（已落地，《详设_1》指导文档 §7.1） ============
+  /api/quant/data/source/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-source]
+      operationId: pageDataSources
+      summary: Page data sources / vendors
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: sourceCode
+          schema: { type: string }
+        - in: query
+          name: sourceName
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-source]
+      operationId: getDataSource
+      summary: Get data source detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [data-source]
+      operationId: addDataSource
+      summary: Add data source (DRAFT/PENDING_CONFIRMATION only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DataSourceForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+    put:
+      tags: [data-source]
+      operationId: updateDataSource
+      summary: Update data source (state machine validated)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DataSourceForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/{pkIds}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    delete:
+      tags: [data-source]
+      operationId: deleteDataSources
+      summary: Delete data sources (comma separated ids)
+      parameters:
+        - in: path
+          name: pkIds
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/{sourceId}/interface:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-source]
+      operationId: listDataSourceInterfaces
+      summary: List interface catalog of a data source
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/interface/{interfaceId}/field:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-source]
+      operationId: listDataSourceFields
+      summary: List field-level authorization catalog of an interface
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/group/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-source]
+      operationId: pageSourceGroups
+      summary: Page source groups
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: groupCode
+          schema: { type: string }
+        - in: query
+          name: groupName
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/group/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-source]
+      operationId: getSourceGroup
+      summary: Get source group detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/group:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [data-source]
+      operationId: addSourceGroup
+      summary: Add source group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SourceGroupForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+    put:
+      tags: [data-source]
+      operationId: updateSourceGroup
+      summary: Update source group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SourceGroupForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/group/{pkIds}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    delete:
+      tags: [data-source]
+      operationId: deleteSourceGroups
+      summary: Delete source groups
+      parameters:
+        - in: path
+          name: pkIds
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/group/{pkId}/verify:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [data-source]
+      operationId: verifySourceGroupHealth
+      summary: >-
+        Verify source group health (failover on primary failure, partial
+        availability, conflict reported as DataQualityIssue, never silently
+        picked)
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/source/group/verify-all:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [data-source]
+      operationId: verifyAllSourceGroups
+      summary: Verify all source groups (manual trigger; scheduled by qualityCheckJob)
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/dict/{enumName}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [dict]
+      operationId: getEnumDict
+      summary: Enum dictionary options for dropdown (value/label/description/order)
+      parameters:
+        - in: path
+          name: enumName
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/DictListResponse'
+  /api/quant/data/quality/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-governance]
+      operationId: pageDataQualityIssues
+      summary: Page data quality issues
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: issueStatus
+          schema: { type: string }
+        - in: query
+          name: qualityStatus
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/quality/{pkId}/resolve:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [data-governance]
+      operationId: resolveDataQualityIssue
+      summary: "Resolve a data quality issue (state machine: OPEN/ANALYZING/WAITING_* to RESOLVED)"
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/QualityResolveForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/snapshot/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-governance]
+      operationId: pageRawSnapshots
+      summary: Page raw snapshots
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: sourceId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: sourceGroupId
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/snapshot/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-governance]
+      operationId: getRawSnapshot
+      summary: Get raw snapshot detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/collection/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-governance]
+      operationId: pageCollectionTasks
+      summary: Page collection tasks
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: status
+          schema: { type: string }
+        - in: query
+          name: taskType
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/point-in-time/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-governance]
+      operationId: pagePointInTimeSnapshots
+      summary: Page point-in-time snapshots
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: subjectType
+          schema: { type: string }
+        - in: query
+          name: subjectId
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/data/point-in-time/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [data-governance]
+      operationId: getPointInTimeSnapshot
+      summary: Get point-in-time snapshot detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/instrument/{id}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [instrument]
+      operationId: getInstrument
+      summary: Get instrument detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/instrument/sync:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [instrument]
+      operationId: syncInstruments
+      summary: Sync instruments (placeholder until Tushare authorized)
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/instrument/{id}/version:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [instrument]
+      operationId: listInstrumentVersions
+      summary: List instrument trading-property version chain
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/instrument/tradability/{id}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [instrument]
+      operationId: getInstrumentTradability
+      summary: >-
+        Tradability + data usage eligibility (quality matrix + capacity +
+        calendar binding + readiness; UNAUTHORIZED/CONFLICTED/STALE/UNTRADEABLE
+        block paper new positions)
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: pageCalendarDefs
+      summary: Page trading calendar definitions
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: calendarCode
+          schema: { type: string }
+        - in: query
+          name: calendarName
+          schema: { type: string }
+        - in: query
+          name: marketType
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: getCalendarDef
+      summary: Get calendar definition detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [calendar]
+      operationId: addCalendarDef
+      summary: Add calendar definition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CalendarDefForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+    put:
+      tags: [calendar]
+      operationId: updateCalendarDef
+      summary: Update calendar definition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CalendarDefForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/{pkIds}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    delete:
+      tags: [calendar]
+      operationId: deleteCalendarDefs
+      summary: Delete calendar definitions
+      parameters:
+        - in: path
+          name: pkIds
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/{pkId}/import:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [calendar]
+      operationId: importCalendar
+      summary: >-
+        Import trading calendar days from source endpoint (mock adapter until
+        Tushare authorized; preserves is_open raw value; conflicts recorded,
+        never silently picked)
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - in: query
+          name: endpoint
+          required: true
+          schema: { type: string, enum: [trade_cal, fut_trade_cal, hk_tradecal, us_tradecal] }
+        - in: query
+          name: startDate
+          required: true
+          schema: { type: string, format: date }
+        - in: query
+          name: endDate
+          required: true
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/day/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: pageCalendarDays
+      summary: Page trading calendar days (market local date)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: calendarId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: startDate
+          schema: { type: string, format: date }
+        - in: query
+          name: endDate
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/day/detail:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: getCalendarDayDetail
+      summary: Get calendar day detail incl. previous/next trade date
+      parameters:
+        - in: query
+          name: calendarId
+          required: true
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: date
+          required: true
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/session/list:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: listCalendarSessions
+      summary: List trading session templates of a calendar
+      parameters:
+        - in: query
+          name: calendarId
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/binding/list:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: listInstrumentCalendarBindings
+      summary: List instrument/calendar bindings
+      parameters:
+        - in: query
+          name: instrumentId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: calendarId
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/readiness/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: pageMarketDataReadiness
+      summary: Page daily market-data readiness (expected/received/validated/strategy/paper)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: calendarId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: blockReason
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/source-snapshot/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: pageCalendarSourceSnapshots
+      summary: Page calendar source raw snapshots (Tushare endpoints, professional detail)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: sourceName
+          schema: { type: string }
+        - in: query
+          name: endpointName
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/conflict/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: pageCalendarConflicts
+      summary: Page calendar conflicts
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: calendarId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/conflict/{pkId}/override:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [calendar]
+      operationId: overrideCalendarConflict
+      summary: Manual override of calendar conflict (OPEN/REVIEWED only, no silent pick)
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - in: query
+          name: overrideDecision
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/calendar/fx-session-rule/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [calendar]
+      operationId: pageFxSessionRules
+      summary: Page FX/broker session rules (fx_obasic derived, no fake unified FX calendar)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: classify
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/corporate/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [event]
+      operationId: pageCorporateActions
+      summary: Page corporate actions (dividend/suspend/ST/delist...)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: instrumentId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: actionType
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/corporate/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [event]
+      operationId: getCorporateAction
+      summary: Get corporate action detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/corporate:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [event]
+      operationId: addCorporateAction
+      summary: Add corporate action (lifecycle starts at DISCOVERED)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CorporateActionForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+    put:
+      tags: [event]
+      operationId: updateCorporateAction
+      summary: Update corporate action (lifecycle validated)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CorporateActionForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/corporate/{pkIds}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    delete:
+      tags: [event]
+      operationId: deleteCorporateActions
+      summary: Delete corporate actions
+      parameters:
+        - in: path
+          name: pkIds
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/contract/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [event]
+      operationId: pageContractEvents
+      summary: Page futures contract lifecycle events (margin/limit/delivery/rollover...)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: instrumentId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: eventType
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/contract/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [event]
+      operationId: getContractEvent
+      summary: Get contract event detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/contract:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [event]
+      operationId: addContractEvent
+      summary: Add contract event (lifecycle starts at DISCOVERED)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ContractEventForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+    put:
+      tags: [event]
+      operationId: updateContractEvent
+      summary: Update contract event (lifecycle validated)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ContractEventForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/event/contract/{pkIds}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    delete:
+      tags: [event]
+      operationId: deleteContractEvents
+      summary: Delete contract events
+      parameters:
+        - in: path
+          name: pkIds
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/market/bar/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [market]
+      operationId: pageMarketBars
+      summary: Page K-line bars (30M/DAY/WEEK/MONTH)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: instrumentId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: timeframe
+          schema: { type: string }
+        - in: query
+          name: startTime
+          schema: { type: string, format: date-time }
+        - in: query
+          name: endTime
+          schema: { type: string, format: date-time }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/market/bar/{id}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [market]
+      operationId: getMarketBar
+      summary: Get K-line bar detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/market/bar/import:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [market]
+      operationId: importMarketBar
+      summary: >-
+        Incremental K-line import (idempotent by instrument+timeframe+barTime;
+        OHLC validation enforced)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MarketBarForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/market/state/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [market-analysis]
+      operationId: pageMarketStates
+      summary: Page market state snapshots (deterministic rules)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: instrumentId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: calendarId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: stateCode
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/market/state/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [market-analysis]
+      operationId: getMarketState
+      summary: Get market state detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/market/state:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [market-analysis]
+      operationId: saveMarketState
+      summary: Save market state snapshot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MarketStateForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/capacity/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [capacity]
+      operationId: pageCapacityAssessments
+      summary: Page capacity/impact assessments
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: instrumentId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: capacityStatus
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/capacity/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [capacity]
+      operationId: getCapacityAssessment
+      summary: Get capacity assessment detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/capacity:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [capacity]
+      operationId: saveCapacityAssessment
+      summary: >-
+        Save capacity assessment; status is computed by deterministic rules
+        (plannedRatio thresholds), caller-provided status is ignored
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CapacityForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/feature/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [feature]
+      operationId: pageQuantFeatureSnapshots
+      summary: Page quant feature snapshots (phase-2 timing reserve)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: instrumentId
+          schema: { type: integer, format: int64 }
+        - in: query
+          name: timeframe
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/feature/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [feature]
+      operationId: getQuantFeatureSnapshot
+      summary: Get quant feature snapshot detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/feature:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [feature]
+      operationId: saveQuantFeatureSnapshot
+      summary: Save quant feature snapshot (phase-1 basic features + version + PIT)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/FeatureForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/task/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [research]
+      operationId: pageResearchTasks
+      summary: Page research tasks
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: status
+          schema: { type: string }
+        - in: query
+          name: taskType
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/task/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [research]
+      operationId: getResearchTask
+      summary: Get research task detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/task:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [research]
+      operationId: createResearchTask
+      summary: Create research task (idempotent by idempotencyKey)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ResearchTaskForm' }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/task/{pkId}/submit:
+    x-quantpf-implementation-status: IMPLEMENTED
+    post:
+      tags: [research]
+      operationId: submitResearchTask
+      summary: >-
+        Submit research task to Dify/TradingAgents; AI output is draft-only,
+        validation failure or adapter error degrades to PENDING_REVIEW (never
+        fabricates results)
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/task/{pkId}/draft:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [research]
+      operationId: listAiResearchDrafts
+      summary: List AI research drafts of a task
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/event/page:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [research]
+      operationId: pageResearchEvents
+      summary: Page research events (verified + published only after Spring Boot validation)
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: status
+          schema: { type: string }
+        - in: query
+          name: subjectType
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/event/{pkId}:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [research]
+      operationId: getResearchEvent
+      summary: Get research event detail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/research/event/{pkId}/evidence:
+    x-quantpf-implementation-status: IMPLEMENTED
+    get:
+      tags: [research]
+      operationId: listEventEvidence
+      summary: List evidence chain of a research event
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/market/kline:
+    x-quantpf-implementation-status: SUPERSEDED
+    description: Superseded by /api/quant/market/bar/page
+    get:
+      tags: [market]
+      operationId: getMarketKline
+      summary: (Superseded) Query market K-line data
+      parameters:
+        - in: query
+          name: instrumentCode
+          required: true
+          schema: { type: string }
+        - in: query
+          name: timeframe
+          required: true
+          schema: { type: string, enum: [1m, 5m, 15m, 1d] }
+        - in: query
+          name: startTime
+          schema: { type: string, format: date-time }
+        - in: query
+          name: endTime
+          schema: { type: string, format: date-time }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/news/page:
+    x-quantpf-implementation-status: DEFERRED
+    get:
+      tags: [research]
+      operationId: pageNews
+      summary: Page research news
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: instrumentCode
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/finance/statements:
+    x-quantpf-implementation-status: DEFERRED
+    get:
+      tags: [research]
+      operationId: getFinancialStatements
+      summary: Query financial statements
+      parameters:
+        - in: query
+          name: instrumentCode
+          required: true
+          schema: { type: string }
+        - in: query
+          name: period
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/pool/page:
+    x-quantpf-implementation-status: DEFERRED
+    get:
+      tags: [research]
+      operationId: pageInstrumentPool
+      summary: Page screened instrument pool
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/strategy/page:
+    x-quantpf-implementation-status: DEFERRED
+    get:
+      tags: [strategy]
+      operationId: pageStrategies
+      summary: Page strategies
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/signal/page:
+    x-quantpf-implementation-status: DEFERRED
+    get:
+      tags: [strategy]
+      operationId: pageStrategySignals
+      summary: Page strategy signals
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+  /api/quant/backtest:
+    x-quantpf-implementation-status: DEFERRED
+    post:
+      tags: [backtest]
+      operationId: createBacktest
+      summary: Create an isolated backtest run
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BacktestRequest'
+      responses:
+        '202':
+          $ref: '#/components/responses/ApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/quant/backtest/{id}:
+    x-quantpf-implementation-status: DEFERRED
+    get:
+      tags: [backtest]
+      operationId: getBacktest
+      summary: Get backtest run
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/quant/account/page:
+    get:
+      tags: [paper-account]
+      operationId: pagePaperAccounts
+      summary: List Paper accounts
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/PaperAccountListResponse'
+  /api/quant/account/{id}/ledger:
+    get:
+      tags: [paper-account]
+      operationId: getAccountLedger
+      summary: List Paper account ledger entries
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/PaperLedgerListResponse'
+  /api/quant/order/page:
+    get:
+      tags: [paper-order]
+      operationId: pagePaperOrders
+      summary: List Paper orders
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/PaperOrderListResponse'
+  /api/quant/order/{id}/cancel:
+    post:
+      tags: [paper-order]
+      operationId: cancelPaperOrder
+      summary: Cancel a Paper order
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - in: query
+          name: reason
+          required: false
+          schema: { type: string, maxLength: 512, default: Canceled by Paper API }
+      responses:
+        '200':
+          $ref: '#/components/responses/PaperOrderResponse'
+  /api/quant/order/paper:
+    post:
+      tags: [paper-order]
+      operationId: submitPaperOrder
+      summary: Submit a Paper order
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaperOrderRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PaperOrderResponse'
+  /api/quant/paper/follow-start:
+    post:
+      tags: [paper-order]
+      operationId: startPaperFollow
+      summary: Start Paper follow mode
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PaperFollowStartRequest' }
+      responses:
+        '200':
+          $ref: '#/components/responses/PaperFollowResponse'
+  /api/quant/paper/follow-stop:
+    post:
+      tags: [paper-order]
+      operationId: stopPaperFollow
+      summary: Stop Paper follow mode
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PaperFollowStopRequest' }
+      responses:
+        '200':
+          $ref: '#/components/responses/PaperFollowResponse'
+  /api/quant/risk/status:
+    get:
+      tags: [risk]
+      operationId: getRiskStatus
+      summary: Get Paper risk gate status
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      responses:
+        '200':
+          $ref: '#/components/responses/RiskStatusResponse'
+  /api/quant/risk/halt:
+    post:
+      tags: [risk]
+      operationId: haltPaperTrading
+      summary: Halt Paper trading globally
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RiskReasonRequest' }
+      responses:
+        '200':
+          $ref: '#/components/responses/RiskStatusResponse'
+  /api/quant/risk/resume:
+    post:
+      tags: [risk]
+      operationId: resumePaperTrading
+      summary: Resume Paper trading globally
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RiskReasonRequest' }
+      responses:
+        '200':
+          $ref: '#/components/responses/RiskStatusResponse'
+  /api/quant/job/execution/page:
+    get:
+      tags: [audit]
+      operationId: pageJobExecutions
+      summary: List Paper job execution audits
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: jobName
+          schema: { type: string }
+        - in: query
+          name: executionId
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/JobExecutionListResponse'
+  /api/quant/audit/page:
+    get:
+      tags: [audit]
+      operationId: pageAuditRecords
+      summary: List Paper audit records
+      x-quantpf-error-transport: body-code-over-HTTP-200
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: requestId
+          schema: { type: string }
+        - in: query
+          name: aggregateType
+          schema: { type: string }
+        - in: query
+          name: aggregateId
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/AuditListResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  parameters:
+    Id:
+      in: path
+      name: id
+      required: true
+      schema: { type: integer, format: int64 }
+    Page:
+      in: query
+      name: pageNum
+      schema: { type: integer, minimum: 1, default: 1 }
+    PageSize:
+      in: query
+      name: pageSize
+      schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+    IdempotencyKey:
+      in: header
+      name: Idempotency-Key
+      required: true
+      schema: { type: string, minLength: 8, maxLength: 128 }
+  responses:
+    ApiResponse:
+      description: Successful API response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiResponse'
+    DictListResponse:
+      description: Enum dictionary options; data is a list of value/label/description/order.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DictOptionVo'
+    PaperAccountListResponse:
+      description: Paper account list; data is a bounded list without total count.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaperAccountView'
+    PaperLedgerListResponse:
+      description: Paper ledger list; data is a bounded list without total count.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaperLedgerEntry'
+    PaperOrderListResponse:
+      description: Paper order list; data is a bounded list without total count.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaperOrderView'
+    PaperOrderResponse:
+      description: Paper order response.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PaperOrderView'
+    PaperFollowResponse:
+      description: Paper Follow session response.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PaperFollowSessionResponse'
+    RiskStatusResponse:
+      description: Paper risk status response.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/RiskStatusView'
+    AuditListResponse:
+      description: Paper audit list; data is a bounded list without total count.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditView'
+    JobExecutionListResponse:
+      description: Paper job execution audit list; data is a bounded list without total count.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JobExecutionView'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    Conflict:
+      description: Idempotency or state conflict
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+  schemas:
+    PaperFollowStartRequest:
+      type: object
+      required: [accountId, strategyId, mode]
+      properties:
+        accountId: { type: integer, format: int64 }
+        strategyId: { type: integer, format: int64 }
+        mode: { type: string, enum: [PAPER] }
+    PaperFollowStopRequest:
+      type: object
+      required: [sessionId]
+      properties:
+        sessionId: { type: string }
+        reason: { type: string, maxLength: 512 }
+    PaperFollowSessionResponse:
+      type: object
+      required: [sessionId, accountId, strategyId, mode, status, idempotent]
+      properties:
+        sessionId: { type: string }
+        accountId: { type: integer, format: int64 }
+        strategyId: { type: integer, format: int64 }
+        mode: { type: string, enum: [PAPER] }
+        status: { type: string, enum: [RUNNING, STOPPED] }
+        startedAt: { type: string, format: date-time }
+        stoppedAt: { type: string, format: date-time, nullable: true }
+        idempotent: { type: boolean }
+    HealthResponse:
+      type: object
+      required: [code, msg, data]
+      properties:
+        code: { type: integer, example: 200 }
+        msg: { type: string, example: 操作成功 }
+        data:
+          type: object
+          required: [status, phase, liveEnabled]
+          properties:
+            status: { type: string, example: UP }
+            phase: { type: string, example: PHASE0C }
+            liveEnabled: { type: boolean, example: false }
+    ApiResponse:
+      type: object
+      required: [code, msg]
+      properties:
+        code: { type: integer, example: 200 }
+        msg: { type: string }
+        data: {}
+    DictOptionVo:
+      type: object
+      required: [value, label]
+      properties:
+        value: { type: string }
+        label: { type: string }
+        description: { type: string, nullable: true }
+        order: { type: integer, nullable: true }
+    PaperAccountView:
+      type: object
+      required: [id, accountCode, status, availableCash, frozenCash]
+      properties:
+        id: { type: integer, format: int64 }
+        accountCode: { type: string }
+        status: { type: string }
+        availableCash: { type: number, format: double }
+        frozenCash: { type: number, format: double }
+    PaperLedgerEntry:
+      type: object
+      required: [type, amount, balanceAfter, referenceId, occurredAt]
+      properties:
+        type: { type: string }
+        amount: { type: number, format: double }
+        balanceAfter: { type: number, format: double }
+        referenceId: { type: string }
+        occurredAt: { type: string, format: date-time }
+    PaperOrderView:
+      type: object
+      required: [id, accountId, instrumentId, clientOrderId, status, side, orderType, quantity]
+      properties:
+        id: { type: integer, format: int64 }
+        accountId: { type: integer, format: int64 }
+        instrumentId: { type: integer, format: int64 }
+        clientOrderId: { type: string }
+        status: { type: string }
+        side: { type: string, enum: [BUY, SELL] }
+        orderType: { type: string, enum: [MARKET, LIMIT] }
+        quantity: { type: number, format: double }
+        rejectReason: { type: string, nullable: true }
+    RiskStatusView:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string, enum: [CLEAR, HALTED] }
+        reason: { type: string, nullable: true }
+    AuditView:
+      type: object
+      required: [id, requestId, actorId, action, aggregateType, aggregateId, result, detail, occurredAt]
+      properties:
+        id: { type: integer, format: int64 }
+        requestId: { type: string }
+        actorId: { type: string }
+        action: { type: string }
+        aggregateType: { type: string }
+        aggregateId: { type: string }
+        result: { type: string }
+        detail: { type: string }
+        occurredAt: { type: string, format: date-time }
+    JobExecutionView:
+      type: object
+      required: [id, jobName, executionId, schedulerType, status, requestId, startedAt, createdAt]
+      properties:
+        id: { type: integer, format: int64 }
+        jobName: { type: string }
+        executionId: { type: string }
+        schedulerType: { type: string }
+        status: { type: string }
+        requestId: { type: string }
+        startedAt: { type: string, format: date-time }
+        finishedAt: { type: string, format: date-time, nullable: true }
+        errorCode: { type: string, nullable: true }
+        errorMessage: { type: string, nullable: true }
+        createdAt: { type: string, format: date-time }
+    ErrorResponse:
+      type: object
+      required: [code, msg]
+      properties:
+        code: { type: integer }
+        msg: { type: string }
+        data: {}
+    BacktestRequest:
+      type: object
+      required: [strategyId, startDate, endDate]
+      properties:
+        strategyId: { type: integer, format: int64 }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        initialCapital: { type: number, format: double }
+    PaperOrderRequest:
+      type: object
+      required: [accountId, instrumentId, side, orderType, quantity, estimatedNotional, fillPrice, clientOrderId]
+      properties:
+        accountId: { type: integer, format: int64 }
+        instrumentId: { type: integer, format: int64 }
+        side: { type: string, enum: [BUY, SELL] }
+        orderType: { type: string, enum: [MARKET, LIMIT] }
+        quantity: { type: number, format: double, exclusiveMinimum: 0 }
+        limitPrice: { type: number, format: double, exclusiveMinimum: 0, nullable: true }
+        estimatedNotional: { type: number, format: double, exclusiveMinimum: 0 }
+        fillPrice: { type: number, format: double, exclusiveMinimum: 0 }
+        clientOrderId: { type: string, minLength: 1, maxLength: 128 }
+        requestId: { type: string, maxLength: 128, nullable: true }
+    RiskHaltRequest:
+      deprecated: true
+      description: Compatibility alias. The implemented Controller accepts only reason and applies a GLOBAL halt.
+      allOf:
+        - $ref: '#/components/schemas/RiskReasonRequest'
+    RiskResumeRequest:
+      deprecated: true
+      description: Compatibility alias. The implemented Controller accepts only reason and applies a GLOBAL resume.
+      allOf:
+        - $ref: '#/components/schemas/RiskReasonRequest'
+    RiskReasonRequest:
+      type: object
+      required: [reason]
+      properties:
+        reason: { type: string, maxLength: 512 }
+    DataSourceForm:
+      type: object
+      required: [sourceCode, sourceName]
+      properties:
+        pkId: { type: integer, format: int64, nullable: true }
+        sourceCode: { type: string, maxLength: 64 }
+        sourceName: { type: string, maxLength: 128 }
+        vendorName: { type: string, nullable: true }
+        accountType: { type: string, nullable: true }
+        contractRef: { type: string, nullable: true }
+        serviceScope: { type: string, nullable: true }
+        feeInfo: { type: string, nullable: true }
+        expiryDate: { type: string, format: date, nullable: true }
+        primarySource: { type: boolean, nullable: true }
+        status: { type: string, enum: [DRAFT, PENDING_CONFIRMATION, ACTIVE, DEGRADED, EXPIRING, EXPIRED, SUSPENDED, RETIRED] }
+        remark: { type: string, nullable: true }
+    SourceGroupForm:
+      type: object
+      required: [groupCode, groupName]
+      properties:
+        pkId: { type: integer, format: int64, nullable: true }
+        groupCode: { type: string, enum: [NEWS_POLICY, CORP_REPORT, RESEARCH, MARKET_PRICE, COMMODITY, TRADING_RULE] }
+        groupName: { type: string }
+        primarySourceId: { type: integer, format: int64, nullable: true }
+        backupSourceIds: { type: string, nullable: true }
+        verifyRule: { type: string, nullable: true }
+        reprintPolicy: { type: string, nullable: true }
+        status: { type: string, enum: [CONFIGURED, HEALTHY, PARTIALLY_AVAILABLE, CONFLICTED, DEGRADED, UNAVAILABLE] }
+    QualityResolveForm:
+      type: object
+      required: [handler, actionTaken]
+      properties:
+        handler: { type: string }
+        actionTaken: { type: string }
+        basisRef: { type: string, nullable: true }
+        fixVersion: { type: string, nullable: true }
+    CalendarDefForm:
+      type: object
+      required: [calendarCode, marketType]
+      properties:
+        pkId: { type: integer, format: int64, nullable: true }
+        calendarCode: { type: string }
+        calendarName: { type: string, nullable: true }
+        marketType: { type: string, enum: [STOCK, FUTURE, FX, SPOT, INDEX] }
+        regionCode: { type: string, nullable: true }
+        venueCode: { type: string, nullable: true }
+        timezone: { type: string }
+        currency: { type: string, nullable: true }
+        calendarLevel: { type: string, enum: [MARKET, EXCHANGE, PRODUCT, INSTRUMENT, BROKER] }
+        status: { type: string }
+        version: { type: string }
+        remark: { type: string, nullable: true }
+    CorporateActionForm:
+      type: object
+      required: [instrumentId, actionType]
+      properties:
+        pkId: { type: integer, format: int64, nullable: true }
+        instrumentId: { type: integer, format: int64 }
+        actionType: { type: string }
+        actionCode: { type: string }
+        effectiveDate: { type: string, format: date-time, nullable: true }
+        announceDate: { type: string, format: date-time, nullable: true }
+        status: { type: string, enum: [DISCOVERED, VERIFIED, SCHEDULED, EFFECTIVE, EXPIRED, SUPERSEDED] }
+        detail: { type: string, nullable: true }
+        version: { type: string }
+    ContractEventForm:
+      type: object
+      required: [instrumentId, eventType]
+      properties:
+        pkId: { type: integer, format: int64, nullable: true }
+        instrumentId: { type: integer, format: int64 }
+        eventType: { type: string }
+        eventCode: { type: string }
+        effectiveDate: { type: string, format: date-time, nullable: true }
+        status: { type: string, enum: [DISCOVERED, VERIFIED, SCHEDULED, EFFECTIVE, EXPIRED, SUPERSEDED] }
+        detail: { type: string, nullable: true }
+        version: { type: string }
+    MarketBarForm:
+      type: object
+      required: [instrumentId, timeframe, barTime, openPrice, highPrice, lowPrice, closePrice]
+      properties:
+        instrumentId: { type: integer, format: int64 }
+        timeframe: { type: string, enum: [30M, DAY, WEEK, MONTH] }
+        barTime: { type: string, format: date-time }
+        openPrice: { type: number, exclusiveMinimum: 0 }
+        highPrice: { type: number, exclusiveMinimum: 0 }
+        lowPrice: { type: number, exclusiveMinimum: 0 }
+        closePrice: { type: number, exclusiveMinimum: 0 }
+        volume: { type: number, nullable: true }
+        turnover: { type: number, nullable: true }
+        source: { type: string }
+    MarketStateForm:
+      type: object
+      required: [instrumentId, marketLocalDate, stateCode]
+      properties:
+        instrumentId: { type: integer, format: int64 }
+        calendarId: { type: integer, format: int64, nullable: true }
+        marketLocalDate: { type: string, format: date }
+        stateCode: { type: string, enum: [TREND_UP, TREND_DOWN, RANGE, HIGH_VOLATILITY, LOW_LIQUIDITY, SYSTEMIC_RISK, DATA_UNAVAILABLE, SPECIAL_RULE] }
+        stateReason: { type: string, nullable: true }
+        version: { type: string }
+    CapacityForm:
+      type: object
+      required: [instrumentId, assessDate]
+      properties:
+        instrumentId: { type: integer, format: int64 }
+        assessDate: { type: string, format: date }
+        avgTurnover: { type: number, nullable: true }
+        avgVolume: { type: number, nullable: true }
+        bidAskSpread: { type: number, nullable: true }
+        turnoverRate: { type: number, nullable: true }
+        floatMarketCap: { type: number, nullable: true }
+        plannedRatio: { type: number, nullable: true, description: planned amount / avg turnover; drives computed capacity status }
+        slippageEstimate: { type: number, nullable: true }
+        detail: { type: string, nullable: true }
+    FeatureForm:
+      type: object
+      required: [instrumentId, marketLocalDate, timeframe, featureDefinitionVersion]
+      properties:
+        instrumentId: { type: integer, format: int64 }
+        marketLocalDate: { type: string, format: date }
+        timeframe: { type: string, enum: [30M, DAY, WEEK, MONTH] }
+        featureDefinitionVersion: { type: string }
+        sourceSnapshotId: { type: integer, format: int64, nullable: true }
+        pointInTimeId: { type: integer, format: int64, nullable: true }
+        returnValue: { type: number, nullable: true }
+        volatility: { type: number, nullable: true }
+        relativeStrength: { type: number, nullable: true }
+        volumePercentile: { type: number, nullable: true }
+        pricePosition: { type: number, nullable: true }
+        status: { type: string }
+    ResearchTaskForm:
+      type: object
+      properties:
+        materialIds: { type: string, nullable: true }
+        subjectRefs: { type: string, nullable: true }
+        taskType: { type: string }
+        snapshotId: { type: integer, format: int64, nullable: true }
+        workflowVersion: { type: string, nullable: true }
+        promptVersion: { type: string, nullable: true }
+        idempotencyKey: { type: string, nullable: true, description: empty value falls back to generated taskCode }
