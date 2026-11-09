@@ -23,18 +23,21 @@
     >
       <img :src="aiChatIcon" alt="AI会话" draggable="false" />
     </div>
+
+    <!-- AI 会话对话框（SSE 流式） -->
+    <AiChatDialog v-model="aiChatVisible" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { NavTypeEnum } from '@/enums/NavTypeEnum';
-import router from '@/router';
 import { useAppStore } from '@/store/modules/app';
 import { useSettingsStore } from '@/store/modules/settings';
 import { initMessageBox, initPush } from '@/utils/push';
 import aiChatIcon from '@/assets/images/ai-chat-float.png';
 import { AppMain, Navbar, Settings, TagsView } from './components';
 import SideBar from './components/Sidebar/index.vue';
+import AiChatDialog from '@/components/AiChatDialog/index.vue';
 
 const settingsStore = useSettingsStore();
 const theme = computed(() => settingsStore.theme);
@@ -91,9 +94,7 @@ const setLayout = () => {
   settingRef.value?.openSetting();
 };
 
-const goAiChat = () => {
-  router.push('/aichat');
-};
+const aiChatVisible = ref(false);
 
 // ---- AI会话 浮动按钮：右下角默认定位，支持任意拖放 ----
 const floatLeft = ref<number | null>(null);
@@ -107,30 +108,37 @@ const floatStyle = computed(() => {
   return { left: `${floatLeft.value}px`, top: `${floatTop.value}px`, right: 'auto', bottom: 'auto' };
 });
 
+// 全局缩放（html { zoom: --app-scale }）下，视觉像素与布局像素相差 --app-scale 倍
+const getAppScale = (): number => {
+  return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--app-scale')) || 1;
+};
+
 const onFloatPointerDown = (e: PointerEvent) => {
   const el = e.currentTarget as HTMLElement;
   const r = el.getBoundingClientRect();
+  const scale = getAppScale();
   floatDrag.active = true;
   floatDrag.moved = false;
   floatDrag.startX = e.clientX;
   floatDrag.startY = e.clientY;
-  floatDrag.origLeft = r.left;
-  floatDrag.origTop = r.top;
-  floatLeft.value = r.left;
-  floatTop.value = r.top;
+  // getBoundingClientRect / clientX 是视觉像素，left/top 样式在 zoom 子树里按布局像素渲染，需换算
+  floatDrag.origLeft = r.left / scale;
+  floatDrag.origTop = r.top / scale;
+  floatLeft.value = r.left / scale;
+  floatTop.value = r.top / scale;
   el.setPointerCapture(e.pointerId);
 };
 
 const onFloatPointerMove = (e: PointerEvent) => {
   if (!floatDrag.active) return;
-  const dx = e.clientX - floatDrag.startX;
-  const dy = e.clientY - floatDrag.startY;
+  const scale = getAppScale();
+  const dx = (e.clientX - floatDrag.startX) / scale;
+  const dy = (e.clientY - floatDrag.startY) / scale;
   if (Math.abs(dx) + Math.abs(dy) > 4) {
     floatDrag.moved = true;
   }
   const size = 58;
   // 视口尺寸是视觉像素，定位坐标写在 zoom 子树里按布局像素渲染，需按缩放换算
-  const scale = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--app-scale')) || 1;
   const vw = window.innerWidth / scale;
   const vh = window.innerHeight / scale;
   floatLeft.value = Math.max(-size + 24, Math.min(vw - 24, floatDrag.origLeft + dx));
@@ -146,9 +154,9 @@ const onFloatPointerUp = (e: PointerEvent) => {
   } catch {
     /* ignore */
   }
-  // 未发生拖拽视为点击，进入 AI 会话
+  // 未发生拖拽视为点击，打开 AI 会话对话框
   if (!floatDrag.moved) {
-    goAiChat();
+    aiChatVisible.value = true;
   }
 };
 </script>
