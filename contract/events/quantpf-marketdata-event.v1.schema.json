@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantpf.local/schema/quantpf-marketdata-event.v1.schema.json",
+  "title": "QuantPF marketdata module-1 events v1",
+  "description": "数据与标的基础领域事件契约（《详设_1》§16.3/§20.3：DataSourceHealthChanged/DataCollectionCompleted/DataQualityIssueDetected/DataQualityStatusChanged/PointInTimeSnapshotCreated/InstrumentVerified/InstrumentStatusChanged/TradingCalendarUpdated/CorporateActionUpdated/ContractEventUpdated/MarketSessionChanged/MarketStateChanged/MarketDataReady/MarketDataStale/CapacityStatusChanged）。状态由确定性规则产生，Dify/TradingAgents 只解释不改写。",
+  "type": "object",
+  "required": [
+    "eventId",
+    "eventType",
+    "occurredAt",
+    "availableAt",
+    "schemaVersion",
+    "aggregateType",
+    "aggregateId"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "DataSourceHealthChangedEvent",
+        "DataCollectionCompletedEvent",
+        "DataQualityIssueDetectedEvent",
+        "DataQualityStatusChangedEvent",
+        "PointInTimeSnapshotCreatedEvent",
+        "InstrumentVerifiedEvent",
+        "InstrumentStatusChangedEvent",
+        "TradingCalendarUpdatedEvent",
+        "CorporateActionUpdatedEvent",
+        "ContractEventUpdatedEvent",
+        "MarketSessionChangedEvent",
+        "MarketStateChangedEvent",
+        "MarketDataReadyEvent",
+        "MarketDataStaleEvent",
+        "CapacityStatusChangedEvent",
+        "QuantFeatureCalculatedEvent",
+        "OpportunityTimingStateChangedEvent"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "availableAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "aggregateType": {
+      "type": "string",
+      "enum": ["DataSource", "SourceGroup", "CollectionTask", "RawSnapshot", "DataQualityIssue", "PointInTimeSnapshot", "Instrument", "InstrumentVersion", "TradingCalendar", "CalendarDay", "CorporateAction", "ContractEvent", "MarketState", "MarketDataReadiness", "CapacityAssessment", "QuantFeatureSnapshot"]
+    },
+    "aggregateId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "schemaVersion": {
+      "type": "string",
+      "const": "1"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "correlationId": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "causationId": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "instrumentId": { "type": "integer" },
+        "calendarId": { "type": "integer" },
+        "sourceId": { "type": "integer" },
+        "stateCode": {
+          "type": "string",
+          "enum": ["TREND_UP", "TREND_DOWN", "RANGE", "HIGH_VOLATILITY", "LOW_LIQUIDITY", "SYSTEMIC_RISK", "DATA_UNAVAILABLE", "SPECIAL_RULE"]
+        },
+        "capacityStatus": {
+          "type": "string",
+          "enum": ["SUFFICIENT", "LIMITED", "HIGH_IMPACT", "UNTRADEABLE", "UNKNOWN"]
+        },
+        "qualityStatus": {
+          "type": "string",
+          "enum": ["AVAILABLE", "DELAYED", "PARTIAL", "CONFLICTED", "UNAUTHORIZED", "STALE", "INVALID", "PENDING_REVIEW"]
+        },
+        "actionCode": { "type": "string", "maxLength": 64 },
+        "eventCode": { "type": "string", "maxLength": 64 },
+        "actionType": { "type": "string", "maxLength": 32 },
+        "eventType": { "type": "string", "maxLength": 32 },
+        "marketLocalDate": { "type": "string", "format": "date" }
+      }
+    }
+  }
+}

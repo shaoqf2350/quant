@@ -1,0 +1,57 @@
+schema: spec-driven
+
+context: |
+  Language: Chinese
+  All artifacts must be written in Chinese.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+  Project: QuantPF, a private multi-asset research and paper-trading platform.
+  Source-code repository: D:\workspace\quant\RuoYi-Vue-Plus (this OpenSpec root).
+  Business-document repository: D:\我的文档\私人\量化.
+  Treat D:\我的文档\私人\量化\量化交易系统完整设计方案说明书_V4.md as the business-goal baseline.
+  Treat D:\我的文档\私人\量化\总体业务架构及记录落地功能进度.md as the technical architecture and implementation-status ledger.
+  Treat D:\我的文档\私人\量化\详设文档\详设_0_整体流程文档.md and applicable 详设_1 through 详设_5 documents as implementation-design baselines. Read relevant files before proposing or applying changes.
+  Preserve existing uncommitted source-repository changes. Do not overwrite or revert user work.
+  Keep business facts and deterministic decisions in Spring Boot; Dify is limited to research assistance and explanation. Never create real-trading submission/cancellation paths for Phase 1.
+  Phase 2 opportunity discovery is led by price-volume/price-action analysis across A-shares, Hong Kong, US, futures, and FX/overseas broker instruments. Factors and LLM explanations are augmentations; recent news is optional, not a prerequisite.
+  Ordinary users are internal team members and authorized acquaintances without technical or professional-finance backgrounds. Proposals must minimize user input, prefer system-derived defaults, and explain conclusions, risks, blockers, and next steps in plain Chinese.
+
+rules:
+  proposal:
+    - Reference the applicable QuantPF goal, technical ledger, and detailed-design documents from the business-document repository.
+    - Separate Phase 1 behavior from Phase 2 reservations; never describe reserved work as already implemented.
+    - State scope, non-goals, user impact, data authorization assumptions, and acceptance outcomes.
+  specs:
+    - Write requirements in Chinese while retaining SHALL/MUST keywords and OpenSpec structure.
+    - Describe observable behavior and acceptance criteria; distinguish ordinary users, reviewers, and professional administrators.
+    - For multi-asset behavior, specify A-share, Hong Kong, US, futures, and FX/overseas-broker differences where applicable.
+    - Keep price-volume-led Phase 2 discovery independent of recent-news availability; treat news, factors, and LLM explanations according to their defined authority.
+  design:
+    - Map responsibilities to existing Vue/RuoYi, Spring Boot domain modules, Dify, and XXL-JOB boundaries.
+    - Preserve Spring Boot as the source of deterministic business facts, calculations, state, risk checks, and Paper execution.
+    - Include point-in-time data, versions, idempotency, audit, failure handling, and asset-specific market/session rules where relevant.
+  tasks:
+    - Name the affected repository-relative modules or contract paths and include tests and verification steps.
+    - Preserve pre-existing uncommitted changes; do not overwrite unrelated user work.
+    - Keep Phase 1 free of real-trading submission/cancellation paths.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always state what is out of scope
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

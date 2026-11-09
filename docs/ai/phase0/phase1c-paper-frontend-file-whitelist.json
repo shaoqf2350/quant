@@ -1,0 +1,179 @@
+{
+  "phase": "PHASE1C-PAPER-FRONTEND-PLAN-AND-CONTRACT-CONSUMPTION",
+  "auditDate": "2026-10-07",
+  "currentPhaseWriteAllowed": [
+    "docs/ai/phase0/phase1c-paper-frontend-plan.md",
+    "docs/ai/phase0/phase1c-paper-frontend-file-whitelist.json",
+    "docs/ai/phase0/phase1c-paper-frontend-risk-register.md",
+    "docs/ai/phase0/phase1c-paper-frontend-commands.log",
+    "docs/ai/phase0/phase1c-paper-frontend-manifest.json",
+    "docs/ai/handoff/phase1c-paper-frontend-plan-handoff.md"
+  ],
+  "currentPhaseFrontendCodeChangesAllowed": false,
+  "status": "PROPOSED_NOT_APPROVED",
+  "nextImplementationCandidateFiles": [
+    {
+      "status": "proposed",
+      "purpose": "Account page and ledger API wrapper",
+      "path": "src/api/quant/paper-account/index.ts",
+      "gate": "Only after response DTO and pagination envelope are frozen"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Account and ledger DTO",
+      "path": "src/api/quant/paper-account/types.ts",
+      "gate": "Only after backend contract schemas are frozen"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Paper order page/submit; cancel only after formal OpenAPI operation exists",
+      "path": "src/api/quant/paper-order/index.ts",
+      "gate": "Order 202/synchronous semantics and cancel contract reconciled"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Order request/response DTO",
+      "path": "src/api/quant/paper-order/types.ts",
+      "gate": "DTO and status model freeze"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Risk status/halt/resume wrappers",
+      "path": "src/api/quant/risk/index.ts",
+      "gate": "Halt/resume authorization and response contract approved"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Risk status/request DTO",
+      "path": "src/api/quant/risk/types.ts",
+      "gate": "Backend schema freeze"
+    },
+    {
+      "status": "proposed_blocked",
+      "purpose": "Follow start/stop and future session query wrappers",
+      "path": "src/api/quant/follow/index.ts",
+      "gate": "Full UI blocked until GET/page sessions API exists"
+    },
+    {
+      "status": "proposed_blocked",
+      "purpose": "Follow session DTO",
+      "path": "src/api/quant/follow/types.ts",
+      "gate": "OpenAPI operations must reference PaperFollowSessionResponse and GET/page schema"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Audit and optionally job execution read API wrappers",
+      "path": "src/api/quant/audit/index.ts",
+      "gate": "Response DTO and redaction semantics frozen"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Audit/job execution DTO",
+      "path": "src/api/quant/audit/types.ts",
+      "gate": "Backend response schemas frozen"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Paper account list/details and ledger",
+      "path": "src/views/quant/paper-account/index.vue",
+      "gate": "Account/ledger DTO available"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Paper order list/submit",
+      "path": "src/views/quant/paper-order/index.vue",
+      "gate": "Order contract and idempotency UX approved"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Risk status and gated halt/resume",
+      "path": "src/views/quant/risk/index.vue",
+      "gate": "Backend permission and confirmation policy approved"
+    },
+    {
+      "status": "proposed",
+      "purpose": "Read-only Audit list",
+      "path": "src/views/quant/audit/index.vue",
+      "gate": "Audit DTO/redaction policy approved"
+    },
+    {
+      "status": "proposed_blocked",
+      "purpose": "Paper Position page",
+      "path": "src/views/quant/paper-position/index.vue",
+      "gate": "Blocked until formal position query API/DTO and menu fact exist"
+    },
+    {
+      "status": "proposed_blocked",
+      "purpose": "Paper Follow management",
+      "path": "src/views/quant/paper-follow/index.vue",
+      "gate": "Blocked until session query API/DTO and menu fact exist"
+    },
+    {
+      "status": "conditional",
+      "purpose": "QuantPF business error mapping",
+      "path": "src/utils/errorCode.ts",
+      "gate": "Approved mapping for QPF-* codes"
+    },
+    {
+      "status": "conditional_not_approved",
+      "purpose": "Static routes, only if dynamic backend menus cannot meet approved design",
+      "path": "src/router/index.ts",
+      "gate": "Avoid if possible; requires separate approval"
+    },
+    {
+      "status": "conditional_not_approved",
+      "purpose": "Permission loading changes, only if required after proof",
+      "path": "src/store/modules/permission.ts",
+      "gate": "Avoid if possible; requires security review and separate approval"
+    },
+    {
+      "status": "proposed_blocked",
+      "purpose": "Execution history page",
+      "path": "src/views/quant/paper-execution/index.vue",
+      "gate": "Blocked until formal execution query API/DTO exists"
+    }
+  ],
+  "nonFrontendContractPrerequisites": [
+    {
+      "status": "separate backend contract stage; not authorized by this whitelist",
+      "path": "contract/openapi/quantpf-v29.yaml",
+      "change": "Add position query, Follow session query, execution query, order cancel if intended; define DTOs and reconcile 202"
+    },
+    {
+      "status": "separate backend contract/menu stage",
+      "path": "contract/menu/quantpf-menu-facts.yaml",
+      "change": "Add approved Follow/Position/menu facts and permission names only if scope approved"
+    },
+    {
+      "status": "separate backend contract stage",
+      "path": "contract/error-codes/quantpf-error-codes.yaml",
+      "change": "Review complete codes used by MVP controllers"
+    }
+  ],
+  "forbidden": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "vite.config.ts",
+    ".env.*",
+    "RSA private-key crypto implementation",
+    "src/views/monitor/snailjob/**",
+    "backend Java/XML/YAML/SQL/POM",
+    "event schemas",
+    "QMT/**",
+    "CTP/**",
+    "LIVE/**",
+    "XXL-JOB activation or scheduler admin UI"
+  ],
+  "approvalRequired": [
+    "P0 client-side private-key rotation/revocation and cleanup evidence",
+    "MVP page scope",
+    "candidate file whitelist",
+    "menu facts and backend permission mapping",
+    "API response DTOs and pagination shape",
+    "order submit status and cancel endpoint contract",
+    "Follow session read API or exclusion",
+    "Position and execution API availability or exclusion",
+    "whether route/store changes are allowed",
+    "front-end dependency or package script changes"
+  ]
+}

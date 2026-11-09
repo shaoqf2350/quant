@@ -1,0 +1,81 @@
+version: 1
+stage: STAGE_1
+menus:
+  - code: quant.dashboard
+    title: Dashboard
+    path: /quant/dashboard
+    permission: quant:dashboard:view
+    enabled: true
+  - code: quant.research
+    title: Research
+    path: /quant/research
+    permission: quant:news:list
+    enabled: true
+  - code: quant.market
+    title: Market
+    path: /quant/market
+    permission: quant:market:view
+    enabled: true
+  - code: quant.strategy
+    title: Strategy
+    path: /quant/strategy
+    permission: quant:strategy:view
+    enabled: true
+  - code: quant.backtest
+    title: Backtest
+    path: /quant/backtest
+    permission: quant:backtest:view
+    enabled: true
+  - code: quant.paper-account
+    title: Paper Account
+    path: /quant/paper-account
+    permission: quant:paper-account:view
+    enabled: true
+  - code: quant.paper-order
+    title: Paper Order
+    path: /quant/paper-order
+    permission: quant:paper-order:view
+    enabled: true
+  - code: quant.risk
+    title: Risk
+    path: /quant/risk
+    permission: quant:risk:view
+    enabled: true
+  - code: quant.audit
+    title: Audit
+    path: /quant/audit
+    permission: quant:audit:view
+    enabled: true
+  - code: quant.data-source
+    title: 数据源管理
+    path: /quant/data-source
+    permission: quant:data:list
+    enabled: true
+  # 指导文档 §8.4 要求的 quant.data-quality 条目；落地页面 views/quant/data-quality/index.vue
+  # （含质量问题/原始快照/采集任务/点时版本四个 Tab），权限与 @SaCheckPermission/菜单 SQL 一致
+  - code: quant.data-quality
+    title: 数据质量
+    path: /quant/data-quality
+    permission: quant:data:list
+    enabled: true
+  - code: quant.instrument
+    title: 标的
+    path: /quant/instrument
+    permission: quant:instrument:list
+    enabled: true
+  - code: quant.calendar
+    title: 交易日历
+    path: /quant/calendar
+    permission: quant:calendar:list
+    enabled: true
+  - code: quant.event
+    title: 事件
+    path: /quant/event
+    permission: quant:instrument:list
+    enabled: true
+forbiddenCapabilities:
+  - LIVE
+  - QMT
+  - CTP
+  - REAL_BROKER_ORDER
+  - REAL_BROKER_CANCEL

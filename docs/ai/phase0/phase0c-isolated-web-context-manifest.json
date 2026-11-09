@@ -1,0 +1,80 @@
+{
+  "phase": "PHASE0C-ISOLATED-WEB-CONTEXT-PLAN",
+  "auditDate": "2026-10-06",
+  "planOnly": true,
+  "codeChangesApplied": false,
+  "pomChangesApplied": false,
+  "sqlChangesApplied": false,
+  "contractChangesApplied": false,
+  "frontendChangesApplied": false,
+  "schedulerMigrationApplied": false,
+  "selectedApproach": "ruoyi-admin @WebMvcTest slice with MockMvc",
+  "requiresHumanApprovalBeforeImplementation": true,
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\test\\java\\com\\quantpf\\web\\controller\\QuantPfHealthControllerWebMvcTest.java",
+      "action": "planned-create",
+      "role": "isolated Web MVC contract test for the static health controller",
+      "readOnly": false,
+      "humanApprovalRequired": true,
+      "acceptance": [
+        "@WebMvcTest loads only QuantPfHealthController",
+        "MockMvc GET /api/quant/health returns 200",
+        "status=UP",
+        "phase=PHASE0C",
+        "liveEnabled=false",
+        "no database/redis/broker/scheduler connection"
+      ],
+      "rollback": "Remove only this newly created test file through reviewed rollback; no destructive Git command"
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\pom.xml",
+      "action": "review-only",
+      "role": "verify inherited spring-boot-starter-test availability",
+      "readOnly": true,
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\pom.xml",
+      "action": "review-only",
+      "role": "verify no POM change is needed; propose minimal test dependency only if classpath is missing",
+      "readOnly": true,
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_vue.sql",
+      "action": "reference-only",
+      "role": "RuoYi MySQL base schema reference",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_job.sql",
+      "action": "reference-only",
+      "role": "current SnailJob-related base SQL reference; not to be executed by this phase",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v25_core_hardening.sql",
+      "action": "legacy-reference-only",
+      "role": "historical QuantPF SQL reference; not production migration",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v25_xxljob_migration.sql",
+      "action": "legacy-reference-only",
+      "role": "historical scheduler migration reference; not production migration",
+      "readOnly": true
+    }
+  ],
+  "forbiddenInThisPlan": [
+    "production YAML changes",
+    "database migration",
+    "real database connection",
+    "real Redis connection",
+    "Broker connection",
+    "SnailJob or XXL-JOB startup",
+    "QMT/CTP/LIVE code",
+    "business Entity/Mapper/Service/Controller",
+    "Git commit"
+  ]
+}

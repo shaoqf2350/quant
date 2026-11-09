@@ -1,0 +1,207 @@
+{
+  "phase": "PHASE1B-FOLLOW-PERSISTENCE-SCHEMA-APPROVAL-AND-IMPLEMENTATION-PLAN",
+  "auditDate": "2026-10-07",
+  "planOnly": true,
+  "currentPhaseCodeChangesAllowed": false,
+  "databaseMigrationAllowed": false,
+  "databaseMigrationExecuted": false,
+  "gitCommandsExecuted": false,
+  "currentPhaseAllowedFiles": [
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-schema-approval-and-implementation-plan.md",
+      "action": "create",
+      "purpose": "canonical plan"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-migration-proposal.md",
+      "action": "create",
+      "purpose": "non-executable migration proposal"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-file-whitelist.json",
+      "action": "create",
+      "purpose": "next-stage whitelist"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-risk-register.md",
+      "action": "create",
+      "purpose": "risk register"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-commands.log",
+      "action": "create",
+      "purpose": "command log"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-manifest.json",
+      "action": "create",
+      "purpose": "manifest"
+    },
+    {
+      "path": "docs/ai/handoff/phase1b-follow-persistence-schema-plan-handoff.md",
+      "action": "create",
+      "purpose": "unique handoff"
+    }
+  ],
+  "nextStage": "PHASE1B-FOLLOW-PERSISTENCE-IMPLEMENTATION-AND-CONCURRENCY-CLOSURE",
+  "nextStageAllowedFiles": [
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/record/PaperFollowSessionRow.java",
+      "action": "create",
+      "purpose": "persistence row"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/mapper/PaperFollowSessionMapper.java",
+      "action": "create",
+      "purpose": "MyBatis mapper"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/resources/mapper/quantpf/PaperFollowSessionMapper.xml",
+      "action": "create",
+      "purpose": "MyBatis XML"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/repository/PaperFollowSessionRepository.java",
+      "action": "create",
+      "purpose": "repository port"
+    },
+    {
+      "path": "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PaperFollowSessionRepositoryAdapter.java",
+      "action": "create",
+      "purpose": "repository adapter"
+    },
+    {
+      "path": "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PersistentPaperFollowApplicationService.java",
+      "action": "create",
+      "purpose": "transactional start/stop service"
+    },
+    {
+      "path": "ruoyi-admin/src/main/java/com/quantpf/web/dto/PaperFollowStartRequest.java",
+      "action": "create",
+      "purpose": "start DTO"
+    },
+    {
+      "path": "ruoyi-admin/src/main/java/com/quantpf/web/dto/PaperFollowStopRequest.java",
+      "action": "create",
+      "purpose": "stop DTO"
+    },
+    {
+      "path": "ruoyi-admin/src/main/java/com/quantpf/web/controller/QuantPaperFollowController.java",
+      "action": "modify",
+      "purpose": "persistent API cutover"
+    },
+    {
+      "path": "ruoyi-admin/src/main/java/com/quantpf/web/config/QuantPfPaperRuntimeConfiguration.java",
+      "action": "modify",
+      "purpose": "wire Follow beans"
+    },
+    {
+      "path": "db/migration/V1_9_0__paper_follow_session.sql",
+      "action": "create",
+      "purpose": "approved Flyway migration"
+    },
+    {
+      "path": "ruoyi-admin/src/test/java/com/quantpf/web/controller/QuantPaperFollowPersistenceIntegrationTest.java",
+      "action": "create",
+      "purpose": "API and MySQL fact tests"
+    },
+    {
+      "path": "quantpf-modules/quantpf-finance/src/test/java/com/quantpf/finance/PaperFollowConcurrencyIntegrationTest.java",
+      "action": "create",
+      "purpose": "concurrency and idempotency tests"
+    },
+    {
+      "path": "contract/openapi/quantpf-v29.yaml",
+      "action": "modify",
+      "purpose": "approved Follow request/response contract"
+    },
+    {
+      "path": "contract/error-codes/quantpf-error-codes.yaml",
+      "action": "modify",
+      "purpose": "approved Follow error codes"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/mapper/AuditRecordMapper.java",
+      "action": "modify",
+      "purpose": "same-transaction audit insert"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/resources/mapper/quantpf/AuditRecordMapper.xml",
+      "action": "modify",
+      "purpose": "same-transaction audit insert XML"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/repository/AuditRecordRepository.java",
+      "action": "modify",
+      "purpose": "audit append port"
+    },
+    {
+      "path": "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/AuditRecordRepositoryAdapter.java",
+      "action": "modify",
+      "purpose": "audit append adapter"
+    },
+    {
+      "path": "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PaperFollowPersistenceTransactionService.java",
+      "action": "create",
+      "purpose": "explicit same-session Follow plus Audit transaction boundary"
+    }
+  ],
+  "proposalFiles": [
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-migration-proposal.md",
+      "status": "non-executable",
+      "humanApprovalRequired": true
+    }
+  ],
+  "humanApprovalRequired": [
+    "schema/table/fields",
+    "generated-column unique active slot",
+    "state machine",
+    "canonical request id",
+    "error codes",
+    "Flyway V1_9_0",
+    "next-stage code and SQL whitelist"
+  ],
+  "forbiddenFiles": [
+    "root pom.xml",
+    "ruoyi-admin/src/main/resources/application-dev.yml",
+    "ruoyi-admin/src/main/resources/application-prod.yml",
+    "quantpf-modules/quantpf-application/**",
+    "contract/events/**",
+    "frontend/**",
+    "QMT/**",
+    "CTP/**",
+    "LIVE/**",
+    "SnailJob migration/**",
+    "XXL-JOB activation/**"
+  ],
+  "prohibitedActions": [
+    "DDL",
+    "Flyway execution",
+    "CREATE TABLE",
+    "ALTER TABLE",
+    "DROP",
+    "USE",
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "Git status/log/diff/commit/push/reset/clean",
+    "production DB connection",
+    "Redis/Broker/SnailJob/XXL-JOB/QMT/CTP/LIVE connection"
+  ],
+  "acceptanceGates": [
+    "two concurrent starts produce at most one RUNNING row",
+    "same start request replay is idempotent",
+    "same request with different parameters is rejected",
+    "stop is row-locked and atomic with audit",
+    "database failure has no AtomicBoolean fallback",
+    "rollback leaves no RUNNING ghost row",
+    "full existing Paper regression remains green"
+  ],
+  "notes": [
+    "Current phase creates only documents",
+    "Next-stage SQL creation requires human approval",
+    "Do not use partial unique index syntax unsupported by MySQL",
+    "No Follow migration has been executed"
+  ]
+}

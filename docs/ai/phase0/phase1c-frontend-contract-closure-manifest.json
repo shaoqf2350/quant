@@ -1,0 +1,146 @@
+{
+  "auditDate": "2026-10-07",
+  "phase": "PHASE1C-FRONTEND-CONTRACT-CLOSURE-AND-SECURITY-REMEDIATION",
+  "status": "PARTIAL",
+  "implementationAllowed": false,
+  "productionBuildAllowed": false,
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\package.json",
+      "exists": true,
+      "size": 2339,
+      "sha256": "D1376599B7C4736C081EC9BEAA7354E236C1D4DE371C8B16ECB0E6F13E871BE1",
+      "role": "frontend dependency/toolchain baseline",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\request.ts",
+      "exists": true,
+      "size": 9863,
+      "sha256": "56B2C78E5B6B776C807C8D9EF76C97A75AE5426BA3E87E4712819D07CCF59436",
+      "role": "frontend transport/repeat-submit/encryption path",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\jsencrypt.ts",
+      "exists": true,
+      "size": 736,
+      "sha256": "F0B75259E57F887E3DE6E43F284280E59F465E67E5A0F83237D31DFCF41FED6B",
+      "role": "client-side RSA key access path",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\errorCode.ts",
+      "exists": true,
+      "size": 247,
+      "sha256": "2F685BAC3A6ACB9987FBD38CBE0BC1695930FDEADB26A988F9EC69E801520676",
+      "role": "frontend error mapping",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\router\\index.ts",
+      "exists": true,
+      "size": 3821,
+      "sha256": "4BF894EF16D65BFA3966A48864391FC97FCE4617DD4CFC06DFF4F0FE6FDA301B",
+      "role": "router boundary",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\store\\modules\\permission.ts",
+      "exists": true,
+      "size": 6996,
+      "sha256": "3E30CA2179051A9156FB1B935614576D6165D1ED26A8435FE88444ADEC5192AD",
+      "role": "dynamic menu/component resolution",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\api\\menu.ts",
+      "exists": true,
+      "size": 316,
+      "sha256": "0E79F0F78975E23D7A1FC1FE9F7CE7B20CAB4417E431334348213710CCC713C1",
+      "role": "menu API wrapper",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+      "exists": true,
+      "size": 13921,
+      "sha256": "E3941D8395916A8050F6714E8E6EC1C4BA9966169DC4A4610A88369DA8B93319",
+      "role": "formal API contract",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+      "exists": true,
+      "size": 2738,
+      "sha256": "9CF9E504226C01BBB580EF53FC8A38C3BC27FABA210FCC48EB489592B59EDAE8",
+      "role": "formal error codes",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml",
+      "exists": true,
+      "size": 1250,
+      "sha256": "C8FFDB712DC326B866D97F14C13A339386AA0803677BC772404393C0EAA8469E",
+      "role": "menu fact source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\PROTOTYPE_PAGE_MAP.md",
+      "exists": true,
+      "size": 7351,
+      "sha256": "6069269051CAF970F9FAC6B26ACE9B7B2130F66F9582CB25E9713CACAD768BC2",
+      "role": "prototype page/API map",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\java\\com\\quantpf\\web\\controller",
+      "exists": true,
+      "size": 0,
+      "sha256": null,
+      "role": "actual Controller paths",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\java\\com\\quantpf\\web\\dto",
+      "exists": true,
+      "size": 0,
+      "sha256": null,
+      "role": "actual request DTOs",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.development",
+      "exists": true,
+      "size": 2256,
+      "sha256": "D6506D964E203603324BA6B64E76EAEF1D70F2A3A6E97E126C8E567A8CF6C748",
+      "role": "sensitive variable names only",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.production",
+      "exists": true,
+      "size": 2282,
+      "sha256": "7013E7EF4103878B3B67185BF2E3F3B4DEB6AD051E92A6CB9A7F4995971A1424",
+      "role": "sensitive variable names only",
+      "readOnly": true
+    }
+  ],
+  "snailJobFiles": [],
+  "xxlJobFiles": [],
+  "quantpfFiles": [
+    "QuantPF controllers and DTOs audited; no business source modified"
+  ],
+  "contractFiles": [
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml"
+  ],
+  "migrationFiles": [],
+  "sensitiveValuesRecorded": false,
+  "notes": [
+    "Private-key values intentionally omitted",
+    "sys_menu not found in configured quantpf schema; other schemas not queried",
+    "No source/config/database writes performed"
+  ]
+}

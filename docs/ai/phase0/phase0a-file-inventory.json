@@ -1,0 +1,668 @@
+{
+  "auditDate": "2026-10-03",
+  "backendRoot": "D:\\workspace\\quant\\RuoYi-Vue-Plus",
+  "frontendRoot": "D:\\workspace\\quant\\plus-ui",
+  "prototypeRoot": "D:\\我的文档\\私人\\量化\\前端功能原型设计",
+  "files": [
+    {
+      "path": "D:\\我的文档\\私人\\量化\\量化交易系统完整设计方案\\_V28.md",
+      "exists": true,
+      "size": 309706,
+      "sha256": "556831112BCE1D279B025F2F2EAEF1AC1C4541A22137CC4F50230D8F6585F285",
+      "role": "formal plan chapters V28-0..V28-8; read-only design input",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\pom.xml",
+      "exists": true,
+      "size": 25073,
+      "sha256": "CBD3740F955E8B911754351C7A70B549626C2E2A20C8546155BA39772635FBEE",
+      "role": "backend root Maven POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\pom.xml",
+      "exists": true,
+      "size": 1788,
+      "sha256": "2647BEB49C4A4B7C389B8AF39565C62FDC79A2BE803AD1B149928E131C98E720",
+      "role": "common aggregator POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\ruoyi-common-job\\pom.xml",
+      "exists": true,
+      "size": 1583,
+      "sha256": "2814516FA8354787E513EF8E6E6180B6A039BE56CAD4203929F761B4903141BD",
+      "role": "SnailJob client common module POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\pom.xml",
+      "exists": true,
+      "size": 888,
+      "sha256": "FE1C059EB7B7CD73ED335C6B249DDFCD454080637A2945257D65AEEE60825AEE",
+      "role": "modules aggregator POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\pom.xml",
+      "exists": true,
+      "size": 983,
+      "sha256": "684EBCE9FE896DEBC411EBAF55F01E3930018BAEA48209FD2B260D21956B7C9B",
+      "role": "SnailJob task module POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\pom.xml",
+      "exists": true,
+      "size": 727,
+      "sha256": "58C60540F007E35D87C8CD14E426BED38F202FCA39B655AD1A498FAB0B10B9DE",
+      "role": "extension aggregator POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\pom.xml",
+      "exists": true,
+      "size": 6225,
+      "sha256": "483386745CC117217A6368B3D127DB13FFEB70CD9B2B8F215BF7B5A0BA328820",
+      "role": "admin application POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\resources\\application.yml",
+      "exists": true,
+      "size": 13953,
+      "sha256": "AAB334FAFF22FEE9307DACB6AF1334FC5EAD08B584BEB286C01C474F90EF76D6",
+      "role": "admin base configuration",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\resources\\application-dev.yml",
+      "exists": true,
+      "size": 12724,
+      "sha256": "460C6625BD29356081B39BE7126CD9308E50DEDC83620EC41ED8CA2720418A7B",
+      "role": "admin development configuration",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\resources\\application-prod.yml",
+      "exists": true,
+      "size": 12856,
+      "sha256": "E2F1E4AB2FB630641A24C23864DE7CBF9F33B935AD35A42FB23DBB9BF2A777A3",
+      "role": "admin production configuration",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\ruoyi-common-job\\src\\main\\java\\org\\dromara\\common\\job\\config\\SnailJobConfig.java",
+      "exists": true,
+      "size": 1534,
+      "sha256": "7DA11B0178688129078750B02ED686E02FBFDC116E583A9EC9B5B64BFAFEB67E",
+      "role": "required common-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\package-info.java",
+      "exists": true,
+      "size": 26,
+      "sha256": "BB86F12A059735CD83E82F17D87634DEF7EDB085776441F8BBC358BFB02FBDCF",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\entity\\BillDTO.java",
+      "exists": true,
+      "size": 378,
+      "sha256": "C268F50B352767F8C0FA117E86194269CB0FBE38AE69DE7C70E6079881AD276E",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\AlipayBillTask.java",
+      "exists": true,
+      "size": 1706,
+      "sha256": "4E664009FBD118A122720CDC7D153746234DBAE0043C292B7D2762F5940D9186",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\SummaryBillTask.java",
+      "exists": true,
+      "size": 1967,
+      "sha256": "5574CF5AA8D008ED1F3B11C76B76EF1D36FCAD3F7A410802454C2FB1C2FA7DD2",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestAnnoJobExecutor.java",
+      "exists": true,
+      "size": 1017,
+      "sha256": "B7ED7D0FF45256B5B6C42687285D8FE996D6763071EC1ABDBD9083FAC2198151",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestBroadcastJob.java",
+      "exists": true,
+      "size": 1481,
+      "sha256": "25D0F5BD023918BCD48A01C8CD877B2368298EC7453A92D658169734E9E858C7",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestClassJobExecutor.java",
+      "exists": true,
+      "size": 691,
+      "sha256": "B36D7736DB5EF22ACFF9B70583105BA14D6B2A2013589AFA121A0FCE64284CC7",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestMapJobAnnotation.java",
+      "exists": true,
+      "size": 2541,
+      "sha256": "26692D9DC8D69053244357169E54E7F2D29A0E2F4065A617D52AFA04EA41A901",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestMapReduceAnnotation1.java",
+      "exists": true,
+      "size": 3166,
+      "sha256": "3FD880BA34E14EA71C8D964B2BF1336C61BCB5649BD0DFC980558B1514F20560",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestStaticShardingJob.java",
+      "exists": true,
+      "size": 1661,
+      "sha256": "5FA128DD4C47282EFA12395D3BD29A2A42591076FA68BBB95745890583F0454F",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\WechatBillTask.java",
+      "exists": true,
+      "size": 1838,
+      "sha256": "98D599528C517C84F8513A62425FDBFE3DFD42461C10EB5B9D51D13DD9977549",
+      "role": "required ruoyi-job Java source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\Dockerfile",
+      "exists": true,
+      "size": 646,
+      "sha256": "4CED0DA5E6DD501485872092FEA43DF9418752960E59DF68EDFF1D607CB37D01",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\pom.xml",
+      "exists": true,
+      "size": 2132,
+      "sha256": "E5B20DDFF49FC66D53DB6A2952595DB3BD6D92E12DD5654E15E654BFA27765C8",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\java\\com\\aizuda\\snailjob\\server\\starter\\filter\\ActuatorAuthFilter.java",
+      "exists": true,
+      "size": 3203,
+      "sha256": "9B49AE181E3011DD43056D8669EA6AB25A69B29689F384916392EBBA38931159",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\java\\com\\aizuda\\snailjob\\server\\starter\\filter\\SecurityConfig.java",
+      "exists": true,
+      "size": 1181,
+      "sha256": "7064DA65AB094EF2129C009EA1AC513926D896498F32B75D08E8A7320B27B43B",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\java\\org\\dromara\\snailjob\\SnailJobServerApplication.java",
+      "exists": true,
+      "size": 569,
+      "sha256": "48E830EB106C76100469AF333FF806126B64EBB13DEE83A0F16AB59133DA799B",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\application-dev.yml",
+      "exists": true,
+      "size": 1539,
+      "sha256": "6C73BE8827AB0D2F9F15FD6DEB72D06BD014EC145DC87321B9D5C460A248B0A4",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\application-prod.yml",
+      "exists": true,
+      "size": 1539,
+      "sha256": "6C73BE8827AB0D2F9F15FD6DEB72D06BD014EC145DC87321B9D5C460A248B0A4",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\application.yml",
+      "exists": true,
+      "size": 828,
+      "sha256": "F22BC6F2A7C36838B67AC9AF17D141203118413725082E529DF091EFEABA9187",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\banner.txt",
+      "exists": true,
+      "size": 476,
+      "sha256": "092A633301CDF7A695707ECC78F725E0EA04390E2E324C5748CF17D780454672",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\logback-plus.xml",
+      "exists": true,
+      "size": 3813,
+      "sha256": "CD800B989FD80F155160CCABBB8B377689749CD7B51FAA7692019EE7208BBB1D",
+      "role": "SnailJob server source/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\router\\index.ts",
+      "exists": true,
+      "size": 3821,
+      "sha256": "4BF894EF16D65BFA3966A48864391FC97FCE4617DD4CFC06DFF4F0FE6FDA301B",
+      "role": "frontend router source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\store\\modules\\permission.ts",
+      "exists": true,
+      "size": 6996,
+      "sha256": "3E30CA2179051A9156FB1B935614576D6165D1ED26A8435FE88444ADEC5192AD",
+      "role": "dynamic permission/router store",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\api\\menu.ts",
+      "exists": true,
+      "size": 316,
+      "sha256": "0E79F0F78975E23D7A1FC1FE9F7CE7B20CAB4417E431334348213710CCC713C1",
+      "role": "menu API client",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\views\\monitor\\snailjob\\index.vue",
+      "exists": true,
+      "size": 461,
+      "sha256": "C34AB230C56D429F567E0EE891E3C2B34B014BAF6A00842FBECE8AEE372BF9C4",
+      "role": "SnailJob iframe page",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\types\\env.d.ts",
+      "exists": true,
+      "size": 886,
+      "sha256": "E735F44DF2CB0338434AF3B37EB5F31E430478B6560A93842C810E8F754FD52E",
+      "role": "frontend environment typings",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.development",
+      "exists": true,
+      "size": 2256,
+      "sha256": "D6506D964E203603324BA6B64E76EAEF1D70F2A3A6E97E126C8E567A8CF6C748",
+      "role": "development environment config; sensitive values not emitted",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.production",
+      "exists": true,
+      "size": 2282,
+      "sha256": "7013E7EF4103878B3B67185BF2E3F3B4DEB6AD051E92A6CB9A7F4995971A1424",
+      "role": "production environment config; sensitive values not emitted",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\package.json",
+      "exists": true,
+      "size": 2339,
+      "sha256": "D1376599B7C4736C081EC9BEAA7354E236C1D4DE371C8B16ECB0E6F13E871BE1",
+      "role": "frontend package manifest",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\pnpm-lock.yaml",
+      "exists": true,
+      "size": 175408,
+      "sha256": "C29BBB60A733B8F09ECAB8DE3697A51EE5340F45A1AE7E1D9739D3C3DF1C1F05",
+      "role": "frontend dependency lockfile",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\vite.config.ts",
+      "exists": true,
+      "size": 2052,
+      "sha256": "F29453337A1F3162777D0C2C882C07EF1C4AD03E389B554F8F22797EA04164D5",
+      "role": "Vite configuration",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\README.md",
+      "exists": true,
+      "size": 1401,
+      "sha256": "63B76860F188C081B837BF9D5F9388C30298F0E1B0BB68434D36A6D58BFE0576",
+      "role": "prototype README",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\PROTOTYPE_PAGE_MAP.md",
+      "exists": true,
+      "size": 7351,
+      "sha256": "6069269051CAF970F9FAC6B26ACE9B7B2130F66F9582CB25E9713CACAD768BC2",
+      "role": "prototype page/API map",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\assets\\app.js",
+      "exists": true,
+      "size": 54328,
+      "sha256": "4DFC3C551C1F262151B926E5072BF3E87D2B294DBBEDC33250C5A82282EB2309",
+      "role": "prototype runtime and mock data",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\assets\\styles.css",
+      "exists": true,
+      "size": 18471,
+      "sha256": "54570E0A2512935A0A2F72C35D2A628B5CBE8BDB03A7FB1A73EF4389B8AB44E1",
+      "role": "prototype styles",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v25_core_hardening.sql",
+      "exists": true,
+      "size": 15025,
+      "sha256": "FBE9ED3B84B7599397518C57C4420DA2266D1713F347627DD94388F90ED1E5D3",
+      "role": "prototype supplemental SQL; legacy/reference only",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v25_xxljob_migration.sql",
+      "exists": true,
+      "size": 4083,
+      "sha256": "C5710F3E923E147FE425FC8E5266F4328D745D5F676EEF1093AC9125074A6D68",
+      "role": "prototype XXL-JOB migration SQL; legacy/reference only",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_ai.sql",
+      "exists": true,
+      "size": 32167,
+      "sha256": "0A6C65F2BF41879135167CBBC8A9DF9028DADC2C4CB5370E9448B1D7C97FE683",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_job.sql",
+      "exists": true,
+      "size": 37816,
+      "sha256": "F56505BDE6FF9DE7016894E5DF893857A2E8732B7C424481AEA77F8D21E2EFB7",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_vue.sql",
+      "exists": true,
+      "size": 94383,
+      "sha256": "02630AB1774F5BE33C8FD1265489BC5854F27A622591A5E51C139B4E47C27901",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_workflow.sql",
+      "exists": true,
+      "size": 35268,
+      "sha256": "064CB660D9810C4F6F49C13C66E872921A6A237CA1F616BF75A238095E14677A",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\oracle\\oracle_ry_job.sql",
+      "exists": true,
+      "size": 58496,
+      "sha256": "B6E43BE678E87D2AE429173883AFB67D47D9F7F7D408B85E772C1CAA1DEB9807",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\oracle\\oracle_ry_vue.sql",
+      "exists": true,
+      "size": 104867,
+      "sha256": "00B7068C8C4FF777746C73B780E0E146FF03B59CCC979642838F18925EB6BBEA",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\oracle\\oracle_ry_workflow.sql",
+      "exists": true,
+      "size": 40284,
+      "sha256": "82D1FA68229945168565966C25D795509AFFA5B121980FF8EB2FD4AD38D5612D",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_ai.sql",
+      "exists": true,
+      "size": 38410,
+      "sha256": "3DC81437AD2A7D6B31AB2133FD3F0C2A9C4C617BC102E1B2B78E1C7F4012938D",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_job.sql",
+      "exists": true,
+      "size": 47091,
+      "sha256": "21C883626EE5A089166931BA60DC995767C01CC0D55733845E1A66CAD2DCE2F2",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_vue.sql",
+      "exists": true,
+      "size": 102660,
+      "sha256": "752EC8C5D1A382591ABD63BDADFE9A4641680A4939CCA6F9DDC9E04E94D91D14",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_workflow.sql",
+      "exists": true,
+      "size": 40139,
+      "sha256": "3FC624072C3C04574C4B2812271A9E8FAF8C209AA99A664EE869B04E83362796",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\sqlserver\\sqlserver_ry_job.sql",
+      "exists": true,
+      "size": 81783,
+      "sha256": "9C50C9FFB8F82874F2A0A5AB5E44AA8BC1F26F9879375428FAF889B3787C6082",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\sqlserver\\sqlserver_ry_vue.sql",
+      "exists": true,
+      "size": 144419,
+      "sha256": "70BB226B21CAC0A14FDFE53D4A440F04EED0AA7741580752DBF7AC4F5386B2D1",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\sqlserver\\sqlserver_ry_workflow.sql",
+      "exists": true,
+      "size": 56516,
+      "sha256": "5245BC3F43F3C92395794F41FE3D3EE40872F970AD3545E7ABDAA379907F180F",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v23_frontend_supplement.sql",
+      "exists": true,
+      "size": 19376,
+      "sha256": "027C36CA2830EC17B3DD807643E963D48C8604854CED909573B0DE0BF63D32CE",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v24_core_hardening.sql",
+      "exists": true,
+      "size": 15025,
+      "sha256": "FBE9ED3B84B7599397518C57C4420DA2266D1713F347627DD94388F90ED1E5D3",
+      "role": "existing SQL; read-only inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\pom.xml",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected QuantPF aggregator POM",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v28.yaml",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected formal OpenAPI",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\order-event.v1.schema.json",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected event schema",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\market-data-event.v1.schema.json",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected event schema",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\risk-alert-event.v1.schema.json",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected event schema",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\job-event.v1.schema.json",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected event schema",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected error-code contract",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected menu fact source",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\BASELINE.md",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected baseline file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration",
+      "exists": false,
+      "size": 0,
+      "sha256": "",
+      "role": "V28 expected Flyway migration directory",
+      "readOnly": true
+    }
+  ],
+  "snailJobFiles": [
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\ruoyi-common-job\\pom.xml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\pom.xml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\ruoyi-common-job\\src\\main\\java\\org\\dromara\\common\\job\\config\\SnailJobConfig.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\package-info.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\entity\\BillDTO.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\AlipayBillTask.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\SummaryBillTask.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestAnnoJobExecutor.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestBroadcastJob.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestClassJobExecutor.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestMapJobAnnotation.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestMapReduceAnnotation1.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\TestStaticShardingJob.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\WechatBillTask.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\Dockerfile",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\pom.xml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\java\\com\\aizuda\\snailjob\\server\\starter\\filter\\ActuatorAuthFilter.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\java\\com\\aizuda\\snailjob\\server\\starter\\filter\\SecurityConfig.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\java\\org\\dromara\\snailjob\\SnailJobServerApplication.java",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\application-dev.yml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\application-prod.yml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\application.yml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\banner.txt",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\src\\main\\resources\\logback-plus.xml",
+    "D:\\workspace\\quant\\plus-ui\\src\\views\\monitor\\snailjob\\index.vue",
+    "D:\\workspace\\quant\\plus-ui\\.env.development",
+    "D:\\workspace\\quant\\plus-ui\\.env.production"
+  ],
+  "xxlJobFiles": [],
+  "quantpfFiles": [],
+  "contractFiles": [
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v28.yaml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\order-event.v1.schema.json",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\market-data-event.v1.schema.json",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\risk-alert-event.v1.schema.json",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\job-event.v1.schema.json",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml"
+  ],
+  "migrationFiles": [
+    "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v25_core_hardening.sql",
+    "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v25_xxljob_migration.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_ai.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_job.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_vue.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\ry_workflow.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\oracle\\oracle_ry_job.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\oracle\\oracle_ry_vue.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\oracle\\oracle_ry_workflow.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_ai.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_job.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_vue.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\postgres\\postgres_ry_workflow.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\sqlserver\\sqlserver_ry_job.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\sqlserver\\sqlserver_ry_vue.sql",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\sqlserver\\sqlserver_ry_workflow.sql",
+    "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v23_frontend_supplement.sql",
+    "D:\\我的文档\\私人\\量化\\前端功能原型设计\\quantpf_v24_core_hardening.sql"
+  ]
+}

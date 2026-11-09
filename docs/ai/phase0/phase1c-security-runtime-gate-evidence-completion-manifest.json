@@ -1,0 +1,143 @@
+{
+  "auditDate": "2026-10-08",
+  "phase": "PHASE1C-SECURITY-RUNTIME-GATE-EVIDENCE-COMPLETION",
+  "status": "PARTIAL",
+  "frontendImplementationAllowed": false,
+  "productionBuildAllowed": false,
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-security-runtime-gate-evidence-completion.md",
+      "exists": true,
+      "size": 4585,
+      "sha256": "C9A9E603CF9FC11A2C005099E879131D6BE3950EBAA50DE0722ECB1F1992F0D4",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-security-runtime-gate-evidence-completion-risk-register.md",
+      "exists": true,
+      "size": 1930,
+      "sha256": "890DDF5EADAB95A492CED7881FBD89134E7F13AE2DF56B69A9B9FA113DD3D6DE",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+      "exists": true,
+      "size": 22505,
+      "sha256": "4439B7B1CE7764DAE5D69F1BFB6ECCB88A61E4859FDBA3D3C69D218F259D3066",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+      "exists": true,
+      "size": 3288,
+      "sha256": "D30D813D596B8335A784D64B3476BB6029B9C22F0BE544FDF285AD45EBFE9B7C",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml",
+      "exists": true,
+      "size": 1250,
+      "sha256": "C8FFDB712DC326B866D97F14C13A339386AA0803677BC772404393C0EAA8469E",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\package.json",
+      "exists": true,
+      "size": 2339,
+      "sha256": "D1376599B7C4736C081EC9BEAA7354E236C1D4DE371C8B16ECB0E6F13E871BE1",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\request.ts",
+      "exists": true,
+      "size": 9863,
+      "sha256": "56B2C78E5B6B776C807C8D9EF76C97A75AE5426BA3E87E4712819D07CCF59436",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\jsencrypt.ts",
+      "exists": true,
+      "size": 736,
+      "sha256": "F0B75259E57F887E3DE6E43F284280E59F465E67E5A0F83237D31DFCF41FED6B",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\errorCode.ts",
+      "exists": true,
+      "size": 247,
+      "sha256": "2F685BAC3A6ACB9987FBD38CBE0BC1695930FDEADB26A988F9EC69E801520676",
+      "role": "audited file",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.development",
+      "exists": true,
+      "size": 2256,
+      "sha256": "D6506D964E203603324BA6B64E76EAEF1D70F2A3A6E97E126C8E567A8CF6C748",
+      "role": "secret variable paths only; values excluded",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.production",
+      "exists": true,
+      "size": 2282,
+      "sha256": "7013E7EF4103878B3B67185BF2E3F3B4DEB6AD051E92A6CB9A7F4995971A1424",
+      "role": "secret variable paths only; values excluded",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\docker\\nginx\\conf\\nginx.conf",
+      "exists": true,
+      "size": 7212,
+      "sha256": "2905BA13726DAFAF1219459AC6580DC0348AD3F88CFD6FEA7F59776869F0EEBC",
+      "role": "repository sample only; not production proof",
+      "readOnly": true
+    }
+  ],
+  "security": {
+    "rotationRevocation": "MISSING",
+    "approvedKeyManagement": "MISSING",
+    "backendCryptoCompatibility": "MISSING",
+    "clientPrivateKeyPath": "PRESENT",
+    "gitleaks": "NOT_AVAILABLE",
+    "trufflehog": "NOT_AVAILABLE",
+    "gitHistory": "PARTIAL_20_COMMITS",
+    "sourceMaps": "NOT_RUN",
+    "ciArtifacts": "NOT_RUN",
+    "sensitiveValuesRecorded": false
+  },
+  "sysMenu": {
+    "status": "UNKNOWN",
+    "approvedSchemaProvided": false,
+    "queryRun": false
+  },
+  "gateway": {
+    "status": "UNKNOWN",
+    "repositorySample": "/prod-api/",
+    "productionEvidence": false
+  },
+  "runtime": {
+    "status": "NOT_RUN",
+    "paperEndpoints": 12,
+    "memoryFallback": "NOT_PROVEN",
+    "duplicateMoneyOrPositionWrites": "NOT_PROVEN"
+  },
+  "testRunner": {
+    "testUnit": false,
+    "runnerFound": false
+  },
+  "deferredPaths": 10,
+  "notes": [
+    "No key values recorded",
+    "No DB query/migration/build/run performed",
+    "Static contract checks are not runtime acceptance"
+  ]
+}

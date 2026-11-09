@@ -1,0 +1,27 @@
+{
+  "phase": "PHASE1B-RUNTIME-TRANSACTION-PROXY-AND-RISK-PERSISTENCE-CLOSURE",
+  "auditDate": "2026-10-06",
+  "executionMode": "single-end-to-end-gpt-5.6-sol",
+  "allowedFiles": [
+    {"path":"quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/repository/TradingHaltRepository.java","action":"modify","purpose":"active halt lookup and resume port"},
+    {"path":"quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/mapper/TradingHaltMapper.java","action":"modify","purpose":"active halt lookup and resume mapper"},
+    {"path":"quantpf-modules/quantpf-domain/src/main/resources/mapper/quantpf/TradingHaltMapper.xml","action":"modify","purpose":"active halt lookup and resume SQL"},
+    {"path":"quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/TradingHaltRepositoryAdapter.java","action":"modify","purpose":"halt repository adapter"},
+    {"path":"quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PersistentPaperRiskApplicationService.java","action":"create","purpose":"database-backed risk/halt/snapshot application service"},
+    {"path":"quantpf-modules/quantpf-finance/pom.xml","action":"modify-if-required","purpose":"risk module dependency for shared PaperRiskGate"},
+    {"path":"ruoyi-admin/src/main/java/com/quantpf/web/config/QuantPfPaperRuntimeConfiguration.java","action":"modify","purpose":"risk service and shared gate bean wiring"},
+    {"path":"ruoyi-admin/src/main/java/com/quantpf/web/controller/QuantPaperRiskController.java","action":"modify","purpose":"persistent risk API injection"},
+    {"path":"quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PersistentPaperOrderApplicationService.java","action":"modify","purpose":"shared risk gate check before persistent submission"},
+    {"path":"ruoyi-admin/src/test/java/com/quantpf/web/controller/QuantPfSpringPersistenceWebIntegrationTest.java","action":"modify","purpose":"risk API and database fact assertions"},
+    {"path":"ruoyi-admin/src/test/java/com/quantpf/web/controller/QuantPfRuntimeTransactionRiskIntegrationTest.java","action":"create","purpose":"risk persistence and no-fallback integration test"},
+    {"path":"docs/ai/phase0/phase1b-runtime-transaction-risk-closure-plan.md","action":"create","purpose":"implementation plan"},
+    {"path":"docs/ai/phase0/phase1b-runtime-transaction-risk-closure-file-whitelist.json","action":"create","purpose":"file whitelist"},
+    {"path":"docs/ai/phase0/phase1b-runtime-transaction-risk-closure.md","action":"create","purpose":"final report"},
+    {"path":"docs/ai/phase0/phase1b-runtime-transaction-risk-closure-commands.log","action":"create","purpose":"command log"},
+    {"path":"docs/ai/phase0/phase1b-runtime-transaction-risk-closure-risk-register.md","action":"create","purpose":"risk register"},
+    {"path":"docs/ai/phase0/phase1b-runtime-transaction-risk-closure-manifest.json","action":"create","purpose":"manifest"},
+    {"path":"docs/ai/handoff/phase1b-runtime-transaction-risk-closure-handoff.md","action":"create","purpose":"handoff"}
+  ],
+  "forbiddenFiles": ["pom.xml(root)","application-dev.yml","application-prod.yml","db/migration/**","frontend/**"],
+  "humanApprovalRequired": "only-if-whitelist-expansion-or-production-config-change-is-required"
+}

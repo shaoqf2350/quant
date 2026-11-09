@@ -1,0 +1,36 @@
+{
+  "auditDate": "2026-10-08",
+  "phase": "PHASE1C-SECURITY-RUNTIME-GATE-EVIDENCE-COMPLETION",
+  "status": "CANDIDATE_NOT_APPROVED",
+  "approvedForFrontendImplementation": false,
+  "blockedBy": [
+    "RSA key rotation/revocation and security-owner sign-off missing",
+    "front-end long-lived private-key path remains",
+    "backend CryptoFilter/@ApiEncrypt compatibility evidence missing",
+    "complete secrets scan missing",
+    "approved RuoYi main schema sys_menu evidence missing",
+    "production gateway /api/quant evidence missing",
+    "12 Paper API runtime regression not run",
+    "no-fallback and duplicate money/position write proof missing"
+  ],
+  "firstBatchCandidatePages": ["Paper Account + Ledger", "Paper Order list/submit", "Risk status", "Audit read-only"],
+  "deferred": ["Position", "Execution", "complete Follow management", "SnailJob", "XXL-JOB", "QMT", "CTP", "LIVE", "Broker", "10 DEFERRED OpenAPI paths"],
+  "candidateFilesAfterAllGates": [
+    "plus-ui/src/api/quant/paper-account/index.ts",
+    "plus-ui/src/api/quant/paper-account/types.ts",
+    "plus-ui/src/api/quant/paper-order/index.ts",
+    "plus-ui/src/api/quant/paper-order/types.ts",
+    "plus-ui/src/api/quant/risk/index.ts",
+    "plus-ui/src/api/quant/risk/types.ts",
+    "plus-ui/src/api/quant/audit/index.ts",
+    "plus-ui/src/api/quant/audit/types.ts",
+    "plus-ui/src/utils/errorCode.ts",
+    "plus-ui/src/utils/idempotency.ts",
+    "plus-ui/src/views/quant/paper-account/index.vue",
+    "plus-ui/src/views/quant/paper-order/index.vue",
+    "plus-ui/src/views/quant/risk/index.vue",
+    "plus-ui/src/views/quant/audit/index.vue"
+  ],
+  "forbiddenWithoutSeparateApproval": ["plus-ui/package.json", "plus-ui/pnpm-lock.yaml", "plus-ui/vite.config.ts", "plus-ui/src/router/index.ts", "plus-ui/src/store/modules/permission.ts", "plus-ui/.env.development", "plus-ui/.env.production", "plus-ui/src/utils/jsencrypt.ts", "plus-ui/src/utils/request.ts"],
+  "testPolicy": {"test:unit": "NOT_AVAILABLE", "packageChanges": "NOT_AUTHORIZED", "postSecurityGateCommands": ["pnpm lint", "pnpm build:dev", "pnpm build:prod"]}
+}

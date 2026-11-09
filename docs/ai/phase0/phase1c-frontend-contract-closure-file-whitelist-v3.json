@@ -1,0 +1,87 @@
+{
+  "phase": "PHASE1C-FRONTEND-CONTRACT-CLOSURE-AND-SECURITY-REMEDIATION",
+  "auditDate": "2026-10-07",
+  "status": "PROPOSED_NOT_APPROVED",
+  "frontendImplementationAllowed": false,
+  "productionBuildAllowed": false,
+  "testScriptStatus": "NO_TEST_SCRIPT_FOUND",
+  "testScriptDecision": "Do not run pnpm test:unit and do not modify package.json/pnpm-lock.yaml without separate approval",
+  "currentWriteAllowed": ["docs/ai/phase0/", "docs/ai/handoff/"],
+  "requiredApprovals": [
+    "client private-key rotation/revocation and backend crypto migration evidence",
+    "Paper DTO/page/error/idempotency contract freeze",
+    "ten unimplemented OpenAPI paths explicit disposition",
+    "production gateway /api/quant routing evidence",
+    "approved RuoYi schema sys_menu component/perms read-only evidence",
+    "test framework/package script decision",
+    "this whitelist v3"
+  ],
+  "implementedApiScope": [
+    "/api/quant/health",
+    "/api/quant/account/page",
+    "/api/quant/account/{id}/ledger",
+    "/api/quant/order/page",
+    "/api/quant/order/paper",
+    "/api/quant/paper/follow-start",
+    "/api/quant/paper/follow-stop",
+    "/api/quant/risk/status",
+    "/api/quant/risk/halt",
+    "/api/quant/risk/resume",
+    "/api/quant/job/execution/page",
+    "/api/quant/audit/page"
+  ],
+  "unimplementedOpenApiPathsMustBeDeferred": [
+    "/api/quant/dashboard/summary",
+    "/api/quant/instrument/page",
+    "/api/quant/market/kline",
+    "/api/quant/news/page",
+    "/api/quant/finance/statements",
+    "/api/quant/pool/page",
+    "/api/quant/strategy/page",
+    "/api/quant/signal/page",
+    "/api/quant/backtest",
+    "/api/quant/backtest/{id}"
+  ],
+  "candidateFrontendFilesAfterAllGates": [
+    "plus-ui/src/api/quant/paper-account/index.ts",
+    "plus-ui/src/api/quant/paper-account/types.ts",
+    "plus-ui/src/api/quant/paper-order/index.ts",
+    "plus-ui/src/api/quant/paper-order/types.ts",
+    "plus-ui/src/api/quant/risk/index.ts",
+    "plus-ui/src/api/quant/risk/types.ts",
+    "plus-ui/src/api/quant/audit/index.ts",
+    "plus-ui/src/api/quant/audit/types.ts",
+    "plus-ui/src/utils/errorCode.ts",
+    "plus-ui/src/utils/idempotency.ts",
+    "plus-ui/src/views/quant/paper-account/index.vue",
+    "plus-ui/src/views/quant/paper-order/index.vue",
+    "plus-ui/src/views/quant/risk/index.vue",
+    "plus-ui/src/views/quant/audit/index.vue"
+  ],
+  "candidateTestFilesAfterTestDecision": [
+    "plus-ui/src/api/quant/**/*.spec.ts",
+    "plus-ui/src/utils/**/*.spec.ts",
+    "plus-ui/src/views/quant/**/*.spec.ts"
+  ],
+  "forbiddenUntilSeparateApproval": [
+    "plus-ui/package.json",
+    "plus-ui/pnpm-lock.yaml",
+    "plus-ui/vite.config.ts",
+    "plus-ui/src/router/index.ts",
+    "plus-ui/src/store/modules/permission.ts",
+    "plus-ui/.env.development",
+    "plus-ui/.env.production",
+    "plus-ui/src/utils/jsencrypt.ts",
+    "plus-ui/src/utils/request.ts",
+    "Position/Execution/Follow UI",
+    "SnailJob/XXL-JOB UI",
+    "QMT/CTP/LIVE/Broker UI"
+  ],
+  "acceptanceCommandsAfterSecurityGate": [
+    "pnpm lint",
+    "pnpm build:dev",
+    "pnpm build:prod"
+  ],
+  "notAvailableWithoutSeparateApproval": ["pnpm test:unit"]
+}
+

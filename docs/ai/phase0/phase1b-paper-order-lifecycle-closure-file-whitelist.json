@@ -1,0 +1,23 @@
+{
+  "phase": "PHASE1B-PAPER-ORDER-LIFECYCLE-AND-REMAINING-API-PERSISTENCE-CLOSURE",
+  "auditDate": "2026-10-06",
+  "executionMode": "single-end-to-end-gpt-5.6-sol",
+  "allowedFiles": [
+    {"path":"quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/mapper/PaperExecutionMapper.java","action":"modify","purpose":"sum execution quantity"},
+    {"path":"quantpf-modules/quantpf-domain/src/main/resources/mapper/quantpf/PaperExecutionMapper.xml","action":"modify","purpose":"sum execution quantity SQL"},
+    {"path":"quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PaperPersistenceTransactionService.java","action":"modify","purpose":"partial fill, multi-execution, cancel release, sell settlement"},
+    {"path":"quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PersistentPaperOrderApplicationService.java","action":"modify","purpose":"persistent cancel application command"},
+    {"path":"ruoyi-admin/src/main/java/com/quantpf/web/controller/QuantPaperOrderController.java","action":"modify","purpose":"persistent cancel endpoint"},
+    {"path":"quantpf-modules/quantpf-finance/src/test/java/com/quantpf/finance/PaperPersistenceTransactionIntegrationTest.java","action":"modify","purpose":"partial fill, cancel, sell lifecycle tests"},
+    {"path":"docs/ai/phase0/phase1b-paper-order-lifecycle-closure-plan.md","action":"create","purpose":"plan"},
+    {"path":"docs/ai/phase0/phase1b-paper-order-lifecycle-closure-file-whitelist.json","action":"create","purpose":"whitelist"},
+    {"path":"docs/ai/phase0/phase1b-paper-order-lifecycle-closure.md","action":"create","purpose":"final report"},
+    {"path":"docs/ai/phase0/phase1b-paper-order-lifecycle-closure-commands.log","action":"create","purpose":"command log"},
+    {"path":"docs/ai/phase0/phase1b-paper-order-lifecycle-closure-risk-register.md","action":"create","purpose":"risk register"},
+    {"path":"docs/ai/phase0/phase1b-paper-order-lifecycle-closure-manifest.json","action":"create","purpose":"manifest"},
+    {"path":"docs/ai/handoff/phase1b-paper-order-lifecycle-closure-handoff.md","action":"create","purpose":"handoff"}
+  ],
+  "forbiddenFiles": ["pom.xml(root)","application-dev.yml","application-prod.yml","db/migration/**","frontend/**"],
+  "databaseMigration": false,
+  "gitCommands": false
+}

@@ -1,0 +1,74 @@
+{
+  "phase": "PHASE1B-PAPER-INTEGRATION-TEST-AND-PERSISTENCE-ADAPTER",
+  "auditDate": "2026-10-06",
+  "planOnly": false,
+  "codeChangesApplied": true,
+  "pomChangesApplied": false,
+  "yamlChangesApplied": false,
+  "sqlSourceChangesApplied": false,
+  "databaseMigrationExecuted": "local-only-via-temporary-jdbc-runner",
+  "flywayEngineExecuted": false,
+  "redisConnection": false,
+  "externalConnections": {
+    "mysql": "local-only",
+    "redis": false,
+    "broker": false,
+    "snailJob": false,
+    "xxlJob": false,
+    "qmt": false,
+    "ctp": false,
+    "live": false
+  },
+  "credentialsPersisted": false,
+  "files": [
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence",
+      "action": "created",
+      "role": "persistence records and Mapper interfaces"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/resources/mapper/quantpf",
+      "action": "created",
+      "role": "MyBatis mapper XML"
+    },
+    {
+      "path": "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/TradingAccountRepositoryAdapter.java",
+      "action": "created",
+      "role": "TradingAccount repository adapter"
+    },
+    {
+      "path": "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/entity/TradingAccount.java",
+      "action": "modified",
+      "role": "persistence balance restoration"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-paper-integration.md",
+      "action": "created",
+      "role": "implementation report"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-paper-integration-commands.log",
+      "action": "created",
+      "role": "command log"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-paper-integration-risk-register.md",
+      "action": "created",
+      "role": "risk register"
+    },
+    {
+      "path": "docs/ai/handoff/phase1b-paper-integration-handoff.md",
+      "action": "created",
+      "role": "handoff"
+    }
+  ],
+  "forbidden": [
+    "production database",
+    "Redis connection",
+    "Broker connection",
+    "SnailJob startup",
+    "XXL-JOB startup",
+    "QMT/CTP/LIVE",
+    "Git commit"
+  ]
+}

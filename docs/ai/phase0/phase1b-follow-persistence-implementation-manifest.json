@@ -1,0 +1,39 @@
+{
+  "phase": "PHASE1B-FOLLOW-PERSISTENCE-IMPLEMENTATION-AND-CONCURRENCY-CLOSURE",
+  "auditDate": "2026-10-07",
+  "result": "PASS",
+  "databaseTarget": "local-only 127.0.0.1:3306/quantpf",
+  "migration": {
+    "file": "db/migration/V1_9_0__paper_follow_session.sql",
+    "flywayVersion": "1.9.0",
+    "flywayHistoryVerified": true,
+    "success": true,
+    "manualDdl": false
+  },
+  "tests": {
+    "followTargeted": {"tests": 5, "failures": 0, "errors": 0, "skipped": 0},
+    "fullMaven": {"tests": 270, "failures": 0, "errors": 0, "skipped": 0},
+    "databaseRowsAfterCleanup": {"follow": 0, "audit": 0, "jobExecution": 0}
+  },
+  "decisions": {
+    "followStates": ["RUNNING", "STOPPED"],
+    "mode": "PAPER",
+    "strategyAdmission": "ACTIVE",
+    "accountAdmission": "PAPER and ACTIVE",
+    "canonicalIdempotency": "Idempotency-Key header",
+    "activeUniqueness": "stored generated active_slot plus unique index",
+    "auditAtomicity": "same MyBatis SqlSession and JDBC connection",
+    "memoryFallback": false,
+    "nowaitConflictMapping": "QPF-FOLLOW-001",
+    "eventSchemaChanged": false,
+    "outboxCreated": false
+  },
+  "acceptance": {
+    "compile": true,
+    "followIntegration": true,
+    "flywayHistory": true,
+    "fullMaven": true,
+    "phase1cImplementationExecuted": false
+  },
+  "nextGate": "PHASE1C-PAPER-FRONTEND-PLAN-AND-CONTRACT-CONSUMPTION"
+}

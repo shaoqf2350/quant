@@ -1,0 +1,122 @@
+{
+  "auditDate": "2026-10-09",
+  "phase": "PHASE1C-SECURITY-RUNTIME-GATE-EVIDENCE-COMPLETION-V2",
+  "status": "PARTIAL",
+  "frontendImplementationAllowed": false,
+  "productionBuildAllowed": false,
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-security-runtime-gate-evidence-completion-v2.md",
+      "exists": true,
+      "size": 4020,
+      "sha256": "C45B8C8FE2B497BFA915888607BA24D440A16622BE2B3D2E996F6470F2D2A7C7",
+      "role": "V2 report",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-security-runtime-gate-evidence-completion-v2-risk-register.md",
+      "exists": true,
+      "size": 1875,
+      "sha256": "5AE0C5D4C8A39BEEFD5B970A633EFC8A396D8BA2E1C4AA5B66963146D98E0EC4",
+      "role": "V2 risk register",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-security-runtime-gate-evidence-completion-v2-commands.log",
+      "exists": true,
+      "size": 1608,
+      "sha256": "CCDA8C50B8D1980EB3309E2415FE785E34EC9FABE7C28714E1A1C65A90D3377E",
+      "role": "V2 commands",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+      "exists": true,
+      "size": 22505,
+      "sha256": "4439B7B1CE7764DAE5D69F1BFB6ECCB88A61E4859FDBA3D3C69D218F259D3066",
+      "role": "OpenAPI",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+      "exists": true,
+      "size": 3288,
+      "sha256": "D30D813D596B8335A784D64B3476BB6029B9C22F0BE544FDF285AD45EBFE9B7C",
+      "role": "error codes",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml",
+      "exists": true,
+      "size": 1250,
+      "sha256": "C8FFDB712DC326B866D97F14C13A339386AA0803677BC772404393C0EAA8469E",
+      "role": "menu facts",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\sql\\quantpf_init_sys_tables.sql",
+      "exists": true,
+      "size": 97970,
+      "sha256": "CF12D03D1F007FFCA6ADCD1259EB7E16C7669365610BCFBA553E7E0310A65EF1",
+      "role": "RuoYi sys initializer",
+      "readOnly": true
+    }
+  ],
+  "database": {
+    "schema": "quantpf",
+    "serverVersion": "8.0.20",
+    "queryMode": "READ_ONLY",
+    "sysTables": 20,
+    "sysMenuPresent": true,
+    "sysMenuRows": 109,
+    "sysMenuColumns": [
+      "component",
+      "perms",
+      "parent_id",
+      "path"
+    ],
+    "quantpfMenuRows": 0,
+    "quantpfBusinessTablesPresent": true,
+    "writes": false,
+    "ruoyiMainSchemaMenuContract": "PARTIAL"
+  },
+  "security": {
+    "rsaRotation": "MISSING",
+    "rsaRevocation": "MISSING",
+    "clientPrivateKeyPath": "PRESENT",
+    "backendCryptoCompatibility": "MISSING",
+    "formalScanner": "PARTIAL",
+    "gitleaks": "UNAVAILABLE",
+    "trufflehog": "UNAVAILABLE",
+    "gitHistoryCommits": 43,
+    "gitMarkerRevisions": 41,
+    "pemMarkerRevisions": 0,
+    "sourceMaps": "NOT_RUN",
+    "ciArtifacts": "NOT_RUN",
+    "sensitiveValuesRecorded": false
+  },
+  "gateway": "UNKNOWN",
+  "runtime": {
+    "status": "NOT_RUN",
+    "endpointCount": 12,
+    "reason": "query-only DB authorization; existing suites write test rows",
+    "repository": "NOT_PROVEN",
+    "memoryFallback": "NOT_PROVEN",
+    "duplicateMoneyPosition": "NOT_PROVEN"
+  },
+  "contract": {
+    "paths": 23,
+    "deferred": 10,
+    "missingSchemaRefs": 0,
+    "missingResponseRefs": 0,
+    "errorCodes": 19,
+    "duplicateCodes": 0
+  },
+  "frontendTooling": {
+    "testUnit": false,
+    "runner": false,
+    "dist": false,
+    "build": false,
+    "nodeModules": false
+  }
+}

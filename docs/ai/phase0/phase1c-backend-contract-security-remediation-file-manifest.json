@@ -1,0 +1,150 @@
+{
+  "auditDate": "2026-10-07",
+  "phase": "PHASE1C-BACKEND-CONTRACT-AND-SECURITY-REMEDIATION-IMPLEMENTATION",
+  "status": "PARTIAL",
+  "frontendImplementationAllowed": false,
+  "productionBuildAllowed": false,
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+      "exists": true,
+      "size": 22505,
+      "sha256": "4439B7B1CE7764DAE5D69F1BFB6ECCB88A61E4859FDBA3D3C69D218F259D3066",
+      "role": "updated Paper API contract",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+      "exists": true,
+      "size": 3288,
+      "sha256": "D30D813D596B8335A784D64B3476BB6029B9C22F0BE544FDF285AD45EBFE9B7C",
+      "role": "updated QPF error codes",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml",
+      "exists": true,
+      "size": 1250,
+      "sha256": "C8FFDB712DC326B866D97F14C13A339386AA0803677BC772404393C0EAA8469E",
+      "role": "menu fact source; DB not verified",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\package.json",
+      "exists": true,
+      "size": 2339,
+      "sha256": "D1376599B7C4736C081EC9BEAA7354E236C1D4DE371C8B16ECB0E6F13E871BE1",
+      "role": "frontend scripts; no test:unit",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\request.ts",
+      "exists": true,
+      "size": 9863,
+      "sha256": "56B2C78E5B6B776C807C8D9EF76C97A75AE5426BA3E87E4712819D07CCF59436",
+      "role": "audited source/document",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\jsencrypt.ts",
+      "exists": true,
+      "size": 736,
+      "sha256": "F0B75259E57F887E3DE6E43F284280E59F465E67E5A0F83237D31DFCF41FED6B",
+      "role": "security evidence; values not recorded",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\errorCode.ts",
+      "exists": true,
+      "size": 247,
+      "sha256": "2F685BAC3A6ACB9987FBD38CBE0BC1695930FDEADB26A988F9EC69E801520676",
+      "role": "audited source/document",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.development",
+      "exists": true,
+      "size": 2256,
+      "sha256": "D6506D964E203603324BA6B64E76EAEF1D70F2A3A6E97E126C8E567A8CF6C748",
+      "role": "security evidence; values not recorded",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.production",
+      "exists": true,
+      "size": 2282,
+      "sha256": "7013E7EF4103878B3B67185BF2E3F3B4DEB6AD051E92A6CB9A7F4995971A1424",
+      "role": "security evidence; values not recorded",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\java\\com\\quantpf\\web\\controller",
+      "exists": true,
+      "size": 0,
+      "sha256": null,
+      "role": "audited source/document",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-finance\\src\\main\\java\\com\\quantpf\\finance",
+      "exists": true,
+      "size": 0,
+      "sha256": null,
+      "role": "audited source/document",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-frontend-contract-closure-file-whitelist-v3.json",
+      "exists": true,
+      "size": 3150,
+      "sha256": "478BF2E506C22961B542C80966907AD09BA51D8041806BAC722AC6245B93FB21",
+      "role": "audited source/document",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-frontend-contract-security-independent-review.md",
+      "exists": true,
+      "size": 14153,
+      "sha256": "9C12BB105403E183FA2945B38B6F63C87DEE4D66FEB524740FB0BB72BBFF8A42",
+      "role": "audited source/document",
+      "readOnly": true
+    }
+  ],
+  "modifiedFiles": [
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+    "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml"
+  ],
+  "securityScan": {
+    "sensitiveValuesRecorded": false,
+    "gitHistory": "NOT_COMPLETED",
+    "gitleaks": "NOT_FOUND",
+    "sourceAndEnvMarkerFiles": 2,
+    "buildPresent": false,
+    "distPresent": false,
+    "nodeModulesPresent": false,
+    "trufflehog": "NOT_FOUND"
+  },
+  "deferredOpenApiPaths": [
+    "/api/quant/dashboard/summary",
+    "/api/quant/instrument/page",
+    "/api/quant/market/kline",
+    "/api/quant/news/page",
+    "/api/quant/finance/statements",
+    "/api/quant/pool/page",
+    "/api/quant/strategy/page",
+    "/api/quant/signal/page",
+    "/api/quant/backtest",
+    "/api/quant/backtest/{id}"
+  ],
+  "unknownFacts": [
+    "RuoYi main schema sys_menu.component/perms",
+    "production gateway /api/quant routing",
+    "key rotation/revocation evidence",
+    "formal YAML parser result"
+  ],
+  "notes": [
+    "No password/token/API key/RSA private key values recorded",
+    "No database migration or production connection",
+    "No Java/XML/Vue/TS/POM/package/lock/env source modification"
+  ]
+}

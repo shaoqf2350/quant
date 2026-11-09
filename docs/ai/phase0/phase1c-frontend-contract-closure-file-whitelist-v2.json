@@ -1,0 +1,41 @@
+{
+  "phase": "PHASE1C-FRONTEND-CONTRACT-CLOSURE-AND-SECURITY-REMEDIATION",
+  "auditDate": "2026-10-07",
+  "status": "PROPOSED_NOT_APPROVED",
+  "currentWriteAllowed": ["docs/ai/phase0/", "docs/ai/handoff/"],
+  "frontendImplementationAllowed": false,
+  "productionBuildAllowed": false,
+  "requiredApprovals": [
+    "security key rotation/revocation and coordinated backend crypto migration",
+    "concrete Paper DTO/page/error/idempotency contract approval",
+    "approved sys_menu schema read-only verification",
+    "page scope and permission approval"
+  ],
+  "nextImplementationCandidates": [
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-account\\index.ts","purpose":"Account page and ledger API wrapper","gate":"Account/Ledger DTO and pagination frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-account\\types.ts","purpose":"Account/Ledger VO and page types","gate":"Backend response schemas frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-order\\index.ts","purpose":"Order page/submit wrapper","gate":"Submit/cancel semantics and idempotency frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-order\\types.ts","purpose":"Order request/response types","gate":"Order status and DTO frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\risk\\index.ts","purpose":"Risk read/write wrappers","gate":"Global halt/resume permission and confirmation approved"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\risk\\types.ts","purpose":"Risk request/status types","gate":"Risk schema frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\audit\\index.ts","purpose":"Audit read-only wrapper","gate":"Audit DTO/redaction frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\audit\\types.ts","purpose":"Audit/job execution VO and page types","gate":"Response schema frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\utils\\errorCode.ts","purpose":"QPF error-code mapping","gate":"Mapping approved"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\utils\\idempotency.ts","purpose":"Idempotency-Key generation/propagation helper","gate":"Retry semantics approved"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\paper-account\\index.vue","purpose":"Paper Account + Ledger page","gate":"API and menu facts frozen"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\paper-order\\index.vue","purpose":"Paper Order list/submit page","gate":"Order and safety UX approved"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\risk\\index.vue","purpose":"Risk status and gated controls","gate":"High-risk permission and confirmation approved"},
+    {"path":"D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\audit\\index.vue","purpose":"Read-only audit page","gate":"Audit DTO/menu/redaction frozen"}
+  ],
+  "excludedUntilClosure": [
+    "plus-ui/.env.development",
+    "plus-ui/.env.production",
+    "plus-ui/src/utils/jsencrypt.ts",
+    "plus-ui/src/utils/request.ts",
+    "plus-ui/src/router/index.ts",
+    "plus-ui/src/store/modules/permission.ts",
+    "Position/Execution/Follow UI",
+    "SnailJob/XXL-JOB UI",
+    "QMT/CTP/LIVE/Broker UI"
+  ]
+}

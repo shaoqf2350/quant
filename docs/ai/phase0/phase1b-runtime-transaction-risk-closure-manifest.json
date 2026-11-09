@@ -1,0 +1,48 @@
+{
+  "phase": "PHASE1B-RUNTIME-TRANSACTION-PROXY-AND-RISK-PERSISTENCE-CLOSURE",
+  "auditDate": "2026-10-06",
+  "executionMode": "single-end-to-end-gpt-5.6-sol",
+  "result": "PARTIAL",
+  "gitCommandsExecuted": false,
+  "databaseMigrationExecuted": false,
+  "credentialsPersisted": false,
+  "externalConnections": {
+    "mysql": "local-only",
+    "redis": false,
+    "broker": false,
+    "snailJob": false,
+    "xxlJob": false,
+    "qmt": false,
+    "ctp": false,
+    "live": false
+  },
+  "springTransactionProxy": "NOT_APPLICABLE_EXPLICIT_SQLSESSION_STRATEGY",
+  "webApplicationContext": "PASS_EQUIVALENT_CONTROLLED_SPRING_CONTEXT_MOCKMVC",
+  "healthApi": "PASS",
+  "paperAccountApi": "PASS",
+  "paperOrderApi": "PASS",
+  "riskApi": "PASS",
+  "memoryFallback": "ABSENT_ON_SPRING_ACCOUNT_ORDER_RISK_PATH",
+  "duplicateCashMutation": "ABSENT_IN_COVERED_IDEMPOTENCY_TESTS",
+  "duplicatePositionMutation": "ABSENT_IN_COVERED_EXECUTION_TESTS",
+  "rollback": "PASS_EXPLICIT_SQLSESSION",
+  "riskHaltPersistence": "PASS",
+  "riskSnapshotPersistence": "PASS",
+  "partialFill": "NOT_EXECUTED",
+  "cancelRelease": "NOT_EXECUTED",
+  "sellFrozenPositionRelease": "NOT_EXECUTED",
+  "phase1cAllowed": false,
+  "databaseTarget": "127.0.0.1:3306/quantpf",
+  "productionYamlChanged": false,
+  "flywayChanged": false,
+  "rootPomChanged": false,
+  "pomChanges": [
+    {"path":"quantpf-modules/quantpf-finance/pom.xml","change":"added quantpf-risk module dependency","scope":"module dependency only"}
+  ],
+  "testSummary": {
+    "QuantPfSpringPersistenceWebIntegrationTest": {"tests":3,"failures":0,"errors":0,"skipped":0},
+    "PaperPersistenceTransactionIntegrationTest": {"tests":5,"failures":0,"errors":0,"skipped":0},
+    "healthAndStandalonePaperApi": "PASS",
+    "quantpfDomainRiskExecutionFinanceRegression": "PASS"
+  }
+}

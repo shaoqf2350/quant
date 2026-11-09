@@ -1,0 +1,59 @@
+{
+  "phase": "PHASE1B-PAPER-PERSISTENCE-TRANSACTION-AND-CONCURRENCY-CLOSURE",
+  "auditDate": "2026-10-06",
+  "result": "PARTIAL",
+  "gitCommandsExecuted": false,
+  "databaseMigrationExecuted": false,
+  "databaseDdlExecuted": false,
+  "targetDatabase": "127.0.0.1:3306/quantpf",
+  "credentialsPersisted": false,
+  "externalConnections": {
+    "mysql": "local-only",
+    "redis": false,
+    "broker": false,
+    "snailJob": false,
+    "xxlJob": false,
+    "qmt": false,
+    "ctp": false,
+    "live": false
+  },
+  "pomChanges": [
+    {"path":"quantpf-modules/quantpf-domain/pom.xml","scope":"test","dependency":"com.mysql:mysql-connector-j","action":"retained-approved-dependency"},
+    {"path":"quantpf-modules/quantpf-finance/pom.xml","scope":"test","dependency":"com.mysql:mysql-connector-j","action":"added-for-finance-integration-classpath"}
+  ],
+  "databaseConstraints": {
+    "accountCode": "present",
+    "orderIdempotencyKey": "present",
+    "clientOrderIdPerAccount": "present",
+    "executionId": "present",
+    "executionIdempotencyKey": "present",
+    "ledgerEventIdempotencyKey": "present",
+    "positionAccountInstrument": "present"
+  },
+  "concurrencyTests": {
+    "idempotencyKey": "PASS",
+    "clientOrderId": "PASS",
+    "executionId": "PASS",
+    "ledgerEventId": "PASS",
+    "stateTransition": "PASS_UNIT_TEST"
+  },
+  "transactionTests": {
+    "orderSubmit": "PASS",
+    "executionSettlement": "PASS",
+    "rollbackAfterLedger": "PASS",
+    "balanceNotDoubleChanged": "PASS",
+    "positionNotDoubleChanged": "PASS"
+  },
+  "testSummary": {
+    "PaperPersistenceTransactionIntegrationTest": {"tests":5,"failures":0,"errors":0,"skipped":0},
+    "domain": {"tests":3,"failures":0,"errors":0,"skipped":0},
+    "risk": {"tests":4,"failures":0,"errors":0,"skipped":0},
+    "execution": {"tests":3,"failures":0,"errors":0,"skipped":0},
+    "finance": {"tests":7,"failures":0,"errors":0,"skipped":0}
+  },
+  "phase1cAllowed": false,
+  "blockingItems": [
+    "Spring runtime wiring not completed",
+    "Paper application API persistence cutover not completed"
+  ]
+}

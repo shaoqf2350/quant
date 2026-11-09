@@ -1,0 +1,200 @@
+{
+  "auditDate": "2026-10-08",
+  "phase": "PHASE1C-SECURITY-AND-RUNTIME-GATE-REMEDIATION",
+  "status": "PARTIAL",
+  "frontendImplementationAllowed": false,
+  "productionBuildAllowed": false,
+  "securityEvidence": {
+    "keyRotation": "MISSING",
+    "keyRevocation": "MISSING",
+    "backendCryptoCompatibility": "MISSING",
+    "frontendLongTermPrivateKey": "PRESENT",
+    "formalSecretsScanner": "UNAVAILABLE",
+    "boundedGitHistoryMarkerScan": "PARTIAL",
+    "sourceMapScan": "NOT_RUN",
+    "ciArtifactScan": "NOT_RUN",
+    "sensitiveValuesRecorded": false
+  },
+  "sysMenuEvidence": {
+    "status": "UNKNOWN",
+    "approvedMainSchemaProvided": false,
+    "queryExecuted": false,
+    "writesExecuted": false
+  },
+  "gatewayEvidence": {
+    "status": "UNKNOWN",
+    "localExampleFound": "script/docker/nginx/conf/nginx.conf",
+    "productionEvidence": false,
+    "quantpfRouteVerified": false
+  },
+  "runtimeRegression": {
+    "status": "NOT_RUN",
+    "endpointCount": 12,
+    "reason": "security gate and approved runtime context not closed",
+    "memoryFallbackChecked": "NOT_PROVEN",
+    "duplicateMoneyFreezePositionChecked": "NOT_PROVEN"
+  },
+  "frontendTooling": {
+    "testUnitScript": false,
+    "testRunnerFound": false,
+    "distPresent": false,
+    "buildPresent": false,
+    "nodeModulesPresent": false
+  },
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-security-runtime-gate-remediation.md",
+      "exists": true,
+      "size": 4028,
+      "sha256": "87AD2C0380BCCDB6DCEFCEBE05722A4D1BE50F71E9B5F0BEC72EA4AD80C8AFA3",
+      "role": "current remediation report",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\docs\\ai\\phase0\\phase1c-security-runtime-gate-remediation-risk-register.md",
+      "exists": true,
+      "size": 2012,
+      "sha256": "233A87857C2F8D3064125F5043BBBC15A482F541128ABF59FE12AE7BC60038B2",
+      "role": "current risk register",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+      "exists": true,
+      "size": 22505,
+      "sha256": "4439B7B1CE7764DAE5D69F1BFB6ECCB88A61E4859FDBA3D3C69D218F259D3066",
+      "role": "formal OpenAPI contract",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+      "exists": true,
+      "size": 3288,
+      "sha256": "D30D813D596B8335A784D64B3476BB6029B9C22F0BE544FDF285AD45EBFE9B7C",
+      "role": "formal error code contract",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml",
+      "exists": true,
+      "size": 1250,
+      "sha256": "C8FFDB712DC326B866D97F14C13A339386AA0803677BC772404393C0EAA8469E",
+      "role": "menu fact source; DB facts not proven",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\package.json",
+      "exists": true,
+      "size": 2339,
+      "sha256": "D1376599B7C4736C081EC9BEAA7354E236C1D4DE371C8B16ECB0E6F13E871BE1",
+      "role": "frontend scripts and test-runner inventory",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\request.ts",
+      "exists": true,
+      "size": 9863,
+      "sha256": "56B2C78E5B6B776C807C8D9EF76C97A75AE5426BA3E87E4712819D07CCF59436",
+      "role": "frontend transport and crypto path",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\jsencrypt.ts",
+      "exists": true,
+      "size": 736,
+      "sha256": "F0B75259E57F887E3DE6E43F284280E59F465E67E5A0F83237D31DFCF41FED6B",
+      "role": "client RSA key path",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\src\\utils\\errorCode.ts",
+      "exists": true,
+      "size": 247,
+      "sha256": "2F685BAC3A6ACB9987FBD38CBE0BC1695930FDEADB26A988F9EC69E801520676",
+      "role": "frontend error mapping",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.development",
+      "exists": true,
+      "size": 2256,
+      "sha256": "D6506D964E203603324BA6B64E76EAEF1D70F2A3A6E97E126C8E567A8CF6C748",
+      "role": "sensitive variable names only; values excluded",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\plus-ui\\.env.production",
+      "exists": true,
+      "size": 2282,
+      "sha256": "7013E7EF4103878B3B67185BF2E3F3B4DEB6AD051E92A6CB9A7F4995971A1424",
+      "role": "sensitive variable names only; values excluded",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\script\\docker\\nginx\\conf\\nginx.conf",
+      "exists": true,
+      "size": 7212,
+      "sha256": "2905BA13726DAFAF1219459AC6580DC0348AD3F88CFD6FEA7F59776869F0EEBC",
+      "role": "local example gateway config; not production evidence",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\resources\\application.yml",
+      "exists": true,
+      "size": 13953,
+      "sha256": "AAB334FAFF22FEE9307DACB6AF1334FC5EAD08B584BEB286C01C474F90EF76D6",
+      "role": "backend application path/context config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\resources\\application-dev.yml",
+      "exists": true,
+      "size": 12676,
+      "sha256": "B6E3800FAE7BAF6A5BA8BC335CA33EAAD7B6CDAC59EAE059FF8E85CA116EA5BE",
+      "role": "local dev datasource/config",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\java\\com\\quantpf\\web\\controller",
+      "exists": true,
+      "size": 0,
+      "sha256": null,
+      "role": "QuantPF actual controllers",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-finance\\src\\main\\java\\com\\quantpf\\finance",
+      "exists": true,
+      "size": 0,
+      "sha256": null,
+      "role": "Paper finance services/repositories",
+      "readOnly": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\test\\java\\com\\quantpf\\web\\controller",
+      "exists": true,
+      "size": 0,
+      "sha256": null,
+      "role": "existing web integration tests",
+      "readOnly": true
+    }
+  ],
+  "deferredOpenApiPaths": [
+    "/api/quant/dashboard/summary",
+    "/api/quant/instrument/page",
+    "/api/quant/market/kline",
+    "/api/quant/news/page",
+    "/api/quant/finance/statements",
+    "/api/quant/pool/page",
+    "/api/quant/strategy/page",
+    "/api/quant/signal/page",
+    "/api/quant/backtest",
+    "/api/quant/backtest/{id}"
+  ],
+  "sensitiveValuesRecorded": false,
+  "notes": [
+    "No password/token/API key/RSA private-key value recorded",
+    "No source/config/database/gateway file modified",
+    "Local Nginx example is not production routing evidence"
+  ]
+}

@@ -1,0 +1,1087 @@
+{
+  "phase": "PHASE0B-FOUNDATION-SKELETON-PLAN",
+  "auditDate": "2026-10-03",
+  "planOnly": true,
+  "codeChangesApplied": false,
+  "pomChangesApplied": false,
+  "sqlChangesApplied": false,
+  "contractChangesApplied": false,
+  "frontendChangesApplied": false,
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\pom.xml",
+      "action": "review-only",
+      "phase": "PHASE0B",
+      "preconditions": [
+        "Phase0A baseline pass",
+        "Plan-only review"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "Read-only inventory confirmed",
+        "No source modification"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P1",
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\pom.xml",
+      "action": "review-only",
+      "phase": "PHASE0B",
+      "preconditions": [
+        "Phase0A baseline pass",
+        "Plan-only review"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "Read-only inventory confirmed",
+        "No source modification"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P1",
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\pom.xml",
+      "action": "review-only",
+      "phase": "PHASE0B",
+      "preconditions": [
+        "Phase0A baseline pass",
+        "Plan-only review"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "Read-only inventory confirmed",
+        "No source modification"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P1",
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\ruoyi-common-job\\pom.xml",
+      "action": "review-only",
+      "phase": "PHASE0B",
+      "preconditions": [
+        "Phase0A baseline pass",
+        "Plan-only review"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "Read-only inventory confirmed",
+        "No source modification"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P1",
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\pom.xml",
+      "action": "review-only",
+      "phase": "PHASE0B",
+      "preconditions": [
+        "Phase0A baseline pass",
+        "Plan-only review"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "Read-only inventory confirmed",
+        "No source modification"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P1",
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\pom.xml",
+      "action": "review-only",
+      "phase": "PHASE0B",
+      "preconditions": [
+        "Phase0A baseline pass",
+        "Plan-only review"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "Read-only inventory confirmed",
+        "No source modification"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P1",
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\pom.xml",
+      "action": "review-only",
+      "phase": "PHASE0B",
+      "preconditions": [
+        "Phase0A baseline pass",
+        "Plan-only review"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "Read-only inventory confirmed",
+        "No source modification"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P1",
+      "humanApprovalRequired": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-common\\ruoyi-common-job\\src\\main\\java\\org\\dromara\\common\\job\\config\\SnailJobConfig.java",
+      "action": "review-only",
+      "phase": "PHASE0B-SCHEDULER-INVENTORY",
+      "preconditions": [
+        "Baseline pass",
+        "Task owner inventory required"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "SnailJob evidence categorized",
+        "No file changed"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-modules\\ruoyi-job\\src\\main\\java\\org\\dromara\\job\\snailjob\\*.java",
+      "action": "review-only",
+      "phase": "PHASE0B-SCHEDULER-INVENTORY",
+      "preconditions": [
+        "Baseline pass",
+        "Task owner inventory required"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "SnailJob evidence categorized",
+        "No file changed"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-extend\\ruoyi-snailjob-server\\**",
+      "action": "review-only",
+      "phase": "PHASE0B-SCHEDULER-INVENTORY",
+      "preconditions": [
+        "Baseline pass",
+        "Task owner inventory required"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "SnailJob evidence categorized",
+        "No file changed"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\resources\\application-dev.yml",
+      "action": "review-only",
+      "phase": "PHASE0B-SCHEDULER-INVENTORY",
+      "preconditions": [
+        "Baseline pass",
+        "Task owner inventory required"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "SnailJob evidence categorized",
+        "No file changed"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\resources\\application-prod.yml",
+      "action": "review-only",
+      "phase": "PHASE0B-SCHEDULER-INVENTORY",
+      "preconditions": [
+        "Baseline pass",
+        "Task owner inventory required"
+      ],
+      "dependencies": [],
+      "acceptance": [
+        "SnailJob evidence categorized",
+        "No file changed"
+      ],
+      "rollback": "No rollback; review-only",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\pom.xml",
+      "action": "modify",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-common\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-marketdata\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-research\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-strategy\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-risk\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-finance\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-execution\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-backtest\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-job\\pom.xml",
+      "action": "create",
+      "phase": "PHASE0C-POM",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\pom.xml",
+      "action": "modify",
+      "phase": "PHASE0C-ADMIN-INTEGRATION",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\ruoyi-admin\\src\\main\\java\\com\\quantpf\\web\\controller\\QuantPfHealthController.java",
+      "action": "create",
+      "phase": "PHASE0C-HEALTH-SAMPLE",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\BASELINE.md",
+      "action": "create",
+      "phase": "PHASE0C-BASELINE",
+      "preconditions": [
+        "Written human approval for PHASE0C",
+        "Clean worktree",
+        "Manifest frozen"
+      ],
+      "dependencies": [
+        "phase0b-foundation-skeleton-plan.md",
+        "phase0b-module-dependency-matrix.md"
+      ],
+      "acceptance": [
+        "Maven validate",
+        "dependency tree no cycle",
+        "no LIVE/QMT/CTP bean",
+        "package boundary scan"
+      ],
+      "rollback": "Revert only files listed in approved manifest; no destructive reset",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml",
+      "action": "create",
+      "phase": "PHASE0D-CONTRACTS",
+      "preconditions": [
+        "PHASE0C skeleton accepted",
+        "Contract review approved"
+      ],
+      "dependencies": [
+        "V29 formal operation list",
+        "prototype mapping matrix"
+      ],
+      "acceptance": [
+        "OpenAPI lint or JSON Schema validate",
+        "error code uniqueness",
+        "menu safety scan"
+      ],
+      "rollback": "Delete/revert only the newly created contract file after approval",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\order-event.v1.schema.json",
+      "action": "create",
+      "phase": "PHASE0D-CONTRACTS",
+      "preconditions": [
+        "PHASE0C skeleton accepted",
+        "Contract review approved"
+      ],
+      "dependencies": [
+        "V29 formal operation list",
+        "prototype mapping matrix"
+      ],
+      "acceptance": [
+        "OpenAPI lint or JSON Schema validate",
+        "error code uniqueness",
+        "menu safety scan"
+      ],
+      "rollback": "Delete/revert only the newly created contract file after approval",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\market-data-event.v1.schema.json",
+      "action": "create",
+      "phase": "PHASE0D-CONTRACTS",
+      "preconditions": [
+        "PHASE0C skeleton accepted",
+        "Contract review approved"
+      ],
+      "dependencies": [
+        "V29 formal operation list",
+        "prototype mapping matrix"
+      ],
+      "acceptance": [
+        "OpenAPI lint or JSON Schema validate",
+        "error code uniqueness",
+        "menu safety scan"
+      ],
+      "rollback": "Delete/revert only the newly created contract file after approval",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\risk-alert-event.v1.schema.json",
+      "action": "create",
+      "phase": "PHASE0D-CONTRACTS",
+      "preconditions": [
+        "PHASE0C skeleton accepted",
+        "Contract review approved"
+      ],
+      "dependencies": [
+        "V29 formal operation list",
+        "prototype mapping matrix"
+      ],
+      "acceptance": [
+        "OpenAPI lint or JSON Schema validate",
+        "error code uniqueness",
+        "menu safety scan"
+      ],
+      "rollback": "Delete/revert only the newly created contract file after approval",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\job-event.v1.schema.json",
+      "action": "create",
+      "phase": "PHASE0D-CONTRACTS",
+      "preconditions": [
+        "PHASE0C skeleton accepted",
+        "Contract review approved"
+      ],
+      "dependencies": [
+        "V29 formal operation list",
+        "prototype mapping matrix"
+      ],
+      "acceptance": [
+        "OpenAPI lint or JSON Schema validate",
+        "error code uniqueness",
+        "menu safety scan"
+      ],
+      "rollback": "Delete/revert only the newly created contract file after approval",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml",
+      "action": "create",
+      "phase": "PHASE0D-CONTRACTS",
+      "preconditions": [
+        "PHASE0C skeleton accepted",
+        "Contract review approved"
+      ],
+      "dependencies": [
+        "V29 formal operation list",
+        "prototype mapping matrix"
+      ],
+      "acceptance": [
+        "OpenAPI lint or JSON Schema validate",
+        "error code uniqueness",
+        "menu safety scan"
+      ],
+      "rollback": "Delete/revert only the newly created contract file after approval",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml",
+      "action": "create",
+      "phase": "PHASE0D-CONTRACTS",
+      "preconditions": [
+        "PHASE0C skeleton accepted",
+        "Contract review approved"
+      ],
+      "dependencies": [
+        "V29 formal operation list",
+        "prototype mapping matrix"
+      ],
+      "acceptance": [
+        "OpenAPI lint or JSON Schema validate",
+        "error code uniqueness",
+        "menu safety scan"
+      ],
+      "rollback": "Delete/revert only the newly created contract file after approval",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_0_0__quantpf_baseline.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_1_0__instrument_calendar_market.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_2_0__news_finance_factor_pool.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_3_0__strategy_signal_risk.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_4_0__paper_account_order_fill_ledger.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_5_0__backtest_snapshot_performance.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_6_0__order_event_outbox_reconciliation.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_7_0__job_execution_audit_quality.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_8_0__menu_fact_source.sql",
+      "action": "create",
+      "phase": "PHASE0E-FLYWAY",
+      "preconditions": [
+        "Contract and skeleton review approved",
+        "MySQL 8 test environment approved",
+        "No production connection"
+      ],
+      "dependencies": [
+        "V29 migration plan",
+        "table mapping",
+        "schema ownership"
+      ],
+      "acceptance": [
+        "static SQL scan",
+        "clean migrate",
+        "upgrade fixture",
+        "validate",
+        "schema diff"
+      ],
+      "rollback": "Forward-fix only; no DROP rollback",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "plus-ui/src/views/quant/**",
+      "action": "modify-or-create",
+      "phase": "PHASE0F-FRONTEND-SCHEDULER-CONTRACT",
+      "preconditions": [
+        "Contracts accepted",
+        "Scheduler migration separately approved"
+      ],
+      "dependencies": [
+        "quantpf-v29 OpenAPI",
+        "menu facts"
+      ],
+      "acceptance": [
+        "pnpm lint",
+        "pnpm build",
+        "generated types diff",
+        "no LIVE routes"
+      ],
+      "rollback": "Revert only approved frontend manifest files",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "plus-ui/src/api/quant/**",
+      "action": "modify-or-create",
+      "phase": "PHASE0F-FRONTEND-SCHEDULER-CONTRACT",
+      "preconditions": [
+        "Contracts accepted",
+        "Scheduler migration separately approved"
+      ],
+      "dependencies": [
+        "quantpf-v29 OpenAPI",
+        "menu facts"
+      ],
+      "acceptance": [
+        "pnpm lint",
+        "pnpm build",
+        "generated types diff",
+        "no LIVE routes"
+      ],
+      "rollback": "Revert only approved frontend manifest files",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "plus-ui/src/types/quant/**",
+      "action": "modify-or-create",
+      "phase": "PHASE0F-FRONTEND-SCHEDULER-CONTRACT",
+      "preconditions": [
+        "Contracts accepted",
+        "Scheduler migration separately approved"
+      ],
+      "dependencies": [
+        "quantpf-v29 OpenAPI",
+        "menu facts"
+      ],
+      "acceptance": [
+        "pnpm lint",
+        "pnpm build",
+        "generated types diff",
+        "no LIVE routes"
+      ],
+      "rollback": "Revert only approved frontend manifest files",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "plus-ui/src/views/monitor/xxljob/index.vue",
+      "action": "modify-or-create",
+      "phase": "PHASE0F-FRONTEND-SCHEDULER-CONTRACT",
+      "preconditions": [
+        "Contracts accepted",
+        "Scheduler migration separately approved"
+      ],
+      "dependencies": [
+        "quantpf-v29 OpenAPI",
+        "menu facts"
+      ],
+      "acceptance": [
+        "pnpm lint",
+        "pnpm build",
+        "generated types diff",
+        "no LIVE routes"
+      ],
+      "rollback": "Revert only approved frontend manifest files",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "plus-ui/src/types/env.d.ts",
+      "action": "modify-or-create",
+      "phase": "PHASE0F-FRONTEND-SCHEDULER-CONTRACT",
+      "preconditions": [
+        "Contracts accepted",
+        "Scheduler migration separately approved"
+      ],
+      "dependencies": [
+        "quantpf-v29 OpenAPI",
+        "menu facts"
+      ],
+      "acceptance": [
+        "pnpm lint",
+        "pnpm build",
+        "generated types diff",
+        "no LIVE routes"
+      ],
+      "rollback": "Revert only approved frontend manifest files",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "plus-ui/.env.development",
+      "action": "modify-or-create",
+      "phase": "PHASE0F-FRONTEND-SCHEDULER-CONTRACT",
+      "preconditions": [
+        "Contracts accepted",
+        "Scheduler migration separately approved"
+      ],
+      "dependencies": [
+        "quantpf-v29 OpenAPI",
+        "menu facts"
+      ],
+      "acceptance": [
+        "pnpm lint",
+        "pnpm build",
+        "generated types diff",
+        "no LIVE routes"
+      ],
+      "rollback": "Revert only approved frontend manifest files",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    },
+    {
+      "path": "plus-ui/.env.production",
+      "action": "modify-or-create",
+      "phase": "PHASE0F-FRONTEND-SCHEDULER-CONTRACT",
+      "preconditions": [
+        "Contracts accepted",
+        "Scheduler migration separately approved"
+      ],
+      "dependencies": [
+        "quantpf-v29 OpenAPI",
+        "menu facts"
+      ],
+      "acceptance": [
+        "pnpm lint",
+        "pnpm build",
+        "generated types diff",
+        "no LIVE routes"
+      ],
+      "rollback": "Revert only approved frontend manifest files",
+      "risk": "P0",
+      "humanApprovalRequired": true
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "phase": "PHASE1C-FRONTEND-IMPLEMENTATION",
+  "auditDate": "2026-10-07",
+  "status": "CANDIDATE_PENDING_SECURITY_AND_RUNTIME_GATES",
+  "approvedForImplementation": false,
+  "preconditions": [
+    "client RSA key rotation/revocation evidence",
+    "approved backend crypto compatibility decision",
+    "secrets scan including source/env/bundle/source-map/CI/Git-history summary",
+    "RuoYi main schema sys_menu component/perms evidence",
+    "production gateway /api/quant routing evidence",
+    "runtime Spring/API contract regression",
+    "GLM-5.3 independent review with no open P0/P1"
+  ],
+  "firstBatchFiles": [
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-account\\index.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-account\\types.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-order\\index.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\paper-order\\types.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\risk\\index.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\risk\\types.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\audit\\index.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\api\\quant\\audit\\types.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\utils\\errorCode.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\utils\\idempotency.ts",
+    "D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\paper-account\\index.vue",
+    "D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\paper-order\\index.vue",
+    "D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\risk\\index.vue",
+    "D:\\workspace\\quant\\plus-ui\\src\\views\\quant\\audit\\index.vue"
+  ],
+  "explicitlyExcluded": [
+    "plus-ui/package.json",
+    "plus-ui/pnpm-lock.yaml",
+    "plus-ui/vite.config.ts",
+    "plus-ui/src/router/index.ts",
+    "plus-ui/src/store/modules/permission.ts",
+    "plus-ui/.env.development",
+    "plus-ui/.env.production",
+    "plus-ui/src/utils/jsencrypt.ts",
+    "plus-ui/src/utils/request.ts",
+    "Position/Execution/Follow UI",
+    "SnailJob/XXL-JOB UI",
+    "QMT/CTP/LIVE/Broker UI"
+  ],
+  "deferredOpenApiPaths": [
+    "/api/quant/dashboard/summary",
+    "/api/quant/instrument/page",
+    "/api/quant/market/kline",
+    "/api/quant/news/page",
+    "/api/quant/finance/statements",
+    "/api/quant/pool/page",
+    "/api/quant/strategy/page",
+    "/api/quant/signal/page",
+    "/api/quant/backtest",
+    "/api/quant/backtest/{id}"
+  ],
+  "testPolicy": {
+    "testUnitScript": "NOT_AVAILABLE",
+    "allowedPackageChanges": false,
+    "approvedCommandsAfterSecurityGate": ["pnpm lint", "pnpm build:dev", "pnpm build:prod"]
+  }
+}

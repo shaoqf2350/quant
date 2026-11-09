@@ -1,0 +1,105 @@
+{
+  "phase": "PHASE1B-FOLLOW-PERSISTENCE-SCHEMA-APPROVAL-AND-IMPLEMENTATION-PLAN",
+  "auditDate": "2026-10-07",
+  "result": "PASS",
+  "planOnly": true,
+  "implementationStarted": false,
+  "databaseMigrationExecuted": false,
+  "ddlExecuted": false,
+  "gitCommandsExecuted": false,
+  "credentialsPersisted": false,
+  "databaseAudit": {
+    "target": "local-only 127.0.0.1:3306/quantpf",
+    "mysqlVersion": "8.0.20",
+    "followOrSessionTablesFound": 0,
+    "businessQuantpfTablesFromV1_0_to_V1_8": 20,
+    "auditRows": 0,
+    "jobExecutionRows": 0
+  },
+  "currentFollow": {
+    "controllerState": "AtomicBoolean in-memory",
+    "databaseFactSource": "absent",
+    "apiHttpBehavior": "200 synchronous",
+    "openapiCurrentBehavior": "202; must align to 200 in next implementation",
+    "phase1cAllowed": false
+  },
+  "canonicalDecisions": {
+    "table": "quantpf_paper_follow_session",
+    "states": [
+      "RUNNING",
+      "STOPPED"
+    ],
+    "failedState": "removed from v1",
+    "strategyAdmission": "ACTIVE only",
+    "idempotencyKey": "Idempotency-Key header is canonical",
+    "activeUniqueness": "stored generated active_slot + unique index",
+    "stopStartConcurrency": "no wait; active slot conflict returns QPF-FOLLOW-001",
+    "revision": "row-lock increment audit counter; no CAS",
+    "auditAtomicity": "same MyBatis SqlSession/transaction",
+    "auditReplay": "no duplicate success audit on idempotent replay"
+  },
+  "recommendedMigration": {
+    "version": "V1_9_0__paper_follow_session.sql",
+    "status": "NON-EXECUTABLE",
+    "ddlExecuted": false,
+    "flywayExecuted": false,
+    "humanApprovalRequired": true
+  },
+  "reviewDisposition": {
+    "deepseekInventory": "READ",
+    "glmIndependentReview": "PASS_WITH_CHANGES initially",
+    "gptFinalDisposition": "all P1 findings resolved in canonical plan; PASS for plan-only stage",
+    "unresolvedReviewItems": [
+      "OpenAPI 202 vs 200 alignment is next implementation work",
+      "disposable schema execution is next implementation gate",
+      "history retention is future operations work"
+    ]
+  },
+  "generatedFiles": [
+    "docs/ai/phase0/phase1b-follow-persistence-schema-approval-and-implementation-plan.md",
+    "docs/ai/phase0/phase1b-follow-persistence-migration-proposal.md",
+    "docs/ai/phase0/phase1b-follow-persistence-file-whitelist.json",
+    "docs/ai/phase0/phase1b-follow-persistence-risk-register.md",
+    "docs/ai/phase0/phase1b-follow-persistence-commands.log",
+    "docs/ai/phase0/phase1b-follow-persistence-manifest.json",
+    "docs/ai/handoff/phase1b-follow-persistence-schema-plan-handoff.md"
+  ],
+  "missingInputs": [
+    "docs/ai/phase0/phase1b-follow-persistence-schema-inventory-draft.md",
+    "docs/ai/phase0/phase1b-follow-persistence-independent-review.md"
+  ],
+  "forbiddenActions": [
+    "Java/XML/YAML/SQL/POM/Vue/TS/formal contract modification in this phase",
+    "DDL",
+    "Flyway execution",
+    "CREATE TABLE",
+    "ALTER TABLE",
+    "DROP",
+    "USE",
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "Git operations",
+    "production/external system connections"
+  ],
+  "acceptance": {
+    "schemaDesignComplete": true,
+    "stateMachineComplete": true,
+    "mysqlConcurrencyDesignComplete": true,
+    "idempotencyDesignComplete": true,
+    "transactionRollbackDesignComplete": true,
+    "contractImpactReviewed": true,
+    "proposalNonExecutable": true,
+    "proposalPathAllowed": true,
+    "businessCodeModified": false,
+    "formalSqlModified": false,
+    "phase1cAllowed": false
+  },
+  "nextGate": "PHASE1B-FOLLOW-PERSISTENCE-IMPLEMENTATION-AND-CONCURRENCY-CLOSURE",
+  "humanApprovalRequired": true,
+  "notes": [
+    "PASS means plan-only complete, not Follow persistence complete",
+    "Before implementation, run disposable-schema MySQL 8.0.20 validation under separately approved write boundary",
+    "Next stage must include Audit insert mapper/XML/repository/adapter and same SqlSession transaction adapter"
+  ]
+}

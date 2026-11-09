@@ -1,0 +1,264 @@
+{
+  "phase": "PHASE1A-PAPER-DOMAIN-IMPLEMENTATION",
+  "auditDate": "2026-10-06",
+  "planOnly": false,
+  "codeChangesApplied": true,
+  "pomChangesApplied": false,
+  "sqlChangesApplied": false,
+  "contractChangesApplied": false,
+  "frontendChangesApplied": false,
+  "schedulerMigrationApplied": false,
+  "files": [
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-backtest\\src\\main\\java\\com\\quantpf\\backtest\\BacktestExecutionBoundary.java",
+      "action": "created",
+      "sha256": "EB62B458ADD3DC8D2C86BD7CF8E16D5CF02E093AF6BB60421B3A8EE8E59A4B78",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\entity\\Instrument.java",
+      "action": "created",
+      "sha256": "978245DA3828F798912F6B253C0B0C4743C1A3E792423C1A8DEE3ECA58161446",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\entity\\PaperExecution.java",
+      "action": "created",
+      "sha256": "F7E11C36A28C05A22B3A818381E58D5E0631E12294DEAC8B725FFEA54E1DE3B0",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\entity\\PaperOrder.java",
+      "action": "created",
+      "sha256": "69BD6504084B9263931B58226AF30810578DA8B03FC0ECF6546074A5305B232A",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\entity\\Position.java",
+      "action": "created",
+      "sha256": "9A7C06AD15DA58DB2C45F5406E04AE9733C24310F7BC165FFE0AC69F54FEC445",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\entity\\TradingAccount.java",
+      "action": "created",
+      "sha256": "8F4C963586D0E9A503CD6EFA479D6F6E0F76D58EDFFAEF3EB6703D4E370C30AC",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\AccountStatus.java",
+      "action": "created",
+      "sha256": "A6023B3351AEA2E8579AE5131160D1543375E7AB7349E6E4891B47A8061A7230",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\AccountType.java",
+      "action": "created",
+      "sha256": "5BCCE5E81E2FE992C3BD9FCEB3062B11A08E363A6DE50572B713C1E3CA4030C4",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\ExecutionStatus.java",
+      "action": "created",
+      "sha256": "5784A821DC5268EC4B2A79BA8A7FEE3C3585D8DB241BF9594286605524C99F80",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\InstrumentStatus.java",
+      "action": "created",
+      "sha256": "1584EA11997A18EAD3ED360D7676D308428197BBB7443C668768DDB2741F22E9",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\OrderSide.java",
+      "action": "created",
+      "sha256": "28A5E1178AD001F0338CE0320D0B86CB5062D2A58A266BFED4848F8EBB2E1A36",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\OrderStatus.java",
+      "action": "created",
+      "sha256": "12E42A0BF345082CB03B58F29686CC3E799EAB6FD268B91A751F8E8004E5805A",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\OrderType.java",
+      "action": "created",
+      "sha256": "EB02F4083B981E418D614797968C7DE696DAA58965E8D0964C9488BE9EC69279",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\ProductType.java",
+      "action": "created",
+      "sha256": "2C689430BDFBB93C9AC4FEF5F230CED18F68FC2DD22E6691136C9E854EBC65A3",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\RiskStatus.java",
+      "action": "created",
+      "sha256": "65B99A9D9543194D42B98971149FC5D7AC0748D1FAD7DBFE1EC944EEB39A848B",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\enums\\TradingHaltScope.java",
+      "action": "created",
+      "sha256": "76EEF96187E809F2E3A40F1A20908280F9E10D714C4A5E5BEC902CDBC7AD4316",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\exception\\QuantPfDomainException.java",
+      "action": "created",
+      "sha256": "6E3C2823996A2700EED6AD80C730A71D8866714B804E63F823790BF6BB896FB4",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\repository\\InstrumentRepository.java",
+      "action": "created",
+      "sha256": "4C5D3AA50C2A2CA81D2842EB9279339B1ADB72167C923F114E1A8BEF49D8C977",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\repository\\PaperOrderRepository.java",
+      "action": "created",
+      "sha256": "BE57F388FD15ED243DC33A308EFCBED48DB794D8C30DE13CA33DCDB6A4139C28",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\repository\\PositionRepository.java",
+      "action": "created",
+      "sha256": "DE3EB7BE300A9B0B919661CE084102CC927EDEF5ABFCCA265E4DB48A1A100D30",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\repository\\TradingAccountRepository.java",
+      "action": "created",
+      "sha256": "45BD78BC8E1BD543CDF9B040058903A534DC74F6E8E2AF372374EA598F7CFE29",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\value\\ClientOrderId.java",
+      "action": "created",
+      "sha256": "E08B0E16B44A24A2D1A59B55E9233D9E94916091CFBE299427CCBAD5641F15DE",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\value\\Money.java",
+      "action": "created",
+      "sha256": "F9E2F170D25EC83ECE99E11E385859AA0E0023DF459CC0502C188E85BD663B31",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\value\\OrderIdempotencyKey.java",
+      "action": "created",
+      "sha256": "C96B1F4CD8D2C77F5B57D14062319C9179650F8329140547F3E634C761C08EB2",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\value\\Quantity.java",
+      "action": "created",
+      "sha256": "DA60E7934879A743C152DCB07BFF59B5D181BBC2755F97C4BDF55BF37BB10E31",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\main\\java\\com\\quantpf\\domain\\value\\RequestId.java",
+      "action": "created",
+      "sha256": "F2449E56A308C23EF39B9D00DBB426A8FEA6C7C8B637610B3BEF2BF2B4686051",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-domain\\src\\test\\java\\com\\quantpf\\domain\\DomainValueTest.java",
+      "action": "created",
+      "sha256": "6C08F9276EA5394EF6318F4CDA462E45E7E471B1CDBAB23DBE8DE27204AD31EB",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-execution\\src\\main\\java\\com\\quantpf\\execution\\InMemoryPaperBrokerAdapter.java",
+      "action": "created",
+      "sha256": "4D4D7947548358D4FF9A1C322DCB9726206B3A961939DE087A5DD6104A7BFE72",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-execution\\src\\main\\java\\com\\quantpf\\execution\\OrderStateMachine.java",
+      "action": "created",
+      "sha256": "3185A60B057C9C1CC49F12AF5F1B276D8B321AB9A7AFA0CA63313CAD2116FEC7",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-execution\\src\\main\\java\\com\\quantpf\\execution\\PaperBrokerAdapter.java",
+      "action": "created",
+      "sha256": "C683B6869693CA94E92E71A1F970F4C621B5F494C355E8D3813AE43A9E675D09",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-execution\\src\\main\\java\\com\\quantpf\\execution\\PaperOrderService.java",
+      "action": "created",
+      "sha256": "AF39CC1173A0571974FAC322717F41884A1CEBFFC14DA892AB9BBE544F2D68E0",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-execution\\src\\test\\java\\com\\quantpf\\execution\\OrderStateMachineTest.java",
+      "action": "created",
+      "sha256": "6E1A0FB1129DB25A5B6BEE40B0F7C85A437822D78C395A529DE37D71D7B6D206",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-finance\\src\\main\\java\\com\\quantpf\\finance\\PaperAccountLedgerService.java",
+      "action": "created",
+      "sha256": "E667A8FC37617F6654EF9F533EE2A3D1DFE483EB3C1336703D8B1BDFAF7C3B74",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-finance\\src\\test\\java\\com\\quantpf\\finance\\PaperAccountLedgerServiceTest.java",
+      "action": "created",
+      "sha256": "FDA1919BDDCB6669A222D8A6BF40D147C4CCC004B83135383B866C3E975E04B7",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-job\\src\\main\\java\\com\\quantpf\\job\\PaperApplicationServicePort.java",
+      "action": "created",
+      "sha256": "3FF82F6E075F484E7A97E7008FCE0215E7B8319A7B99F1988E21949D83596C9D",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-risk\\src\\main\\java\\com\\quantpf\\risk\\PaperRiskGate.java",
+      "action": "created",
+      "sha256": "ECEE221D230CF5535074427860CFB747E5D5594578435F33219DAEFF117B3638",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-risk\\src\\main\\java\\com\\quantpf\\risk\\RiskContext.java",
+      "action": "created",
+      "sha256": "D7659D63D5D982010D667516943153E3AF575D6AED41FA88AEF6903D86CF5EA2",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-risk\\src\\main\\java\\com\\quantpf\\risk\\RiskDecision.java",
+      "action": "created",
+      "sha256": "A7DE46D77CB554F4222B12A6BE6D70A675C36B05810D39E16C2B25F0222FC424",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-risk\\src\\main\\java\\com\\quantpf\\risk\\RiskGate.java",
+      "action": "created",
+      "sha256": "7423C54EB052B6F1F1B6684CFCDA44B7F3DF0DEEC47692F695517540E364CD2D",
+      "readOnly": false
+    },
+    {
+      "path": "D:\\workspace\\quant\\RuoYi-Vue-Plus\\quantpf-modules\\quantpf-risk\\src\\test\\java\\com\\quantpf\\risk\\PaperRiskGateTest.java",
+      "action": "created",
+      "sha256": "FA36BD53165E8E9EC48445E5BC1D8ECBF0389FBEA6F901A27EFEA72B24627B3D",
+      "readOnly": false
+    }
+  ],
+  "externalConnections": {
+    "mysql": false,
+    "redis": false,
+    "broker": false,
+    "snailJob": false,
+    "xxlJob": false,
+    "qmt": false,
+    "ctp": false,
+    "live": false
+  },
+  "credentialsPersisted": false
+}

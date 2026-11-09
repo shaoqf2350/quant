@@ -1,0 +1,32 @@
+{
+  "phase": "PHASE0D-CONTRACT-AND-FLYWAY-IMPLEMENTATION",
+  "auditDate": "2026-10-06",
+  "planOnly": false,
+  "codeChangesApplied": false,
+  "pomChangesApplied": false,
+  "sqlChangesApplied": true,
+  "contractChangesApplied": true,
+  "frontendChangesApplied": false,
+  "schedulerMigrationApplied": false,
+  "devYamlConfigurationUpdatedEarlier": true,
+  "files": [
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\openapi\\quantpf-v29.yaml","action":"created","sha256":"18D3B2C644A7A50AB489BA48B5441D994818A736B6C53B8410F449425871E7C8","role":"formal OpenAPI source"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\quantpf-order-event.v1.schema.json","action":"created","role":"order event schema"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\quantpf-execution-event.v1.schema.json","action":"created","role":"execution event schema"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\quantpf-ledger-event.v1.schema.json","action":"created","role":"ledger event schema"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\events\\quantpf-risk-event.v1.schema.json","action":"created","role":"risk event schema"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\error-codes\\quantpf-error-codes.yaml","action":"created","role":"formal error code source"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\contract\\menu\\quantpf-menu-facts.yaml","action":"created","role":"formal Stage 1 menu source"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_0_0__quantpf_baseline.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_1_0__instrument_and_market.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_2_0__research_and_signal.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_3_0__strategy_and_backtest.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_4_0__paper_account_and_ledger.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_5_0__paper_order_and_execution.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_6_0__risk_and_halt.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_7_0__job_and_audit.sql","action":"created","role":"static Flyway migration"},
+    {"path":"D:\\workspace\\quant\\RuoYi-Vue-Plus\\db\\migration\\V1_8_0__indexes_and_constraints.sql","action":"created","role":"static Flyway migration"}
+  ],
+  "externalConnections": {"mysql":false,"redis":false,"broker":false,"snailJob":false,"xxlJob":false,"qmt":false,"ctp":false,"live":false},
+  "credentialsPersisted": false
+}

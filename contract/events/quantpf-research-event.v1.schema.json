@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantpf.local/schema/quantpf-research-event.v1.schema.json",
+  "title": "QuantPF research module-1 events v1",
+  "description": "研究链领域事件契约（《详设_1》§10.4/§16.3：ResearchEventPublishedEvent/ResearchTaskCreatedEvent/AiResearchDraftCompletedEvent/ResearchEventVerifiedEvent）。事件经 AFTER_COMMIT 发布，幂等键保证重复发布不产生下游副作用。",
+  "type": "object",
+  "required": [
+    "eventType",
+    "occurredAt",
+    "aggregateType",
+    "aggregateId",
+    "idempotencyKey"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "ResearchTaskCreatedEvent",
+        "AiResearchDraftCompletedEvent",
+        "ResearchEventVerifiedEvent",
+        "ResearchEventPublishedEvent"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "availableAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "aggregateType": {
+      "type": "string",
+      "enum": ["ResearchTask", "AiResearchDraft", "ResearchEvent"]
+    },
+    "aggregateId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "schemaVersion": {
+      "type": "string",
+      "const": "1"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "correlationId": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "causationId": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "eventCode": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "researchTaskId": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["NEW", "COLLECTED", "DEDUPLICATED", "AI_ANALYZED", "VERIFIED", "VARIABLE_MAPPED", "PUBLISHED", "DISMISSED", "EXPIRED", "REVISED"]
+        },
+        "taskStatus": {
+          "type": "string",
+          "enum": ["NEW", "RUNNING", "PENDING_REVIEW", "SUCCEEDED", "FAILED", "CANCELED", "RETRYING"]
+        },
+        "validationStatus": {
+          "type": "string",
+          "enum": ["PENDING", "VERIFIED", "REJECTED", "CLAIM_UNVERIFIED"]
+        }
+      }
+    }
+  }
+}

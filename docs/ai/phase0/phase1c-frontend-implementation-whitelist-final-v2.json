@@ -1,0 +1,40 @@
+{
+  "auditDate": "2026-10-08",
+  "phase": "PHASE1C-FRONTEND-IMPLEMENTATION",
+  "status": "CANDIDATE_NOT_APPROVED",
+  "approved": false,
+  "blockedBy": [
+    "P0 client RSA private key and rotation/revocation evidence",
+    "P0 complete secrets scan evidence",
+    "P0 approved RuoYi main-schema sys_menu evidence",
+    "P1 production gateway /api/quant evidence",
+    "P1 12-endpoint runtime regression",
+    "P1 persistence/no-fallback/duplicate-money-position evidence"
+  ],
+  "firstBatch": ["Paper Account + Ledger", "Paper Order list/submit", "Risk status", "Audit read-only"],
+  "excluded": ["Position", "Execution", "complete Follow management", "SnailJob", "XXL-JOB", "QMT", "CTP", "LIVE", "Broker", "all 10 DEFERRED OpenAPI paths"],
+  "allowedFilesAfterAllGates": [
+    "plus-ui/src/api/quant/paper-account/index.ts",
+    "plus-ui/src/api/quant/paper-account/types.ts",
+    "plus-ui/src/api/quant/paper-order/index.ts",
+    "plus-ui/src/api/quant/paper-order/types.ts",
+    "plus-ui/src/api/quant/risk/index.ts",
+    "plus-ui/src/api/quant/risk/types.ts",
+    "plus-ui/src/api/quant/audit/index.ts",
+    "plus-ui/src/api/quant/audit/types.ts",
+    "plus-ui/src/utils/errorCode.ts",
+    "plus-ui/src/utils/idempotency.ts",
+    "plus-ui/src/views/quant/paper-account/index.vue",
+    "plus-ui/src/views/quant/paper-order/index.vue",
+    "plus-ui/src/views/quant/risk/index.vue",
+    "plus-ui/src/views/quant/audit/index.vue"
+  ],
+  "forbiddenWithoutSeparateApproval": [
+    "plus-ui/package.json", "plus-ui/pnpm-lock.yaml", "plus-ui/vite.config.ts",
+    "plus-ui/src/router/index.ts", "plus-ui/src/store/modules/permission.ts",
+    "plus-ui/.env.development", "plus-ui/.env.production",
+    "plus-ui/src/utils/jsencrypt.ts", "plus-ui/src/utils/request.ts",
+    "Position/Execution/Follow UI", "SnailJob/XXL-JOB UI", "QMT/CTP/LIVE/Broker UI"
+  ],
+  "testPolicy": {"testUnit": "NOT_AVAILABLE", "doNotModifyPackageScripts": true, "postGateCommands": ["pnpm lint", "pnpm build:dev", "pnpm build:prod"]}
+}

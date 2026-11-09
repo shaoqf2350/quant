@@ -1,0 +1,134 @@
+{
+  "phase": "PHASE1B-REMAINING-API-PERSISTENCE-AND-PAPER-MVP-CLOSURE",
+  "auditDate": "2026-10-07",
+  "result": "PARTIAL",
+  "gitCommandsExecuted": false,
+  "databaseMigrationExecuted": false,
+  "credentialsPersisted": false,
+  "externalConnections": {
+    "mysql": "local-only",
+    "redis": false,
+    "broker": false,
+    "snailJob": false,
+    "xxlJob": false,
+    "qmt": false,
+    "ctp": false,
+    "live": false
+  },
+  "auditPersistence": "PASS",
+  "jobExecutionPersistence": "PASS",
+  "followPersistence": "NOT_SUPPORTED_BY_CURRENT_SCHEMA",
+  "memoryFallback": "ABSENT_FOR_AUDIT_AND_JOB_PRESENT_FOR_FOLLOW_ATOMIC_BOOLEAN",
+  "duplicateCashMutation": "ABSENT_IN_TESTED_PERSISTENCE_PATH",
+  "duplicatePositionMutation": "ABSENT_IN_TESTED_PERSISTENCE_PATH",
+  "orderLifecycle": "PASS",
+  "rollback": "PASS",
+  "remainingApiPersistence": "PARTIAL",
+  "overallPaperMvp": "PARTIAL",
+  "phase1cAllowed": false,
+  "overallProjectProgress": "76% (reasonable range 73%-80%)",
+  "paperBackendProgress": "86%-90%",
+  "verification": {
+    "targetedRegression": {
+      "QuantPaperApiStandaloneTest": "6/6 PASS",
+      "QuantPfHealthControllerWebMvcTest": "1/1 PASS",
+      "QuantPfRemainingApiNoFallbackUnitTest": "2/2 PASS",
+      "QuantPfRemainingApiPersistenceWebIntegrationTest": "2/2 PASS",
+      "QuantPfSpringPersistenceWebIntegrationTest": "3/3 PASS",
+      "PaperPersistenceTransactionIntegrationTest": "8/8 PASS",
+      "OrderStateMachineTest": "3/3 PASS",
+      "PaperRiskGateTest": "4/4 PASS"
+    },
+    "fullMavenTest": {
+      "command": "mvnw.cmd -B -pl ruoyi-admin -am test -q",
+      "exitCode": 0,
+      "surefireReports": 69,
+      "tests": 266,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "databaseFactTest": {
+      "scope": "local 127.0.0.1:3306/quantpf",
+      "audit": "PASS",
+      "jobExecution": "PASS",
+      "rowsAreRandomScoped": true,
+      "cleanupIsScoped": true
+    },
+    "staticReview": {
+      "auditJobFixedEmptyList": "ABSENT",
+      "databaseFailureFallback": "ABSENT",
+      "followPersistenceForgery": "ABSENT",
+      "duplicateCashMutationIntroduced": false,
+      "duplicatePositionMutationIntroduced": false,
+      "independentReviewArtifact": "MISSING; equivalent static review recorded in closure report"
+    }
+  },
+  "createdFiles": [
+    "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/record/AuditRecordRow.java",
+    "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/mapper/AuditRecordMapper.java",
+    "quantpf-modules/quantpf-domain/src/main/resources/mapper/quantpf/AuditRecordMapper.xml",
+    "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/repository/AuditRecordRepository.java",
+    "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/AuditRecordRepositoryAdapter.java",
+    "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PersistentAuditApplicationService.java",
+    "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/record/JobExecutionAuditRow.java",
+    "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/persistence/mapper/JobExecutionAuditMapper.java",
+    "quantpf-modules/quantpf-domain/src/main/resources/mapper/quantpf/JobExecutionAuditMapper.xml",
+    "quantpf-modules/quantpf-domain/src/main/java/com/quantpf/domain/repository/JobExecutionAuditRepository.java",
+    "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/JobExecutionAuditRepositoryAdapter.java",
+    "quantpf-modules/quantpf-finance/src/main/java/com/quantpf/finance/PersistentJobExecutionApplicationService.java",
+    "ruoyi-admin/src/test/java/com/quantpf/web/controller/QuantPfRemainingApiPersistenceWebIntegrationTest.java"
+  ],
+  "modifiedFiles": [
+    "ruoyi-admin/src/main/java/com/quantpf/web/controller/QuantPaperAuditController.java",
+    "ruoyi-admin/src/main/java/com/quantpf/web/controller/QuantPaperJobExecutionController.java",
+    "ruoyi-admin/src/main/java/com/quantpf/web/config/QuantPfPaperRuntimeConfiguration.java"
+  ],
+  "documentationFiles": [
+    "docs/ai/phase0/phase1b-remaining-api-persistence-paper-mvp-closure.md",
+    "docs/ai/phase0/phase1b-remaining-api-persistence-paper-mvp-closure-commands.log",
+    "docs/ai/phase0/phase1b-remaining-api-persistence-paper-mvp-closure-risk-register.md",
+    "docs/ai/phase0/phase1b-remaining-api-persistence-paper-mvp-closure-manifest.json",
+    "docs/ai/handoff/phase1b-remaining-api-persistence-paper-mvp-closure-handoff.md"
+  ],
+  "untouchedByDesign": [
+    {
+      "path": "ruoyi-admin/src/main/java/com/quantpf/web/controller/QuantPaperFollowController.java",
+      "reason": "Follow persistence requires a schema and approved migration boundary; current implementation remains explicitly non-persistent"
+    },
+    {
+      "path": "docs/ai/phase0/phase1b-follow-persistence-migration-proposal.md",
+      "reason": "Current whitelist lists this path in forbiddenFiles; non-executable proposal is recorded in the closure report instead"
+    },
+    {
+      "path": "pom.xml",
+      "reason": "Root POM was out of scope and was not modified"
+    },
+    {
+      "path": "db/migration/**",
+      "reason": "No Flyway or DDL work was authorized"
+    }
+  ],
+  "blockedItems": [
+    {
+      "id": "P1B-RAP-P0-001",
+      "description": "Follow persistence has no database fact source",
+      "blocking": true
+    },
+    {
+      "id": "P1B-RAP-P1-005",
+      "description": "Whitelist requires a Follow migration proposal but forbids its standalone file",
+      "blocking": true
+    },
+    {
+      "id": "P1B-RAP-P1-006",
+      "description": "Planned independent GLM-5.3 review artifact is absent; equivalent review is recorded but not a GLM sign-off",
+      "blocking": false
+    }
+  ],
+  "nextGate": {
+    "target": "PHASE1B-FOLLOW-PERSISTENCE-SCHEMA-APPROVAL-AND-IMPLEMENTATION-PLAN",
+    "phase1c": "NOT_ALLOWED",
+    "humanApprovalRequired": true
+  }
+}
